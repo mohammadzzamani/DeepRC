@@ -176,35 +176,27 @@ class ffNN():
             if self.decay is True and epoch % self.decay_step ==0:
                 self.learning_rate  *= self.decay_factor
             epoch_cost = float(allcosts)/len(train_X)
-            if abs( bestLoss - epoch_cost) < self.stop_loss:
-                    print("Exited on epoch  %d, with loss  %.6f comparing with bestLoss: %.6f and stop_loss: %.6f" % (epoch + 1, epoch_cost, bestLoss, epoch_cost))
-                    
-                    print('absoulute error difference %f'%( abs( bestLoss - epoch_cost))) 
-                    break
-            if epoch_cost > bestLoss:
-                    pass_best_epochs += 1
-                    if pass_best_epochs > 10:
-                         break
-            else:
-                    pass_best_epochs = 0
-            # int(epoch_cost)
+
             if (epoch % self.saveFrequency == 0 and epoch != 0):
                 saver.save(sess, self.save_path + "/pretrained_lstm.ckpt", global_step=epoch)
-                if epoch_cost > bestLoss:
-                    pass_best_epochs += 1
-                    if pass_best_epochs > 10:
-                         print("Exited on epoch  %d, with loss  %.6f comparing with bestLoss: %.6f and stop_loss: %.6f" % (epoch + 1, epoch_cost, bestLoss, epoch_cost))
 
-                         break
-                else:
-                    pass_best_epochs = 0
-                    bestLoss = epoch_cost
-                    best_ckpt_saver.handle(epoch_cost, sess, global_step_tensor=tf.constant(epoch))
-                
-
-            if epoch_cost < self.minimum_cost :
-                    print("Exited on epoch  %d, with loss  %.6f" % (epoch + 1, epoch_cost))
+            if  bestLoss - epoch_cost < self.stop_loss:
+                #print("Exited on epoch  %d, with loss  %.6f comparing with bestLoss: %.6f and stop_loss: %.6f" % (epoch + 1, epoch_cost, bestLoss, epoch_cost))
+                #print('absoulute error difference %f'%( abs( bestLoss - epoch_cost)))
+                pass_best_epochs += 1
+                if pass_best_epochs > 10:
+                    print("Exited on epoch  %d, with loss  %.6f comparing with bestLoss: %.6f and stop_loss: %.6f" % (epoch + 1, epoch_cost, bestLoss, self.stop_loss))
                     break
+            elif epoch_cost < bestLoss:
+                if (epoch % self.saveFrequency == 0 and epoch != 0):
+                    best_ckpt_saver.handle(epoch_cost, sess, global_step_tensor=tf.constant(epoch))
+                pass_best_epochs = 0
+                bestLoss = epoch_cost 
+            
+
+            #if epoch_cost < self.minimum_cost :
+            #       print("Exited on epoch  %d, with loss  %.6f" % (epoch + 1, epoch_cost))
+            #        break
             print("Epoch = %d, train cost = %.6f"
                   % (epoch + 1, epoch_cost))
 

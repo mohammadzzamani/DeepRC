@@ -1027,7 +1027,7 @@ class RegressionPredictor:
                                 train_mean = mean(ytrain)
                                 train_mean_mae = metrics.mean_absolute_error(ytest, [train_mean]*len(ytest))
                                 
-                                history = open('/home/mbastan/DeepRc/parameters_history.txt','a')
+                                history = open('/home/mbastan/DeepRC/parameters_history.txt','a')
                                 history.write("  *FOLD R^2: %.4f (MSE: %.4f; MAE: %.4f; mean train mae: %.4f)\n"% (R2, mse, mae, train_mean_mae) )
                                 history.close()
                                 print("  *FOLD R^2: %.4f (MSE: %.4f; MAE: %.4f; mean train mae: %.4f)"% (R2, mse, mae, train_mean_mae))
@@ -1132,7 +1132,7 @@ class RegressionPredictor:
                             if report: self.addToReport(outputName+'_.report' ,Str = "*Overall R^2:          %.4f\n_" % (reportStats['R2'])) 
                             Str = "_*Overall R^2:          %.4f    \n_*Overall FOLDS R^2:    %.4f (+- %.4f)    \n_*R (sqrt R^2):         %.4f    \n_*Pearson r:            %.4f (p = %.5f)    \n_*Folds Pearson r:      %.4f (p = %.5f)    \n_*Spearman rho:         %.4f (p = %.5f)    \n_*Mean Squared Error:   %.4f    \n_*Mean Absolute Error:  %.4f    \n_*Train_Mean MAE:       %.4f\n\n" % (reportStats['R2'], reportStats['R2_folds'], reportStats['se_R2_folds'], reportStats['R'], reportStats['r'], reportStats['r_p'], reportStats['r_folds'], reportStats['r_p_folds'], reportStats['rho'], reportStats['rho_p'], reportStats['mse'], reportStats['mae'], reportStats['train_mean_mae'])
 
-                            history = open('/home/mbastan/DeepRc/parameters_history.txt','a')
+                            history = open('/home/mbastan/DeepRC/parameters_history.txt','a')
                             history.write(Str)
                             history.close()
                             if report: self.addToReport(outputName+'_.result', Str = Str,) 
@@ -2047,9 +2047,9 @@ class RegressionPredictor:
             import datetime
             global history_counter
             if history_counter is None :
-                history = open('/home/mbastan/DeepRc/parameters_history.txt','a')
+                history = open('/home/mbastan/DeepRC/parameters_history.txt','a')
                 history.write('\n\n'+str(datetime.datetime.now())+'\n')
-                history.write('Model: %s , epochs: %d, learning_rate: %f, decay: %s , decay_step: %d , decay_factor: %f , stop_loss: %f , keep_prob: %f, activation_function: %s ' %(save_path, epochs,  learning_rate, str(decay), decay_step, decay_factor, stop_loss, keep_prob,activation_function ) )
+                history.write('Model: %s , epochs: %d, learning_rate: %f, decay: %s , decay_step: %d , decay_factor: %f , stop_loss: %f , keep_prob: %f, activation_function: %s \n' %(save_path, epochs,  learning_rate, str(decay), decay_step, decay_factor, stop_loss, keep_prob,activation_function ) )
                 history.write(parameters_str+'\n')
                 history.close()
                 history_counter = True
