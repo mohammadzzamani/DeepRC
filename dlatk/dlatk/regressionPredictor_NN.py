@@ -55,7 +55,7 @@ from numpy import sqrt, array, std, mean, ceil, absolute, append, log, log2
 from numpy.linalg.linalg import LinAlgError
 
 import math
-
+import datetime
 #infrastructure
 from .classifyPredictor_NN import ClassifyPredictor
 from .mysqlmethods import mysqlMethods as mm
@@ -1134,6 +1134,7 @@ class RegressionPredictor:
 
                             history = open('/home/mbastan/DeepRC/parameters_history.txt','a')
                             history.write(Str)
+                            history.write('Finished at: '+str(datetime.datetime.now())+'\n')
                             history.close()
                             if report: self.addToReport(outputName+'_.result', Str = Str,) 
 
@@ -2024,32 +2025,34 @@ class RegressionPredictor:
             if X.shape[1] < 20:
                     hidden_nodes = [8]
                     save_path = './models/ControlsOnly'
-                    hidden_layers = 2
+                    hidden_layers = len(hidden_nodes)
                     regularization_factor = 0
                     parameters_str += 'Controls: hidden_nodes = %s, hidden_layers = %d, regularization_factor= %2.f'%(','.join(map(str,hidden_nodes)), hidden_layers, regularization_factor)
             else:
-                    hidden_nodes = [1]
+                    hidden_nodes = [8]
                     save_path = './models/LMOnly'
-                    hidden_layers = 1
-                    regularization_factor = 0.1
+                    hidden_layers = len(hidden_nodes)
+                    regularization_factor = 0.01
                     parameters_str += 'LM: hidden_nodes = %s, hidden_layers = %d, regularization_factor= %.2f'%(','.join(map(str,hidden_nodes)), hidden_layers, regularization_factor)
             #hidden_nodes = 16 if X.shape[1] < 20 else 32
-            epochs = 100
+            epochs = 150
             learning_rate = 0.001
-            decay = True
+            decay = False
             decay_step = 10
             decay_factor = 0.7
             stop_loss = 0.0001
             keep_prob = 0.9
-            activation_function = 'linear'
-            regressor = ffNN(hidden_nodes=hidden_nodes, epochs=epochs, learning_rate=learning_rate,save_path = save_path,hidden_layers = hidden_layers, decay=decay, decay_step=decay_step, decay_factor=decay_factor, stop_loss=stop_loss, keep_probability = keep_prob, regularization_factor=regularization_factor,minimum_cost=0,activation_function=activation_function)
+            activation_function = 'linear' # linear, sigmoid, tanh, relu
+            batch_size = 4
+            shuffle = True
+            optimizer='Adam' # Adam, SGD, Adadelta
+            regressor= ffNN(hidden_nodes=hidden_nodes, epochs=epochs, learning_rate=learning_rate,save_path = save_path,hidden_layers = hidden_layers, decay=decay, decay_step=decay_step, decay_factor=decay_factor, stop_loss=stop_loss, keep_probability = keep_prob, regularization_factor=regularization_factor,minimum_cost=0,activation_function=activation_function,batch_size=batch_size,shuffle=shuffle,optimizer=optimizer)
             regressor.initialize(x_size = X.shape[1])
-            import datetime
             global history_counter
             if history_counter is None :
                 history = open('/home/mbastan/DeepRC/parameters_history.txt','a')
-                history.write('\n\n'+str(datetime.datetime.now())+'\n')
-                history.write('Model: %s , epochs: %d, learning_rate: %f, decay: %s , decay_step: %d , decay_factor: %f , stop_loss: %f , keep_prob: %f, activation_function: %s \n' %(save_path, epochs,  learning_rate, str(decay), decay_step, decay_factor, stop_loss, keep_prob,activation_function ) )
+                history.write('\n\n Start at: '+str(datetime.datetime.now())+'\n')
+                history.write('Model: %s , epochs: %d, learning_rate: %f, decay: %s , decay_step: %d , decay_factor: %f , stop_loss: %f , keep_prob: %f, activation_function: %s, batch_size: %d, shuffle: %s, optimizer: %s \n' %(save_path, epochs,  learning_rate, str(decay), decay_step, decay_factor, stop_loss, keep_prob,activation_function,batch_size,str(shuffle),optimizer ) )
                 history.write(parameters_str+'\n')
                 history.close()
                 history_counter = True

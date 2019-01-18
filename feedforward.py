@@ -36,7 +36,7 @@ def init_weights(shape):
 
 class ffNN():
     tf.reset_default_graph()
-    def __init__(self,hidden_nodes=64,epochs=3,learning_rate = 0.1,saveFrequency=1,save_path = './models/ControlOnly',hidden_layers= 1, decay=False, decay_step=10, decay_factor=0.7, stop_loss=0.0001,regularization_factor=0.01,keep_probability = 0.7,minimum_cost=0.2,activation_function='sigmoid'):
+    def __init__(self,hidden_nodes=64,epochs=3,learning_rate = 0.1,saveFrequency=1,save_path = './models/ControlOnly',hidden_layers= 1, decay=False, decay_step=10, decay_factor=0.7, stop_loss=0.0001,regularization_factor=0.01,keep_probability = 0.7,minimum_cost=0.2,activation_function='sigmoid',batch_size=1,shuffle=True,optimizer='Adam'):
         self.hidden_nodes = hidden_nodes
         self.epochs = epochs
         self.learning_rate = learning_rate
@@ -51,6 +51,9 @@ class ffNN():
         self.regularization_factor = regularization_factor
         self.minimum_cost = minimum_cost
         self.activation_function = activation_function
+        self.batch_size = batch_size 
+        self.shuffle = shuffle
+        self.optimizer = optimizer
         print('model started working :D')
 
     def forwardprop(self,X, w_in,b_in,keep_prob):
@@ -102,6 +105,7 @@ class ffNN():
         self.X = tf.placeholder("float", shape=[None, x_size],name='XValue')
         self.y = tf.placeholder("float", shape=[None, y_size],name='yValue')
         self.keep_prob = tf.placeholder("float",shape=(), name='keep_prob')
+        batch = tf.Variable(0)
         
         # Weight initializations
         #w_in,b_in = init_weights((x_size, self.hidden_nodes))
@@ -116,7 +120,7 @@ class ffNN():
          h_out = self.forwardprop(self.X, w_in,b_in,self.keep_prob)
          l2_norm = tf.add(tf.nn.l2_loss(w_in),l2_norm)
          l2_norm = tf.add(tf.nn.l2_loss(b_in),l2_norm)
-         i = -1
+         i = -1 #if it doesn't enter the loop it is used for the initial weight of the model after loop
          # Forward propagation
          for i in range(self.hidden_layers-1):
              w_in,b_in = init_weights((self.hidden_nodes[i], self.hidden_nodes[i+1]))
@@ -135,7 +139,13 @@ class ffNN():
          #with tf.control_dependencies(update_ops):
          #        self.updates = tf.train.AdamOptimizer(learning_rate=self.learning_rate).minimize(self.loss)
          # updates = tf.train.GradientDescentOptimizer(0.01).minimize(loss)
-         self.updates = tf.train.AdamOptimizer(learning_rate=self.learning_rate).minimize(self.loss)
+         learning_rate = tf.train.exponential_decay(self.learning_rate,batch,self.decay_step,self.decay_factor , staircase=True)
+         if self.optimizer == 'Adam':
+              self.updates = tf.train.AdamOptimizer(learning_rate=learning_rate).minimize(self.loss)
+         elif self.optimizer == 'SGD':
+              self.updates = tf.train.GradientDescentOptimizer(learning_rate=learning_rate).minimize(self.loss)
+         else:
+              self.updates = tf.train.AdadeltaOptimizer(learning_rate=learning_rate).minimize(self.loss)
 
     def train(self, train_X, train_y):
         print('x_2 size %s %s' % train_X.shape)
@@ -162,19 +172,23 @@ class ffNN():
             # Train with each example
             allcosts = 0
             
-
-            for i in range(len(train_X)):
+            if self.shuffle:
+                s = np.arange(0, len(train_X), 1)
+                np.random.shuffle(s)
+                train_X = train_X[s]
+                train_y = train_y[s]
+            for i in range(0,len(train_X)-self.batch_size +1 ,self.batch_size):
                 #print(train_X[i: i + 1])
                 #x_input = list(map(float,train_X[i: i + 1].values.tolist()[0]))
                 #x_input = np.array([x_input],dtype=np.float64)
-                x_input = np.array(train_X[i: i + 1],dtype=np.float64)
+                x_input = np.array(train_X[i: i + self.batch_size],dtype=np.float64)
                 #y_input = list(map(float,train_y[i: i + 1].values.tolist()[0]))
                 #y_input = np.array([y_input],dtype=np.float64)
-                y_input = np.array([train_y[i: i + 1]],dtype=np.float64)
+                y_input = np.transpose(np.array([train_y[i: i + self.batch_size]],dtype=np.float64))
                 _,myloss,y_out =sess.run([self.updates,self.loss,self.yhat], feed_dict={self.X: x_input, self.y: y_input,self.keep_prob: self.keep_probability})
                 allcosts += myloss
-            if self.decay is True and epoch % self.decay_step ==0:
-                self.learning_rate  *= self.decay_factor
+            #if self.decay is True and epoch % self.decay_step ==0:
+            #    self.learning_rate  *= self.decay_factor
             epoch_cost = float(allcosts)/len(train_X)
 
             if (epoch % self.saveFrequency == 0 and epoch != 0):
@@ -187,7 +201,7 @@ class ffNN():
                 if pass_best_epochs > 10:
                     print("Exited on epoch  %d, with loss  %.6f comparing with bestLoss: %.6f and stop_loss: %.6f" % (epoch + 1, epoch_cost, bestLoss, self.stop_loss))
                     break
-            elif epoch_cost < bestLoss:
+            if epoch_cost < bestLoss:
                 if (epoch % self.saveFrequency == 0 and epoch != 0):
                     best_ckpt_saver.handle(epoch_cost, sess, global_step_tensor=tf.constant(epoch))
                 pass_best_epochs = 0
