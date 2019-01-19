@@ -139,13 +139,15 @@ class ffNN():
          #with tf.control_dependencies(update_ops):
          #        self.updates = tf.train.AdamOptimizer(learning_rate=self.learning_rate).minimize(self.loss)
          # updates = tf.train.GradientDescentOptimizer(0.01).minimize(loss)
-         learning_rate = tf.train.exponential_decay(self.learning_rate,batch,self.decay_step,self.decay_factor , staircase=True)
+         if self.decay:
+              self.learning_rate = tf.train.exponential_decay(self.learning_rate,batch,self.decay_step,self.decay_factor , staircase=True)
+         
          if self.optimizer == 'Adam':
-              self.updates = tf.train.AdamOptimizer(learning_rate=learning_rate).minimize(self.loss)
+              self.updates = tf.train.AdamOptimizer(learning_rate=self.learning_rate).minimize(self.loss)
          elif self.optimizer == 'SGD':
-              self.updates = tf.train.GradientDescentOptimizer(learning_rate=learning_rate).minimize(self.loss)
+              self.updates = tf.train.GradientDescentOptimizer(learning_rate=self.learning_rate).minimize(self.loss)
          else:
-              self.updates = tf.train.AdadeltaOptimizer(learning_rate=learning_rate).minimize(self.loss)
+              self.updates = tf.train.AdadeltaOptimizer(learning_rate=self.learning_rate).minimize(self.loss)
 
     def train(self, train_X, train_y):
         print('x_2 size %s %s' % train_X.shape)
