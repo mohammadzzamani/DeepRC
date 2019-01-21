@@ -16,7 +16,7 @@ import csv
 import pandas as pd
 import copy
 import operator
-from feedforward import ffNN
+from feedforward_parallel import ffNN
 from pprint import pprint
 import numbers
 
@@ -1869,8 +1869,9 @@ class RegressionPredictor:
         self.featureSelectionString = []
         print ('kbest: ' , k, '  , pca:  ' , n , ' dim: ', dim, ' DEFAULT_RANDOM_SEED: ', DEFAULT_RANDOM_SEED)
         for i in range(0,dim):
-            self.featureSelectionString.append('Pipeline([("1_univariate_select",  SelectKBest(score_func=f_regression, k={0})) , ("2_rpca", RandomizedPCA(n_components=int({1}), random_state={2}, whiten=False, iterated_power=3))])'.format(k[i], n[i], DEFAULT_RANDOM_SEED) )
-            #self.featureSelectionString.append('Pipeline([("1_univariate_select",  SelectKBest(score_func=f_regression, k={0})) ])'.format(k[i],  DEFAULT_RANDOM_SEED) )
+            # MB
+            #self.featureSelectionString.append('Pipeline([("1_univariate_select",  SelectKBest(score_func=f_regression, k={0})) , ("2_rpca", RandomizedPCA(n_components=int({1}), random_state={2}, whiten=False, iterated_power=3))])'.format(k[i], n[i], DEFAULT_RANDOM_SEED) )
+            self.featureSelectionString.append('Pipeline([("1_univariate_select",  SelectKBest(score_func=f_regression, k={0})) ])'.format(k[i],  DEFAULT_RANDOM_SEED) )
         print ('kbest: ' , k, '  , pca:  ' , n )
 
 
@@ -2029,21 +2030,21 @@ class RegressionPredictor:
                     regularization_factor = 0
                     parameters_str += 'Controls: hidden_nodes = %s, hidden_layers = %d, regularization_factor= %2.f'%(','.join(map(str,hidden_nodes)), hidden_layers, regularization_factor)
             else:
-                    hidden_nodes = [8]
+                    hidden_nodes = [64,8]
                     save_path = './models/LMOnly'
                     hidden_layers = len(hidden_nodes)
-                    regularization_factor = 0.01
+                    regularization_factor = 0.0005
                     parameters_str += 'LM: hidden_nodes = %s, hidden_layers = %d, regularization_factor= %.2f'%(','.join(map(str,hidden_nodes)), hidden_layers, regularization_factor)
             #hidden_nodes = 16 if X.shape[1] < 20 else 32
-            epochs = 150
-            learning_rate = 0.001
+            epochs = 500
+            learning_rate = 0.0005
             decay = False
             decay_step = 10
             decay_factor = 0.7
             stop_loss = 0.0001
             keep_prob = 0.9
-            activation_function = 'linear' # linear, sigmoid, tanh, relu
-            batch_size = 4
+            activation_function = 'sigmoid' # linear, sigmoid, tanh, relu
+            batch_size = 8
             shuffle = True
             optimizer='Adam' # Adam, SGD, Adadelta
             regressor= ffNN(hidden_nodes=hidden_nodes, epochs=epochs, learning_rate=learning_rate,save_path = save_path,hidden_layers = hidden_layers, decay=decay, decay_step=decay_step, decay_factor=decay_factor, stop_loss=stop_loss, keep_probability = keep_prob, regularization_factor=regularization_factor,minimum_cost=0,activation_function=activation_function,batch_size=batch_size,shuffle=shuffle,optimizer=optimizer)
