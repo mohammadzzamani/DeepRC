@@ -1739,8 +1739,3 @@ _*Mean Absolute Error:  21.9087
 _*Train_Mean MAE:       23.7989
 
 Finished at: 2019-01-18 15:35:05.287467
-
-
- Start at: 2019-01-18 15:37:48.522408
-Model: ./models/LMOnly , epochs: 150, learning_rate: 0.000100, decay: False , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: sigmoid, batch_size: 4, shuffle: True, optimizer: Adam 
-LM: hidden_nodes = 16, hidden_layers = 1, regularization_factor= 0.01
