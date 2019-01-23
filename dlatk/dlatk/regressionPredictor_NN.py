@@ -1013,9 +1013,8 @@ class RegressionPredictor:
                                     ypred = self._multiXpredict(regressor, multiXtest, multiScalers = multiScalers, multiFSelectors = multiFSelectors, sparse = sparse)
                                 predictions.update(dict(zip(testGroupsOrder,ypred)))
                                 #pprint(ypred[:10])
-                                    
                                 ##4 a) save accuracy stats:
-                                  ## TODO: calculate all this at end instead
+                                ## TODO: calculate all this at end instead
                                 ##mb
                                 print('ytest')
                                 print(ytest)
@@ -1026,11 +1025,12 @@ class RegressionPredictor:
                                 mae = metrics.mean_absolute_error(ytest, ypred)
                                 train_mean = mean(ytrain)
                                 train_mean_mae = metrics.mean_absolute_error(ytest, [train_mean]*len(ytest))
-                                
-                                history = open('/home/mbastan/DeepRC/parameters_history.txt','a')
-                                history.write("  *FOLD R^2: %.4f (MSE: %.4f; MAE: %.4f; mean train mae: %.4f)\n"% (R2, mse, mae, train_mean_mae) )
-                                history.close()
-                                print("  *FOLD R^2: %.4f (MSE: %.4f; MAE: %.4f; mean train mae: %.4f)"% (R2, mse, mae, train_mean_mae))
+                                if withLanguage: 
+                                   history = open('/home/mbastan/DeepRC/parameters_history.txt','a')
+                                   history.write("  *FOLD R^2: %.4f (MSE: %.4f; MAE: %.4f; mean train mae: %.4f)\n"% (R2, mse, mae, train_mean_mae) )
+                                   history.close()
+                                   print("  *FOLD R^2: %.4f (MSE: %.4f; MAE: %.4f; mean train mae: %.4f)"% (R2, mse, mae, train_mean_mae))
+
                                 if report: self.addToReport(outputName+'_.result', Str = "  *FOLD: %d  R^2: %.4f (MSE: %.4f; MAE: %.4f; mean train mae: %.4f)\n_"% (testChunk, R2, mse, mae, train_mean_mae))
                                 testStats['R2_folds'].append(R2)
                                 (pearsr, r_p) = pearsonr(ytest, ypred)
@@ -1053,7 +1053,9 @@ class RegressionPredictor:
                                         #print results.summary(outcomeName, [outcomeName+'_pred'])#debug
                                     except ValueError as err:
                                         print("WLS threw ValueError: %s\nresult not included" % str(err))
-
+                                del regressor
+                                import gc
+                                gc.collect()
                             #########################
                             #5) aggregate test stats:
                             ## 5a) average fold results
@@ -1132,10 +1134,11 @@ class RegressionPredictor:
                             if report: self.addToReport(outputName+'_.report' ,Str = "*Overall R^2:          %.4f\n_" % (reportStats['R2'])) 
                             Str = "_*Overall R^2:          %.4f    \n_*Overall FOLDS R^2:    %.4f (+- %.4f)    \n_*R (sqrt R^2):         %.4f    \n_*Pearson r:            %.4f (p = %.5f)    \n_*Folds Pearson r:      %.4f (p = %.5f)    \n_*Spearman rho:         %.4f (p = %.5f)    \n_*Mean Squared Error:   %.4f    \n_*Mean Absolute Error:  %.4f    \n_*Train_Mean MAE:       %.4f\n\n" % (reportStats['R2'], reportStats['R2_folds'], reportStats['se_R2_folds'], reportStats['R'], reportStats['r'], reportStats['r_p'], reportStats['r_folds'], reportStats['r_p_folds'], reportStats['rho'], reportStats['rho_p'], reportStats['mse'], reportStats['mae'], reportStats['train_mean_mae'])
 
-                            history = open('/home/mbastan/DeepRC/parameters_history.txt','a')
-                            history.write(Str)
-                            history.write('Finished at: '+str(datetime.datetime.now())+'\n')
-                            history.close()
+                            if withLanguage:
+                               history = open('/home/mbastan/DeepRC/parameters_history.txt','a')
+                               history.write(Str)
+                               history.write('Finished at: '+str(datetime.datetime.now())+'\n')
+                               history.close()
                             if report: self.addToReport(outputName+'_.result', Str = Str,) 
 
                             if savePredictions: 
@@ -2019,68 +2022,94 @@ class RegressionPredictor:
             print("[COMBINED FEATS] best estimator: %s (score: %.4f)\n" % (gs.best_estimator_, gs.best_score_))
             return gs.best_estimator_,  multiScalers, multiFSelectors
         else:
-            # no grid search
-            print("[COMBINED FEATS: Training regression model: %s]" % modelName)
-            #regressor = eval(self.modelToClassName[modelName]+'()')
-            parameters_str = ""
-            if X.shape[1] < 20:
+            if (len(multiX) > 1):
+               
+             # no grid search
+             print("[COMBINED FEATS: Training regression model: %s]" % modelName)
+             #regressor = eval(self.modelToClassName[modelName]+'()')
+             parameters_str = ""
+             if X.shape[1] < 20:
                     hidden_nodes = [8]
                     save_path = './models/ControlsOnly'
                     hidden_layers = len(hidden_nodes)
                     regularization_factor = 0
                     parameters_str += 'Controls: hidden_nodes = %s, hidden_layers = %d, regularization_factor= %2.f'%(','.join(map(str,hidden_nodes)), hidden_layers, regularization_factor)
-            else:
-                    hidden_nodes = [64,8]
+             else:
+                    hidden_nodes = [32,8]
                     save_path = './models/LMOnly'
                     hidden_layers = len(hidden_nodes)
                     regularization_factor = 0.0005
-                    parameters_str += 'LM: hidden_nodes = %s, hidden_layers = %d, regularization_factor= %.2f'%(','.join(map(str,hidden_nodes)), hidden_layers, regularization_factor)
-            #hidden_nodes = 16 if X.shape[1] < 20 else 32
-            epochs = 500
-            learning_rate = 0.0005
-            decay = False
-            decay_step = 10
-            decay_factor = 0.7
-            stop_loss = 0.0001
-            keep_prob = 0.9
-            activation_function = 'sigmoid' # linear, sigmoid, tanh, relu
-            batch_size = 8
-            shuffle = True
-            optimizer='Adam' # Adam, SGD, Adadelta
-            regressor= ffNN(hidden_nodes=hidden_nodes, epochs=epochs, learning_rate=learning_rate,save_path = save_path,hidden_layers = hidden_layers, decay=decay, decay_step=decay_step, decay_factor=decay_factor, stop_loss=stop_loss, keep_probability = keep_prob, regularization_factor=regularization_factor,minimum_cost=0,activation_function=activation_function,batch_size=batch_size,shuffle=shuffle,optimizer=optimizer)
-            regressor.initialize(x_size = X.shape[1])
-            global history_counter
-            if history_counter is None :
-                history = open('/home/mbastan/DeepRC/parameters_history.txt','a')
-                history.write('\n\n Start at: '+str(datetime.datetime.now())+'\n')
-                history.write('Model: %s , epochs: %d, learning_rate: %f, decay: %s , decay_step: %d , decay_factor: %f , stop_loss: %f , keep_prob: %f, activation_function: %s, batch_size: %d, shuffle: %s, optimizer: %s \n' %(save_path, epochs,  learning_rate, str(decay), decay_step, decay_factor, stop_loss, keep_prob,activation_function,batch_size,str(shuffle),optimizer ) )
-                history.write(parameters_str+'\n')
-                history.close()
-                history_counter = True
-
-            try: 
-                regressor.initialize(x_size = X.shape[1])
+                    parameters_str += 'LM: hidden_nodes = %s, hidden_layers = %d, regularization_factor= %.5f'%(','.join(map(str,hidden_nodes)), hidden_layers, regularization_factor)
+             #hidden_nodes = 16 if X.shape[1] < 20 else 32
+             epochs = 1000
+             learning_rate = 0.0005
+             decay = False
+             decay_step = 10
+             decay_factor = 0.7
+             stop_loss = 0.0001
+             keep_prob = 0.9
+             activation_function = 'sigmoid' # linear, sigmoid, tanh, relu
+             batch_size = 16
+             shuffle = True
+             optimizer='Adam' # Adam, SGD, Adadelta 
+             stopping_iteration = 20 # if the accuracy didnt improve after this many iterations stop
+             regressor= ffNN(hidden_nodes=hidden_nodes, epochs=epochs, learning_rate=learning_rate,save_path = save_path,hidden_layers = hidden_layers, decay=decay, decay_step=decay_step, decay_factor=decay_factor, stop_loss=stop_loss, keep_probability = keep_prob, regularization_factor=regularization_factor,minimum_cost=0,activation_function=activation_function,batch_size=batch_size,shuffle=shuffle,optimizer=optimizer,stopping_iteration= stopping_iteration)
+             #regressor.initialize(x1_size = X.shape[1],x2_size=X.shape[1])
+             global history_counter
+             if history_counter is None :
+                 history = open('/home/mbastan/DeepRC/parameters_history.txt','a')
+                 history.write('\n\n Start at: '+str(datetime.datetime.now())+'\n')
+                 history.write('Model: %s , epochs: %d, learning_rate: %f, decay: %s , decay_step: %d , decay_factor: %f , stop_loss: %f , keep_prob: %f, activation_function: %s, batch_size: %d, shuffle: %s, optimizer: %s, stopping_iteration: %d \n' %(save_path, epochs,  learning_rate, str(decay), decay_step, decay_factor, stop_loss, keep_prob,activation_function,batch_size,str(shuffle),optimizer ,stopping_iteration) )
+                 history.write(parameters_str+'\n')
+                 history.close()
+                 history_counter = True
+             print('length of the multiX is %d'%len(multiX))
+             try: 
+                regressor.initialize(x1_size = multiX[0].shape[1],x2_size=multiX[1].shape[1])
                 #regressor.set_params(**dict((k, v[0] if isinstance(v, list) else v) for k,v in self.cvParams[modelName][0].items()))
-            except IndexError: 
+             except IndexError:
+                 
                 print(" >>No CV parameters available")
                 raise IndexError
-            #print dict(self.cvParams[modelName][0])
+             #print dict(self.cvParams[modelName][0])
 
-            try:
+             try:
                 try:
-                    regressor.train(X,y)
+                    regressor.train(multiX,y)
                     #regressor.fit(X, y, sample_weight = weightedSample)
                 except TypeError:
-                    regressor.train(X,y)
+                    regressor.train(multiX,y)
                     #regressor.fit(X, y)
-            except LinAlgError:
+             except LinAlgError:
                 print("  >>Lin Algebra error, X:")
                 pprint(X)
-                
+             del multiX
+             import gc
+             gc.collect()   
+
+            else:
+                # no grid search
+             print("[COMBINED FEATS: Training regression model: %s]" % modelName)
+             regressor = eval(self.modelToClassName[modelName]+'()')
+             try:
+                regressor.set_params(**dict((k, v[0] if isinstance(v, list) else v) for k,v in self.cvParams[modelName][0].items()))
+             except IndexError:
+                print(" >>No CV parameters available")
+                raise IndexError
+             #print dict(self.cvParams[modelName][0])
+
+             try:
+                try:
+                    regressor.fit(X, y, sample_weight = weightedSample)
+                except TypeError:
+                    regressor.fit(X, y)
+             except LinAlgError:
+                print("  >>Lin Algebra error, X:")
+                pprint(X)
     
             print("model: %s " % str(regressor))
             #if modelName[-2:] == 'cv' and 'alphas' in regressor.get_params():
-             #   print("  selected alpha: %f" % regressor.alpha_)
+            #   print("  selected alpha: %f" % regressor.alpha_)
             if factorAdaptation:
                 return regressor, multiScalers, multiFSelectors, factorScalers
             else:
@@ -2096,7 +2125,7 @@ class RegressionPredictor:
             else:
                 print("No features selected, so using original full X")
 
-        return regressor.predict(X)
+        return regressor.predict(multiX)
 
     def _multiXpredict(self, regressor, X, multiScalers = None, multiFSelectors = None, y = None, sparse = False, 
                         factorAdaptation = False, factorScalers = None, factorAddition = False, factors = None):
@@ -2167,8 +2196,10 @@ class RegressionPredictor:
         if hasattr(regressor, 'intercept_'):
             print("[PREDICT] regression intercept: %f" % regressor.intercept_)
 
-        return multiScalers[len(multiScalers)-1].inverse_transform(np.array(regressor.predict(X)).reshape(-1,1)).reshape(-1)
-
+        if len(multiX) > 1:
+            return multiScalers[len(multiScalers)-1].inverse_transform(np.array(regressor.predict(multiX)).reshape(-1,1)).reshape(-1)
+        else:
+            return regressor.predict(X)
 
     ######################
     def load(self, filename, pickle2_7=True):
