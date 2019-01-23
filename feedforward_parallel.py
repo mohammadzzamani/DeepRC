@@ -46,10 +46,10 @@ class ffNN():
     def __init__(self, hidden_nodes=[64], epochs=3, learning_rate=0.1, saveFrequency=1,
                  save_path='./models/ControlOnly', hidden_layers=1, decay=False, decay_step=10, decay_factor=0.7,
                  stop_loss=0.0001, regularization_factor=0.01, keep_probability=0.7, minimum_cost=0.2,
-                 activation_function='sigmoid', batch_size=1,shuffle=True,optimizer='Adam'):
+                 activation_function='sigmoid', batch_size=1,shuffle=True,optimizer='Adam',stopping_iteration=10):
         self.hidden_nodes = hidden_nodes
         self.epochs = epochs
-
+        self.learning_rate = learning_rate
         self.saveFrequency = saveFrequency
         self.save_path = save_path
         self.hidden_layers = hidden_layers
@@ -64,6 +64,7 @@ class ffNN():
         self.batch_size = batch_size
         self.shuffle = shuffle
         self.optimizer= optimizer
+        self.stopping_iteration = stopping_iteration
         print('model started working :D')
 
     def forwardprop(self, X, w_in, b_in, keep_prob):
@@ -164,7 +165,7 @@ class ffNN():
             self.loss1 = tf.add(self.loss1, self.reg_factor * l2_norm1)
             learning_rate1 = tf.train.exponential_decay(self.learning_rate1, batch, self.decay_step, self.decay_factor,
                                                        staircase=True)
-            self.updates1 = tf.train.AdamOptimizer(learning_rate=learning_rate1).minimize(self.loss1)
+            self.updates1 = tf.train.AdamOptimizer(learning_rate=learning_rate1, beta1=0.99, beta2=0.999).minimize(self.loss1)
 
 
 
@@ -214,9 +215,8 @@ class ffNN():
 
 
     def train(self, train_X, train_y):
-            print('x_2 size %s %s' % train_X.shape)
+            print('x_1 size %s %s' % train_X[0].shape)
             # print('y_2 size %s %s' % train_y.shape)
-            # Run SGD
             sess = tf.InteractiveSession()
             init = tf.global_variables_initializer()
             sess.run(init)
@@ -233,38 +233,45 @@ class ffNN():
                 num_to_keep=3,
                 maximize=False
             )
+            train_X1 = train_X[0]
+            train_X2 = train_X[1]
+
             pass_best_epochs = 0
             for epoch in range(self.epochs):
                 # Train with each example
                 allcosts = 0
 
-                # import random
+                import random
+                if self.shuffle:
+                   s = np.arange(0, len(train_X1), 1)
+                   np.random.shuffle(s)
+                   train_X1 = train_X1[s]
+                   train_X2 = train_X2[s]
+                   train_y = train_y[s]
                 # print(train_X)
-                # random.shuffle(train_X)
-                # print(train_X)
-                for i in range(0, len(train_X) - 1, 2):
+                for i in range(0, len(train_X1) - self.batch_size + 1, self.batch_size):
                     # x_input = list(map(float,train_X[i: i + 2].values.tolist()[0]))
                     # x_input = np.array([x_input],dtype=np.float64)
-                    x1_input = np.array(train_X[i: i + 2], dtype=np.float64)
-                    x2_input = np.array(train_X[i: i + 2], dtype=np.float64)
-                    y_input = list(map(float,train_y[i: i + 1].values.tolist()[0]))
-                    y_input = np.array([y_input,y_input],dtype=np.float64)
-                    # y_input = np.transpose(np.array([np.transpose(train_y[i: i + 2])], dtype=np.float64))
+                    x1_input = np.array(train_X1[i: i + self.batch_size], dtype=np.float64)
+                    x2_input = np.array(train_X2[i: i + self.batch_size], dtype=np.float64)
+                    #y_input = list(map(float,train_y[i: i + 1].values.tolist()[0]))
+                    #y_input = np.array([y_input,y_input],dtype=np.float64)
+                    y_input = np.transpose(np.array([train_y[i: i + self.batch_size]],dtype=np.float64))
                     # _, myloss, y_out = sess.run([self.updates, self.loss, self.yhat],
                     #                             feed_dict={self.X: x_input, self.y: y_input,
                     #                                        self.keep_prob: self.keep_probability})
 
 
-                    _,loss1,loss2,loss3 = sess.run([self.final_opt,self.loss1,self.loss2,self.loss3],feed_dict={self.X1: x1_input, self.X2: x2_input, self.y: y_input,
-                                                           self.keep_prob: self.keep_probability,self.learning_rate1: 0.1,
-                                                              self.learning_rate2: 0.1,self.learning_rate3: 0.1 })
+                    _,loss3 = sess.run([self.final_opt,self.loss3],feed_dict={self.X1: x1_input, self.X2: x2_input, self.y: y_input,
+                                                           self.keep_prob: self.keep_probability,self.learning_rate1: self.learning_rate,
+                                                              self.learning_rate2: self.learning_rate, self.learning_rate3:self.learning_rate })
 
 
-                    allcosts += loss1
+                    allcosts += loss3
                     # print(i)
                 # if self.decay is True and epoch % self.decay_step ==0:
                 #    self.learning_rate  *= self.decay_factor
-                epoch_cost = float(allcosts) / len(train_X)
+                epoch_cost = float(allcosts) / len(train_X1)
 
                 if (epoch % self.saveFrequency == 0 and epoch != 0):
                     saver.save(sess, self.save_path + "/pretrained_lstm.ckpt", global_step=epoch)
@@ -273,11 +280,11 @@ class ffNN():
                     # print("Exited on epoch  %d, with loss  %.6f comparing with bestLoss: %.6f and stop_loss: %.6f" % (epoch + 1, epoch_cost, bestLoss, epoch_cost))
                     # print('absoulute error difference %f'%( abs( bestLoss - epoch_cost)))
                     pass_best_epochs += 1
-                    if pass_best_epochs > 10:
+                    if pass_best_epochs > self.stopping_iteration:
                         print("Exited on epoch  %d, with loss  %.6f comparing with bestLoss: %.6f and stop_loss: %.6f" % (
                         epoch + 1, epoch_cost, bestLoss, self.stop_loss))
                         break
-                elif epoch_cost < bestLoss:
+                if epoch_cost < bestLoss:
                     if (epoch % self.saveFrequency == 0 and epoch != 0):
                         best_ckpt_saver.handle(epoch_cost, sess, global_step_tensor=tf.constant(epoch))
                     pass_best_epochs = 0
@@ -304,13 +311,18 @@ class ffNN():
             checkpoint = checkmate.get_best_checkpoint(model_path + "/bestModel/", select_maximum_value=True)
         saver.restore(sess, checkpoint)
         predicted_y = []
-        for i in range(len(test_X)):
-            x1_input = np.array(test_X[i: i + 1], dtype=np.float64)
-            x2_input = np.array(test_X[i: i + 1], dtype=np.float64)
+        test_X1 = test_X[0]
+        test_X2 = test_X[1]
+        for i in range(len(test_X1)):
+            x1_input = np.array(test_X1[i: i + 1], dtype=np.float64)
+            x2_input = np.array(test_X2[i: i + 1], dtype=np.float64)
 
             yhat = sess.run([self.yhat3], feed_dict={self.X1: x1_input,self.X2: x2_input, self.keep_prob: 1.})
             predicted_y.append(yhat[0][0][0])
         sess.close()
+        del test_X
+        import gc
+        gc.collect()
         return (predicted_y)
 
     def test(self, test_X, test_y, model_path=None, bestModel=True, write=False):
