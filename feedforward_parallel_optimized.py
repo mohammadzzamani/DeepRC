@@ -5,7 +5,7 @@ import numpy as np
 
 from checkmate import BestCheckpointSaver
 import checkmate
-
+import os
 input_path = 'emnlp2018.sql.txt'
 output_path = 'emnlp2018.sql.csv'
 header = ['cnty', '01hea_aar', 'ls09_10_avg', 'hsgradHC03_VC93ACS3yr$10', 'bachdegHC03_VC94ACS3yr$10',
@@ -65,6 +65,9 @@ class ffNN():
         self.shuffle = shuffle
         self.optimizer= optimizer
         self.stopping_iteration = stopping_iteration
+        self.config = tf.ConfigProto(
+        device_count = {'GPU': 0}
+        )
         print('model started working :D')
 
     def forwardprop(self, X, w_in, b_in, keep_prob):
@@ -113,11 +116,10 @@ class ffNN():
         #      yhat = tf.add(tf.matmul(h3, w_out),b_out)  # The \varphi function
         # yhat = tf.nn.dropout(tf.nn.relu(yhat),keep_prob = keep_prob)
         # return yhat
-    def model(self, graph, input_tensor,y_size,keep_pro):
-        input_size = input_tensor.shape[1]
+    def model(self, graph, input_tensor,input_size,y_size,keep_prob):
         with graph.as_default():
             w_in, b_in = init_weights((input_size, self.hidden_nodes[0]))
-            h_out = self.forwardprop(input_tensor, w_in, b_in, keep_pro)
+            h_out = self.forwardprop(input_tensor, w_in, b_in, keep_prob)
             l2_norm = 0.
             l2_norm = tf.add(tf.nn.l2_loss(w_in), l2_norm)
             l2_norm = tf.add(tf.nn.l2_loss(b_in), l2_norm)
@@ -125,19 +127,19 @@ class ffNN():
             # Forward propagation
             for i in range(self.hidden_layers - 1):
                 w_in, b_in = init_weights((self.hidden_nodes[i], self.hidden_nodes[i + 1]))
-                h_out = self.forwardprop(h_out, w_in, b_in,keep_pro)
+                h_out = self.forwardprop(h_out, w_in, b_in,keep_prob)
                 l2_norm = tf.add(tf.nn.l2_loss(w_in), l2_norm)
                 l2_norm = tf.add(tf.nn.l2_loss(b_in), l2_norm)
             w_out, b_out = init_weights((self.hidden_nodes[i + 1], y_size))
             l2_norm = tf.add(tf.nn.l2_loss(w_out), l2_norm)
             l2_norm = tf.add(tf.nn.l2_loss(b_out), l2_norm)
-            yhat = tf.add(tf.matmul(h_out, w_out), b_out)
+            yhat = tf.add(tf.matmul(h_out, w_out), b_out,name='yhat')
             return h_out, l2_norm, yhat
-    def last_layer(self, graph, h_out1, h_out2, y_size,keep_pro):
+    def last_layer(self, graph, h_out1, h_out2, y_size,keep_prob):
         with graph.as_default():
             l2_norm = 0.
             w_out, b_out = init_weights((self.hidden_nodes[-1]*2, y_size))
-            yhat = self.forwardprop(tf.concat([h_out1,h_out2],axis=1), w_out, b_out, keep_pro)
+            yhat = self.forwardprop(tf.concat([h_out1,h_out2],axis=1), w_out, b_out, keep_prob)
             l2_norm = tf.add(tf.nn.l2_loss(w_out), l2_norm)
             l2_norm = tf.add(tf.nn.l2_loss(b_out), l2_norm)
             return  l2_norm, yhat
@@ -149,19 +151,21 @@ class ffNN():
                     loss = tf.losses.mean_squared_error(labels=labels_tensor, predictions=logits)
                     loss = tf.add(loss, self.regularization_factor * l2_norm)
              with tf.variable_scope('optimizer'):
-                    learning_rate = tf.train.exponential_decay(self.learning_rate, batch, self.decay_step, self.decay_factor,
-                                                       staircase=True)
-                    opt_op = tf.train.AdamOptimizer(learning_rate=learning_rate, beta1=0.99, beta2=0.999).minimize(loss)
+                    #learning_rate = tf.train.exponential_decay(self.learning_rate, batch, self.decay_step, self.decay_factor,
+                    #                                   staircase=True)
+                    opt_op = tf.train.AdamOptimizer(learning_rate=self.learning_rate, beta1=0.9, beta2=0.999).minimize(loss)
              return opt_op,loss
 
-    def new_train(self,train_X,train_y):
+    def train(self,train_X,train_y):
+        print('new train started')
         graph1 = tf.Graph()
         train_X1 = train_X[0]
         train_X2 = train_X[1]
         x1_size = train_X1.shape[1]
         x2_size = train_X2.shape[1]
-        y_size = train_y.shape[1]
-
+        y_size = 1
+        np.random.seed(42)
+        tf.set_random_seed(42)
         with graph1.as_default():
             X1 = tf.placeholder("float", shape=[None, x1_size], name='X1Value')  
             X2 = tf.placeholder("float", shape=[None, x2_size], name='X2Value') 
@@ -186,71 +190,78 @@ class ffNN():
                 maximize=False
             )
 
+            train_X1 = np.array(train_X1, dtype=np.float64)
+            train_X2 = np.array(train_X2, dtype=np.float64)
             #Dataset
-            dataset = tf.data.Dataset.from_tensor_slices((X1,X2,y))
-            dataset = dataset.batch(batch_size_ph)
-            iterator = tf.data.Iterator.from_structure(dataset.output_types, dataset.output_shapes)
-            dataset_init_op = iterator.make_initializer(dataset, name='dataset_init')
-            x1_input,x2_input, y_input = iterator.get_next()
-
-
-            #dataset2 = tf.data.Dataset.from_tensor_slices((train_X2, train_y))
-            #dataset2 = dataset1.batch(batch_size_ph)
-            #iterator2 = tf.data.Iterator.from_structure(dataset2.output_types, dataset2.output_shapes)
-            #dataset_init_op2 = iterator.make_initializer(dataset2, name='dataset1_init')
-            #x2_input, y_input2 = iterator2.get_next()
+            dataset_X = tf.data.Dataset.from_tensor_slices((X1,X2))
+            dataset_X = dataset_X.batch(batch_size_ph)#.shuffle(100)
+            iterator_X = tf.data.Iterator.from_structure(dataset_X.output_types, dataset_X.output_shapes)
+            dataset_init_op_X = iterator_X.make_initializer(dataset_X, name='dataset_X_init')
+            x1_input,x2_input = iterator_X.get_next()
+            print('dataset initialization done')
+            dataset_y = tf.data.Dataset.from_tensor_slices((y))
+            dataset_y = dataset_y.batch(batch_size_ph)#.shuffle(100)
+            iterator_y = tf.data.Iterator.from_structure(dataset_y.output_types, dataset_y.output_shapes)
+            dataset_init_op_y = iterator_y.make_initializer(dataset_y, name='dataset_y_init')
+            y_input = iterator_y.get_next()
+            #dataset = tf.data.Dataset.from_tensor_slices((X1,X2,y))
+            #dataset = dataset.batch(batch_size_ph).repeat().shuffle(10000)
+            #iterator = tf.data.Iterator.from_structure(dataset.output_types, dataset.output_shapes)
+            #dataset_init_op = iterator.make_initializer(dataset, name='dataset_init')
+            #x1_input, x2_input, y_input = iterator.get_next()
 
             bestLoss = np.inf
 
-
-            h_out1, l2_norm1, yhat1 = model(graph1, x1_input,y_size)
-            opt_op1, loss1 = get_opt_op(graph = graph1, logits= yhat1, labels_tensor= y_input, l2_norm=l2_norm1, batch=batch,keep_prob)
+            with tf.variable_scope("Phase1"):
+              h_out1, l2_norm1, yhat1 = self.model(graph1, x1_input,x1_size,y_size,keep_prob=keep_prob)
+              opt_op1, loss1 = self.get_opt_op(graph = graph1, logits= yhat1, labels_tensor= y_input, l2_norm=l2_norm1, batch=batch)
             
-
-            h_out2, l2_norm2, yhat2 = model(graph1, x2_input,y_size)
-            opt_op2, loss2 = get_opt_op(graph = graph1, logits= yhat2, labels_tensor= y_input, l2_norm=l2_norm2, batch=batch,keep_prob)
+            with tf.variable_scope("Phase2"):
+              h_out2, l2_norm2, yhat2 = self.model(graph1, x2_input,x2_size,y_size,keep_prob=keep_prob)
+              opt_op2, loss2 = self.get_opt_op(graph = graph1, logits= yhat2, labels_tensor= y_input, l2_norm=l2_norm2, batch=batch)
  
+            with tf.variable_scope("Phase3"):
+              l2_norm, yhat = self.last_layer(graph1, h_out1, h_out2, y_size,keep_prob=keep_prob)
+              opt_op, loss = self.get_opt_op(graph = graph1, logits= yhat, labels_tensor= y_input, l2_norm=l2_norm, batch=batch)
 
-            l2_norm, yhat = last_layer(graph1, h_out1, h_out2, y_size)
-            opt_op, loss = get_opt_op(graph = graph1, logits= yhat, labels_tensor= y_input, l2_norm=l2_norm, batch=batch, keep_prob)
-
-
-
-            with tf.Session(graph=graph1) as sess:
+            print('number of epochs: %d' %self.epochs)
+            with tf.Session(graph=graph1,config=self.config) as sess:
                  tf.global_variables_initializer().run(session=sess)
+                 train_y_t = np.transpose(np.array([train_y],dtype=np.float64))
+                 #sess.run( dataset_init_op_X, feed_dict={ X1: train_X1,X2:train_X2, batch_size_ph: self.batch_size})
+                 #sess.run( dataset_init_op_y, feed_dict={ y: train_y_t, batch_size_ph: self.batch_size})
+                 #sess.run( dataset_init_op, feed_dict={ X1: train_X1, X2:train_X2, y: train_y_t, batch_size_ph: self.batch_size})
+                 pass_best_epochs = 0
                  for epoch in range(self.epochs):
-                     import random
-                     if self.shuffle:
-                           s = np.arange(0, len(train_X1), 1)
-                           np.random.shuffle(s)
-                           train_X1 = train_X1[s]
-                           train_X2 = train_X2[s]
-                           train_y = train_y[s]
-
                      allcosts = 0
-                     sess.run( dataset_init_op, feed_dict={ X1: train_X1,X2:train_X2,y:train_y, batch_size_ph: self.batch_size})
+                     sess.run( dataset_init_op_X, feed_dict={ X1: train_X1,X2:train_X2, batch_size_ph: self.batch_size})
+                     sess.run( dataset_init_op_y, feed_dict={ y: train_y_t, batch_size_ph: self.batch_size})
                      while True:
-                         try:
-                            _, value = sess.run([opt_op1, loss1],feed_dict={keep_prob=keep_probability})
-                            print('Epoch {}, batch {} | loss: {}'.format(epoch, batch, value))
-                            batch += 1
-                            allcosts += loss3
-                         except tf.errors.OutOfRangeError:
-                            break
-
+                       try:
+                           _, value = sess.run([opt_op, loss],feed_dict={keep_prob:self.keep_probability})
+                           #print('Epoch {}, batch {} | loss: {}'.format(epoch, batch, value))
+                           #batch += 1
+                           allcosts += value
+                       except tf.errors.OutOfRangeError:
+                           break
                     #_,loss3 = sess.run([self.final_opt,self.loss3],feed_dict={self.X1: x1_input, self.X2: x2_input, self.y: y_input,
                     #                                      self.keep_prob: self.keep_probability,self.learning_rate1: self.learning_rate,
                     #                                          self.learning_rate2: self.learning_rate, self.learning_rate3:self.learning_rate })
 
 
                      epoch_cost = float(allcosts) / len(train_X1)
-
-                     if (epoch % self.saveFrequency == 0 and epoch != 0):
+                     #epoch_cost = float(value)
+                     if (epoch % self.saveFrequency == 0 and epoch != 0 and epoch_cost < bestLoss):
+                        cwd = os.getcwd()
+                        path = os.path.join(cwd, self.save_path)
+                        shutil.rmtree(path, ignore_errors=True)
+                        self.save_path = path
                         inputs_dict = {
                                "batch_size_ph": batch_size_ph,
                                "X1Value": X1,
                                "X2Value": X2,
-                               "yValue": y
+                               "yValue": y,
+                               "yhat": yhat
                                
                         }
                         outputs_dict = {
@@ -258,7 +269,7 @@ class ffNN():
                                  
                         }
                         tf.saved_model.simple_save(
-                            sess, self.save_path+"/pretrained_lstm.ckpt", inputs_dict, outputs_dict
+                            sess, self.save_path, inputs_dict, outputs_dict
                         )
                         #saver.save(sess, self.save_path + "/pretrained_lstm.ckpt", global_step=epoch)
 
@@ -267,20 +278,66 @@ class ffNN():
                        # print('absoulute error difference %f'%( abs( bestLoss - epoch_cost)))
                        pass_best_epochs += 1
                        if pass_best_epochs > self.stopping_iteration:
-                          print("Exited on epoch  %d, with loss  %.6f comparing with bestLoss: %.6f and stop_loss: %.6f" % (
-                          epoch + 1, epoch_cost, bestLoss, self.stop_loss))
+                          print("Exited on epoch  %d, with loss  %.6f comparing with bestLoss: %.6f and stop_loss: %.6f, pass best epoch is %d" % (
+                          epoch + 1, epoch_cost, bestLoss, self.stop_loss,pass_best_epochs))
                           break
                      if epoch_cost < bestLoss:
-                        if (epoch % self.saveFrequency == 0 and epoch != 0):
-                           best_ckpt_saver.handle(epoch_cost, sess, global_step_tensor=tf.constant(epoch))
+                        #if (epoch % self.saveFrequency == 0 and epoch != 0):
+                        #   best_ckpt_saver.handle(epoch_cost, sess, global_step_tensor=tf.constant(epoch))
                         pass_best_epochs = 0
                         bestLoss = epoch_cost
-
+                        print('best loss updated')
                      print("Epoch = %d, train cost = %.6f"  % (epoch + 1, epoch_cost))
 
 
 
+    def predict(self, test_X, bestModel=False, model_path=None):
+        if model_path == None:
+            model_path = self.save_path
+        test_X1 = test_X[0]
+        test_X2 = test_X[1]
+        print('model path is %s' % model_path)
+        #sess = tf.InteractiveSession()
+        #saver = tf.train.Saver()
+        if not bestModel:
+            # checkpoint =  tf.train.latest_checkpoint('data/models/'+entity.split()[0]+'/')
+            checkpoint = tf.train.latest_checkpoint(model_path)
+        else:
+            checkpoint = tf.train.latest_checkpoint(model_path)
+            #checkpoint = checkmate.get_best_checkpoint(model_path + "/bestModel/", select_maximum_value=True)
+        graph2 = tf.Graph()
+        with graph2.as_default():
+           #X1 = tf.placeholder("float", shape=[None, x1_size], name='X1Value')
+           #X2 = tf.placeholder("float", shape=[None, x2_size], name='X2Value')
+           #keep_prob = tf.placeholder("float", shape=(), name='keep_prob')
+           with tf.Session(graph=graph2,config=self.config) as sess:
+                   from tensorflow.python.saved_model import tag_constants
+                   tf.saved_model.loader.load(sess, [tag_constants.SERVING], model_path)
+                   #sess.run(tf.global_variables_initializer())
+                   #saver = tf.train.Saver()
+                   #saver.restore(sess, checkpoint)
+                   X1 = graph2.get_tensor_by_name('X1Value:0')
+                   X2 = graph2.get_tensor_by_name('X2Value:0')
+                   keep_prob = graph2.get_tensor_by_name('keep_prob:0')
+                   #restored_logits = graph2.get_tensor_by_name('yhat:0')
+                   batch_size_ph = graph2.get_tensor_by_name('batch_size_ph:0')
+                   dataset_init_op = graph2.get_operation_by_name('dataset_X_init')
+                   sess.run(
+                       dataset_init_op,
+                       feed_dict={
+                           X1: test_X1,
+                           X2:test_X2,
+                           batch_size_ph: len(test_X[0])
+                       }
 
+                   )
+                   yhat = graph2.get_tensor_by_name('Phase1/yhat:0')
+                   predicted_y = sess.run([yhat],
+                     feed_dict={
+                     keep_prob: 1.0
+                     })
+           return predicted_y
+       
 
     def initialize(self, x1_size=11,x2_size=11, y_size=1):
 
@@ -382,7 +439,7 @@ class ffNN():
             self.final_opt = tf.group(self.updates1,self.updates2,self.updates3)
 
 
-    def train(self, train_X, train_y):
+    def train_ori(self, train_X, train_y):
             print('x_1 size %s %s' % train_X[0].shape)
             # print('y_2 size %s %s' % train_y.shape)
             sess = tf.InteractiveSession()
@@ -466,7 +523,7 @@ class ffNN():
 
             sess.close()
 
-    def predict(self, test_X, bestModel=True, model_path=None):
+    def predict_ori(self, test_X, bestModel=True, model_path=None):
         if model_path == None:
             model_path = self.save_path
         print('model path is %s' % model_path)
@@ -526,7 +583,7 @@ class ffNN():
             y_input = np.array([y_input], dtype=np.float64)
 
             loss1,loss2,loss3, yhat = sess.run([self.loss1,self.loss2,self.loss3, self.yhat3],
-                                  feed_dict={self.X1: x_input1,self.X2: x_input2, self.y: y_input, self.keep_prob: 1.})
+			    feed_dict={self.X1: x_input1,self.X2: x_input2, self.y: y_input, self.keep_prob: 1.})
             allcosts += loss3
             if write:
                 outp.writerow(['1', yhat])

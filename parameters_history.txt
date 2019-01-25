@@ -1853,3 +1853,433 @@ _*Mean Absolute Error:  23.5437
 _*Train_Mean MAE:       27.1903
 
 Finished at: 2019-01-23 02:47:26.800832
+
+
+
+
+ Start at: 2019-01-25 01:21:06.139056
+Model: ./models/LMOnly , epochs: 200, learning_rate: 0.000500, decay: False , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: sigmoid, batch_size: 32, shuffle: True, optimizer: Adam, stopping_iteration: 10 
+LM: hidden_nodes = 8, hidden_layers = 1, regularization_factor= 0.00050
+  *FOLD R^2: 0.5387 (MSE: 680.8803; MAE: 20.5489; mean train mae: 31.4874)
+  *FOLD R^2: 0.4386 (MSE: 1100.4267; MAE: 25.0547; mean train mae: 33.4512)
+
+
+
+ Start at: 2019-01-25 11:50:50.888544
+Model: ./models/LMOnly , epochs: 200, learning_rate: 0.000500, decay: False , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: sigmoid, batch_size: 32, shuffle: True, optimizer: Adam, stopping_iteration: 15 
+LM: hidden_nodes = 8, hidden_layers = 1, regularization_factor= 0.00050
+  *FOLD R^2: -384.3576 (MSE: 568823.1653; MAE: 562.9627; mean train mae: 31.4874)
+  *FOLD R^2: -387.1541 (MSE: 760800.6599; MAE: 678.1687; mean train mae: 33.4512)
+  *FOLD R^2: -412.3917 (MSE: 748442.5400; MAE: 693.4869; mean train mae: 32.9954)
+  *FOLD R^2: -249.0008 (MSE: 561798.2148; MAE: 616.3072; mean train mae: 36.9698)
+
+
+
+
+ Start at: 2019-01-25 12:21:08.288645
+Model: ./models/LMOnly , epochs: 200, learning_rate: 0.000500, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: sigmoid, batch_size: 4, shuffle: True, optimizer: Adam, stopping_iteration: 15 
+LM: hidden_nodes = 16, hidden_layers = 1, regularization_factor= 0.01000
+  *FOLD R^2: -21.7264 (MSE: 33546.3076; MAE: 176.9268; mean train mae: 31.4874)
+
+
+ Start at: 2019-01-25 12:27:24.563904
+Model: ./models/LMOnly , epochs: 200, learning_rate: 0.000500, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: sigmoid, batch_size: 4, shuffle: True, optimizer: Adam, stopping_iteration: 15 
+LM: hidden_nodes = 16, hidden_layers = 1, regularization_factor= 0.01000
+  *FOLD R^2: 0.6069 (MSE: 580.2791; MAE: 18.9657; mean train mae: 31.4874)
+  *FOLD R^2: 0.5154 (MSE: 949.8108; MAE: 23.7183; mean train mae: 33.4512)
+  *FOLD R^2: 0.5431 (MSE: 827.1352; MAE: 21.4561; mean train mae: 32.9954)
+  *FOLD R^2: 0.3649 (MSE: 1427.1376; MAE: 28.3083; mean train mae: 36.9698)
+  *FOLD R^2: 0.6137 (MSE: 709.5562; MAE: 21.1482; mean train mae: 35.1316)
+  *FOLD R^2: 0.5752 (MSE: 793.8878; MAE: 21.9886; mean train mae: 34.3756)
+  *FOLD R^2: 0.3623 (MSE: 1333.9660; MAE: 28.5478; mean train mae: 35.5784)
+  *FOLD R^2: 0.4961 (MSE: 1029.3232; MAE: 24.9406; mean train mae: 36.6985)
+  *FOLD R^2: 0.5418 (MSE: 739.4173; MAE: 20.8977; mean train mae: 32.1991)
+  *FOLD R^2: 0.5499 (MSE: 800.6781; MAE: 21.1088; mean train mae: 33.6105)
+_*Overall R^2:          0.5126    
+_*Overall FOLDS R^2:    0.5169 (+- 0.0266)    
+_*R (sqrt R^2):         0.7160    
+_*Pearson r:            0.7172 (p = 0.00000)    
+_*Folds Pearson r:      0.7218 (p = 0.00000)    
+_*Spearman rho:         0.7303 (p = 0.00000)    
+_*Mean Squared Error:   918.5096    
+_*Mean Absolute Error:  23.0977    
+_*Train_Mean MAE:       24.7180
+
+Finished at: 2019-01-25 12:45:58.516697
+
+
+ Start at: 2019-01-25 12:49:28.217231
+Model: ./models/LMOnly , epochs: 200, learning_rate: 0.000500, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: sigmoid, batch_size: 4, shuffle: True, optimizer: Adam, stopping_iteration: 15 
+LM: hidden_nodes = 16, hidden_layers = 1, regularization_factor= 0.01000
+  *FOLD R^2: -22.2880 (MSE: 34375.1657; MAE: 151.4491; mean train mae: 31.4874)
+
+
+ Start at: 2019-01-25 12:53:44.833342
+Model: ./models/LMOnly , epochs: 200, learning_rate: 0.000500, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: sigmoid, batch_size: 4, shuffle: True, optimizer: Adam, stopping_iteration: 15 
+LM: hidden_nodes = 16, hidden_layers = 1, regularization_factor= 0.01000
+
+
+ Start at: 2019-01-25 12:55:58.083412
+Model: ./models/LMOnly , epochs: 200, learning_rate: 0.000500, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: sigmoid, batch_size: 4, shuffle: True, optimizer: Adam, stopping_iteration: 15 
+LM: hidden_nodes = 16, hidden_layers = 1, regularization_factor= 0.01000
+  *FOLD R^2: -23.3391 (MSE: 35926.7152; MAE: 185.5007; mean train mae: 31.4874)
+
+
+ Start at: 2019-01-25 12:58:46.615256
+Model: ./models/ControlsOnly , epochs: 200, learning_rate: 0.000500, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: sigmoid, batch_size: 4, shuffle: True, optimizer: Adam, stopping_iteration: 15 
+Controls: hidden_nodes = 8, hidden_layers = 1, regularization_factor=  0
+
+
+ Start at: 2019-01-25 13:00:48.480412
+Model: ./models/LMOnly , epochs: 200, learning_rate: 0.001000, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: sigmoid, batch_size: 4, shuffle: True, optimizer: Adam, stopping_iteration: 15 
+LM: hidden_nodes = 8, hidden_layers = 1, regularization_factor= 0.01000
+  *FOLD R^2: -20.5571 (MSE: 31820.2723; MAE: 171.0783; mean train mae: 31.4874)
+
+
+ Start at: 2019-01-25 13:03:37.820113
+Model: ./models/LMOnly , epochs: 200, learning_rate: 0.001000, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: sigmoid, batch_size: 4, shuffle: True, optimizer: Adam, stopping_iteration: 15 
+LM: hidden_nodes = 8, hidden_layers = 1, regularization_factor= 0.01000
+  *FOLD R^2: -16.9514 (MSE: 26497.9188; MAE: 157.4636; mean train mae: 31.4874)
+  *FOLD R^2: -14.9074 (MSE: 31179.2711; MAE: 171.1832; mean train mae: 33.4512)
+
+
+ Start at: 2019-01-25 13:08:39.455855
+Model: ./models/LMOnly , epochs: 200, learning_rate: 0.001000, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: sigmoid, batch_size: 4, shuffle: True, optimizer: Adam, stopping_iteration: 15 
+LM: hidden_nodes = 8, hidden_layers = 1, regularization_factor= 0.01000
+  *FOLD R^2: -22.7747 (MSE: 35093.6291; MAE: 183.6934; mean train mae: 31.4874)
+
+
+ Start at: 2019-01-25 13:10:57.207206
+Model: ./models/LMOnly , epochs: 200, learning_rate: 0.001000, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: sigmoid, batch_size: 4, shuffle: True, optimizer: Adam, stopping_iteration: 15 
+LM: hidden_nodes = 8, hidden_layers = 1, regularization_factor= 0.01000
+  *FOLD R^2: -22.8944 (MSE: 35270.3924; MAE: 184.1646; mean train mae: 31.4874)
+
+
+ Start at: 2019-01-25 13:24:44.665846
+Model: ./models/LMOnly , epochs: 200, learning_rate: 0.001000, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: sigmoid, batch_size: 4, shuffle: True, optimizer: Adam, stopping_iteration: 15 
+LM: hidden_nodes = 8, hidden_layers = 1, regularization_factor= 0.01000
+  *FOLD R^2: -22.0410 (MSE: 34010.5624; MAE: 180.6724; mean train mae: 31.4874)
+
+
+ Start at: 2019-01-25 13:26:57.719264
+Model: ./models/LMOnly , epochs: 200, learning_rate: 0.001000, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: linear, batch_size: 4, shuffle: True, optimizer: Adam, stopping_iteration: 15 
+LM: hidden_nodes = 8, hidden_layers = 1, regularization_factor= 0.01000
+  *FOLD R^2: 0.5029 (MSE: 733.7180; MAE: 20.9214; mean train mae: 31.4874)
+  *FOLD R^2: -661961.5061 (MSE: 1297478137.0125; MAE: 28502.4785; mean train mae: 33.4512)
+  *FOLD R^2: -4812.7946 (MSE: 8715338.0771; MAE: 2190.1120; mean train mae: 32.9954)
+
+
+ Start at: 2019-01-25 13:36:53.483662
+Model: ./models/LMOnly , epochs: 200, learning_rate: 0.001000, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: linear, batch_size: 4, shuffle: True, optimizer: Adam, stopping_iteration: 15 
+LM: hidden_nodes = 8, hidden_layers = 1, regularization_factor= 0.01000
+
+
+ Start at: 2019-01-25 13:44:20.005128
+Model: ./models/LMOnly , epochs: 200, learning_rate: 0.001000, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: linear, batch_size: 4, shuffle: True, optimizer: Adam, stopping_iteration: 15 
+LM: hidden_nodes = 8, hidden_layers = 1, regularization_factor= 0.01000
+
+
+ Start at: 2019-01-25 13:47:04.803674
+Model: ./models/LMOnly , epochs: 200, learning_rate: 0.001000, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: linear, batch_size: 4, shuffle: True, optimizer: Adam, stopping_iteration: 15 
+LM: hidden_nodes = 8, hidden_layers = 1, regularization_factor= 0.01000
+  *FOLD R^2: -10312733.5464 (MSE: 15222542524.5407; MAE: 94058.5878; mean train mae: 31.4874)
+  *FOLD R^2: -8929498.2735 (MSE: 17502245180.9065; MAE: 96540.3684; mean train mae: 33.4512)
+
+
+ Start at: 2019-01-25 13:54:38.271363
+Model: ./models/LMOnly , epochs: 200, learning_rate: 0.001000, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: linear, batch_size: 4, shuffle: True, optimizer: Adam, stopping_iteration: 15 
+LM: hidden_nodes = 8, hidden_layers = 1, regularization_factor= 0.01000
+  *FOLD R^2: -16380042.7777 (MSE: 24178447708.4009; MAE: 118656.2063; mean train mae: 31.4874)
+
+
+ Start at: 2019-01-25 13:59:40.005552
+Model: ./models/LMOnly , epochs: 500, learning_rate: 0.001000, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: linear, batch_size: 4, shuffle: True, optimizer: Adam, stopping_iteration: 15 
+LM: hidden_nodes = 8, hidden_layers = 1, regularization_factor= 0.01000
+  *FOLD R^2: -16348698.0370 (MSE: 24132179994.8003; MAE: 118251.4110; mean train mae: 31.4874)
+  *FOLD R^2: -10138698.8283 (MSE: 19872336037.5249; MAE: 102573.0534; mean train mae: 33.4512)
+
+
+ Start at: 2019-01-25 14:12:38.671232
+Model: ./models/LMOnly , epochs: 500, learning_rate: 0.001000, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: linear, batch_size: 4, shuffle: True, optimizer: Adam, stopping_iteration: 15 
+LM: hidden_nodes = 8, hidden_layers = 1, regularization_factor= 0.01000
+
+
+ Start at: 2019-01-25 14:14:48.431456
+Model: ./models/LMOnly , epochs: 500, learning_rate: 0.001000, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: linear, batch_size: 4, shuffle: True, optimizer: Adam, stopping_iteration: 15 
+LM: hidden_nodes = 8, hidden_layers = 1, regularization_factor= 0.01000
+  *FOLD R^2: 0.5878 (MSE: 608.4374; MAE: 19.6147; mean train mae: 31.4874)
+
+
+ Start at: 2019-01-25 14:26:10.510397
+Model: ./models/LMOnly , epochs: 500, learning_rate: 0.001000, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: linear, batch_size: 4, shuffle: True, optimizer: Adam, stopping_iteration: 15 
+LM: hidden_nodes = 8, hidden_layers = 1, regularization_factor= 0.01000
+
+
+ Start at: 2019-01-25 14:30:17.523609
+Model: ./models/LMOnly , epochs: 500, learning_rate: 0.001000, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: linear, batch_size: 4, shuffle: True, optimizer: Adam, stopping_iteration: 15 
+LM: hidden_nodes = 8, hidden_layers = 1, regularization_factor= 0.01000
+
+
+ Start at: 2019-01-25 14:37:39.014572
+Model: ./models/LMOnly , epochs: 500, learning_rate: 0.001000, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: linear, batch_size: 4, shuffle: True, optimizer: Adam, stopping_iteration: 15 
+LM: hidden_nodes = 8, hidden_layers = 1, regularization_factor= 0.01000
+  *FOLD R^2: 0.5132 (MSE: 718.5662; MAE: 20.7863; mean train mae: 31.4874)
+
+
+ Start at: 2019-01-25 15:05:08.642406
+Model: ./models/LMOnly , epochs: 500, learning_rate: 0.001000, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: linear, batch_size: 4, shuffle: True, optimizer: Adam, stopping_iteration: 15 
+LM: hidden_nodes = 8, hidden_layers = 1, regularization_factor= 0.01000
+  *FOLD R^2: 0.4900 (MSE: 752.8006; MAE: 21.0164; mean train mae: 31.4874)
+  *FOLD R^2: 0.5029 (MSE: 974.3605; MAE: 24.2263; mean train mae: 33.4512)
+  *FOLD R^2: 0.5371 (MSE: 838.1035; MAE: 20.6776; mean train mae: 32.9954)
+  *FOLD R^2: 0.4339 (MSE: 1272.2010; MAE: 26.2664; mean train mae: 36.9698)
+  *FOLD R^2: 0.5567 (MSE: 814.3374; MAE: 21.1098; mean train mae: 35.1316)
+  *FOLD R^2: 0.5707 (MSE: 802.2403; MAE: 20.7322; mean train mae: 34.3756)
+
+
+ Start at: 2019-01-25 15:25:11.891624
+Model: ./models/LMOnly , epochs: 500, learning_rate: 0.001000, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: linear, batch_size: 8, shuffle: True, optimizer: Adam, stopping_iteration: 15 
+LM: hidden_nodes = 16,8, hidden_layers = 2, regularization_factor= 0.01000
+
+
+ Start at: 2019-01-25 15:27:56.557756
+Model: ./models/LMOnly , epochs: 500, learning_rate: 0.001000, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: linear, batch_size: 8, shuffle: True, optimizer: Adam, stopping_iteration: 15 
+LM: hidden_nodes = 16,8, hidden_layers = 2, regularization_factor= 0.01000
+
+
+ Start at: 2019-01-25 15:29:43.845927
+Model: ./models/LMOnly , epochs: 500, learning_rate: 0.001000, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: linear, batch_size: 8, shuffle: True, optimizer: Adam, stopping_iteration: 15 
+LM: hidden_nodes = 16,8, hidden_layers = 2, regularization_factor= 0.01000
+
+
+ Start at: 2019-01-25 15:30:59.633089
+Model: ./models/LMOnly , epochs: 500, learning_rate: 0.001000, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: linear, batch_size: 8, shuffle: True, optimizer: Adam, stopping_iteration: 15 
+LM: hidden_nodes = 16,8, hidden_layers = 2, regularization_factor= 0.01000
+
+
+ Start at: 2019-01-25 15:32:46.391154
+Model: ./models/LMOnly , epochs: 500, learning_rate: 0.001000, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: linear, batch_size: 8, shuffle: True, optimizer: Adam, stopping_iteration: 15 
+LM: hidden_nodes = 16,8, hidden_layers = 2, regularization_factor= 0.01000
+
+
+ Start at: 2019-01-25 15:37:37.431734
+Model: ./models/LMOnly , epochs: 500, learning_rate: 0.010000, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: sigmoid, batch_size: 8, shuffle: True, optimizer: Adam, stopping_iteration: 15 
+LM: hidden_nodes = 16,8, hidden_layers = 2, regularization_factor= 0.01000
+  *FOLD R^2: 0.6217 (MSE: 558.4538; MAE: 18.6008; mean train mae: 31.4874)
+  *FOLD R^2: 0.4935 (MSE: 992.8428; MAE: 23.7473; mean train mae: 33.4512)
+  *FOLD R^2: 0.5064 (MSE: 893.5927; MAE: 21.7728; mean train mae: 32.9954)
+  *FOLD R^2: 0.4766 (MSE: 1176.0670; MAE: 25.4276; mean train mae: 36.9698)
+
+
+ Start at: 2019-01-25 15:46:53.994671
+Model: ./models/LMOnly , epochs: 500, learning_rate: 0.010000, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: sigmoid, batch_size: 8, shuffle: True, optimizer: Adam, stopping_iteration: 15 
+LM: hidden_nodes = 16,8, hidden_layers = 2, regularization_factor= 0.01000
+
+
+ Start at: 2019-01-25 15:48:40.778563
+Model: ./models/LMOnly , epochs: 500, learning_rate: 0.010000, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: sigmoid, batch_size: 8, shuffle: True, optimizer: Adam, stopping_iteration: 15 
+LM: hidden_nodes = 16,8, hidden_layers = 2, regularization_factor= 0.01000
+  *FOLD R^2: 0.5908 (MSE: 604.0395; MAE: 19.2087; mean train mae: 31.4874)
+  *FOLD R^2: 0.4690 (MSE: 1040.7359; MAE: 23.8647; mean train mae: 33.4512)
+  *FOLD R^2: 0.5308 (MSE: 849.5448; MAE: 21.5891; mean train mae: 32.9954)
+  *FOLD R^2: 0.4749 (MSE: 1180.0707; MAE: 24.9475; mean train mae: 36.9698)
+
+
+ Start at: 2019-01-25 15:56:18.901906
+Model: ./models/LMOnly , epochs: 500, learning_rate: 0.001000, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: sigmoid, batch_size: 8, shuffle: True, optimizer: Adam, stopping_iteration: 15 
+LM: hidden_nodes = 16,8, hidden_layers = 2, regularization_factor= 0.00500
+  *FOLD R^2: 0.6004 (MSE: 589.8759; MAE: 19.1976; mean train mae: 31.4874)
+  *FOLD R^2: 0.4980 (MSE: 983.9932; MAE: 23.6289; mean train mae: 33.4512)
+
+
+ Start at: 2019-01-25 16:02:07.304525
+Model: ./models/LMOnly , epochs: 700, learning_rate: 0.000500, decay: True , decay_step: 10 , decay_factor: 0.800000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: sigmoid, batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 30 
+LM: hidden_nodes = 16,8, hidden_layers = 2, regularization_factor= 0.00500
+  *FOLD R^2: 0.5315 (MSE: 691.5582; MAE: 20.0423; mean train mae: 31.4874)
+
+
+ Start at: 2019-01-25 16:14:59.983385
+Model: ./models/LMOnly , epochs: 700, learning_rate: 0.000500, decay: True , decay_step: 10 , decay_factor: 0.800000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: sigmoid, batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 30 
+LM: hidden_nodes = 16,8, hidden_layers = 2, regularization_factor= 0.00500
+  *FOLD R^2: 0.5404 (MSE: 678.4480; MAE: 20.1411; mean train mae: 31.4874)
+  *FOLD R^2: 0.4716 (MSE: 1035.6718; MAE: 24.3651; mean train mae: 33.4512)
+
+
+ Start at: 2019-01-25 16:21:31.419335
+Model: ./models/LMOnly , epochs: 700, learning_rate: 0.001000, decay: True , decay_step: 10 , decay_factor: 0.800000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: sigmoid, batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 30 
+LM: hidden_nodes = 16,8, hidden_layers = 2, regularization_factor= 0.01000
+  *FOLD R^2: 0.5597 (MSE: 649.9025; MAE: 19.9199; mean train mae: 31.4874)
+  *FOLD R^2: 0.4666 (MSE: 1045.4353; MAE: 24.3190; mean train mae: 33.4512)
+
+
+ Start at: 2019-01-25 16:30:28.156015
+Model: ./models/LMOnly , epochs: 700, learning_rate: 0.001000, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: sigmoid, batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 30 
+LM: hidden_nodes = 16,8, hidden_layers = 2, regularization_factor= 0.01000
+
+
+ Start at: 2019-01-25 16:37:13.195527
+Model: ./models/LMOnly , epochs: 700, learning_rate: 0.001000, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: sigmoid, batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 30 
+LM: hidden_nodes = 16,8, hidden_layers = 2, regularization_factor= 0.01000
+  *FOLD R^2: 0.3235 (MSE: 998.6111; MAE: 24.1917; mean train mae: 31.4874)
+
+
+ Start at: 2019-01-25 16:41:24.732116
+Model: ./models/LMOnly , epochs: 700, learning_rate: 0.001000, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: sigmoid, batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 30 
+LM: hidden_nodes = 16,8, hidden_layers = 2, regularization_factor= 0.01000
+  *FOLD R^2: 0.5829 (MSE: 615.6454; MAE: 19.3504; mean train mae: 31.4874)
+  *FOLD R^2: 0.4695 (MSE: 1039.8419; MAE: 24.3925; mean train mae: 33.4512)
+
+
+ Start at: 2019-01-25 16:49:31.814376
+Model: ./models/LMOnly , epochs: 700, learning_rate: 0.001000, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: sigmoid, batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 15 
+LM: hidden_nodes = 16,8, hidden_layers = 2, regularization_factor= 0.01000
+  *FOLD R^2: -9.8955 (MSE: 16082.7858; MAE: 101.2926; mean train mae: 31.4874)
+
+
+ Start at: 2019-01-25 16:52:42.127860
+Model: ./models/LMOnly , epochs: 700, learning_rate: 0.001000, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: sigmoid, batch_size: 4, shuffle: True, optimizer: Adam, stopping_iteration: 15 
+LM: hidden_nodes = 16,8, hidden_layers = 2, regularization_factor= 0.01000
+  *FOLD R^2: -367.5783 (MSE: 544055.3605; MAE: 724.0867; mean train mae: 31.4874)
+
+
+ Start at: 2019-01-25 16:54:09.521524
+Model: ./models/LMOnly , epochs: 700, learning_rate: 0.005000, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: sigmoid, batch_size: 4, shuffle: True, optimizer: Adam, stopping_iteration: 15 
+LM: hidden_nodes = 16,8, hidden_layers = 2, regularization_factor= 0.01000
+  *FOLD R^2: -44.0776 (MSE: 66538.7011; MAE: 238.3663; mean train mae: 31.4874)
+
+
+ Start at: 2019-01-25 16:56:01.382820
+Model: ./models/LMOnly , epochs: 700, learning_rate: 0.000100, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: sigmoid, batch_size: 4, shuffle: True, optimizer: Adam, stopping_iteration: 15 
+LM: hidden_nodes = 16,8, hidden_layers = 2, regularization_factor= 0.01000
+  *FOLD R^2: -990.6391 (MSE: 1463750.2942; MAE: 1199.5527; mean train mae: 31.4874)
+
+
+ Start at: 2019-01-25 16:57:45.172748
+Model: ./models/LMOnly , epochs: 700, learning_rate: 0.000100, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: linear, batch_size: 4, shuffle: True, optimizer: Adam, stopping_iteration: 15 
+LM: hidden_nodes = 16,8, hidden_layers = 2, regularization_factor= 0.01000
+  *FOLD R^2: -99972.7162 (MSE: 147570378.9898; MAE: 9515.0370; mean train mae: 31.4874)
+
+
+ Start at: 2019-01-25 17:00:23.768763
+Model: ./models/LMOnly , epochs: 700, learning_rate: 0.001000, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 1.000000, activation_function: linear, batch_size: 4, shuffle: True, optimizer: Adam, stopping_iteration: 15 
+LM: hidden_nodes = 8,8, hidden_layers = 2, regularization_factor= 0.00000
+  *FOLD R^2: -44405.5049 (MSE: 65548076.1193; MAE: 5853.4037; mean train mae: 31.4874)
+  *FOLD R^2: -26196.6270 (MSE: 51348600.5444; MAE: 5635.6158; mean train mae: 33.4512)
+
+
+ Start at: 2019-01-25 17:14:37.937439
+Model: ./models/ControlsOnly , epochs: 700, learning_rate: 0.010000, decay: True , decay_step: 10 , decay_factor: 0.900000 , stop_loss: 0.000100 , keep_prob: 1.000000, activation_function: linear, batch_size: 4, shuffle: False, optimizer: Adam, stopping_iteration: 15 
+Controls: hidden_nodes = 16,8, hidden_layers = 2, regularization_factor=  0
+  *FOLD R^2: -918.1072 (MSE: 1356686.5040; MAE: 867.3559; mean train mae: 31.4874)
+  *FOLD R^2: -617.1551 (MSE: 1211613.5667; MAE: 808.1848; mean train mae: 33.4512)
+  *FOLD R^2: -312.4230 (MSE: 567449.8985; MAE: 531.8421; mean train mae: 32.9954)
+
+
+ Start at: 2019-01-25 17:17:22.878233
+Model: ./models/ControlsOnly , epochs: 700, learning_rate: 0.010000, decay: True , decay_step: 10 , decay_factor: 0.900000 , stop_loss: 0.000100 , keep_prob: 1.000000, activation_function: linear, batch_size: 1, shuffle: False, optimizer: Adam, stopping_iteration: 15 
+Controls: hidden_nodes = 16,8, hidden_layers = 2, regularization_factor=  0
+  *FOLD R^2: -1279.0284 (MSE: 1889439.3881; MAE: 865.5176; mean train mae: 31.4874)
+  *FOLD R^2: -348.8364 (MSE: 685695.9788; MAE: 683.7309; mean train mae: 33.4512)
+  *FOLD R^2: -111.2841 (MSE: 203289.4294; MAE: 345.1801; mean train mae: 32.9954)
+  *FOLD R^2: -1402.1053 (MSE: 3153038.4470; MAE: 1288.9945; mean train mae: 36.9698)
+  *FOLD R^2: -1872.3177 (MSE: 3441323.5228; MAE: 1468.3360; mean train mae: 35.1316)
+  *FOLD R^2: -90.8388 (MSE: 171616.6041; MAE: 330.5656; mean train mae: 34.3756)
+  *FOLD R^2: -558.0041 (MSE: 1169392.8608; MAE: 816.0582; mean train mae: 35.5784)
+  *FOLD R^2: -1247.5817 (MSE: 2550677.6989; MAE: 865.1188; mean train mae: 36.6985)
+
+
+ Start at: 2019-01-25 17:26:22.364847
+Model: ./models/ControlsOnly , epochs: 700, learning_rate: 0.010000, decay: True , decay_step: 10 , decay_factor: 0.900000 , stop_loss: 0.000100 , keep_prob: 1.000000, activation_function: linear, batch_size: 1, shuffle: False, optimizer: Adam, stopping_iteration: 15 
+Controls: hidden_nodes = 16,8, hidden_layers = 2, regularization_factor=  0
+
+
+ Start at: 2019-01-25 17:27:37.650252
+Model: ./models/ControlsOnly , epochs: 700, learning_rate: 0.010000, decay: True , decay_step: 10 , decay_factor: 0.900000 , stop_loss: 0.000100 , keep_prob: 1.000000, activation_function: linear, batch_size: 1, shuffle: False, optimizer: Adam, stopping_iteration: 15 
+Controls: hidden_nodes = 16,8, hidden_layers = 2, regularization_factor=  0
+  *FOLD R^2: 0.4761 (MSE: 773.3142; MAE: 21.4125; mean train mae: 31.4874)
+
+
+ Start at: 2019-01-25 17:30:24.876409
+Model: ./models/ControlsOnly , epochs: 700, learning_rate: 0.000500, decay: True , decay_step: 10 , decay_factor: 0.900000 , stop_loss: 0.000100 , keep_prob: 1.000000, activation_function: linear, batch_size: 1, shuffle: False, optimizer: Adam, stopping_iteration: 15 
+Controls: hidden_nodes = 16,8, hidden_layers = 2, regularization_factor=  0
+  *FOLD R^2: -1223.2978 (MSE: 1807175.8498; MAE: 988.3615; mean train mae: 31.4874)
+  *FOLD R^2: -0.0970 (MSE: 2150.0792; MAE: 35.3483; mean train mae: 33.4512)
+
+
+ Start at: 2019-01-25 17:34:00.552556
+Model: ./models/ControlsOnly , epochs: 700, learning_rate: 0.001000, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 1.000000, activation_function: linear, batch_size: 1, shuffle: False, optimizer: Adam, stopping_iteration: 15 
+Controls: hidden_nodes = 16,8, hidden_layers = 2, regularization_factor=  0
+  *FOLD R^2: -237.1219 (MSE: 351489.7743; MAE: 252.2691; mean train mae: 31.4874)
+
+
+ Start at: 2019-01-25 17:35:41.844478
+Model: ./models/ControlsOnly , epochs: 700, learning_rate: 0.001000, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 1.000000, activation_function: linear, batch_size: 1, shuffle: False, optimizer: Adam, stopping_iteration: 15 
+Controls: hidden_nodes = 16,8, hidden_layers = 2, regularization_factor=  0
+  *FOLD R^2: -372.2983 (MSE: 551022.5554; MAE: 457.6797; mean train mae: 31.4874)
+
+
+ Start at: 2019-01-25 17:38:01.203702
+Model: ./models/ControlsOnly , epochs: 700, learning_rate: 0.010000, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 1.000000, activation_function: linear, batch_size: 1, shuffle: False, optimizer: Adam, stopping_iteration: 15 
+Controls: hidden_nodes = 16,8, hidden_layers = 2, regularization_factor=  0
+  *FOLD R^2: 0.4801 (MSE: 767.4457; MAE: 21.6210; mean train mae: 31.4874)
+
+
+ Start at: 2019-01-25 17:41:56.793003
+Model: ./models/ControlsOnly , epochs: 700, learning_rate: 0.005000, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 1.000000, activation_function: sigmoid, batch_size: 1, shuffle: False, optimizer: Adam, stopping_iteration: 15 
+Controls: hidden_nodes = 16,8, hidden_layers = 2, regularization_factor=  0
+  *FOLD R^2: 0.1210 (MSE: 1297.4732; MAE: 24.3104; mean train mae: 31.4874)
+
+
+ Start at: 2019-01-25 17:49:53.061618
+Model: ./models/ControlsOnly , epochs: 60, learning_rate: 0.005000, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 1.000000, activation_function: sigmoid, batch_size: 1, shuffle: False, optimizer: Adam, stopping_iteration: 15 
+Controls: hidden_nodes = 16,8, hidden_layers = 2, regularization_factor=  0
+  *FOLD R^2: 0.4415 (MSE: 824.4500; MAE: 23.4095; mean train mae: 31.4874)
+
+
+ Start at: 2019-01-25 17:52:44.536430
+Model: ./models/ControlsOnly , epochs: 30, learning_rate: 0.005000, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 1.000000, activation_function: sigmoid, batch_size: 1, shuffle: False, optimizer: Adam, stopping_iteration: 15 
+Controls: hidden_nodes = 16,8, hidden_layers = 2, regularization_factor=  0
+  *FOLD R^2: 0.4360 (MSE: 832.4681; MAE: 23.2706; mean train mae: 31.4874)
+  *FOLD R^2: 0.3513 (MSE: 1271.4972; MAE: 29.0361; mean train mae: 33.4512)
+  *FOLD R^2: 0.3549 (MSE: 1167.9915; MAE: 24.9272; mean train mae: 32.9954)
+
+
+ Start at: 2019-01-25 18:01:03.399829
+Model: ./models/ControlsOnly , epochs: 30, learning_rate: 0.005000, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 1.000000, activation_function: sigmoid, batch_size: 1, shuffle: False, optimizer: Adam, stopping_iteration: 15 
+Controls: hidden_nodes = 16,8, hidden_layers = 2, regularization_factor=  0
+
+
+ Start at: 2019-01-25 18:02:27.108286
+Model: ./models/ControlsOnly , epochs: 30, learning_rate: 0.005000, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 1.000000, activation_function: sigmoid, batch_size: 1, shuffle: False, optimizer: Adam, stopping_iteration: 15 
+Controls: hidden_nodes = 16,8, hidden_layers = 2, regularization_factor=  0
+
+
+ Start at: 2019-01-25 18:04:38.531225
+Model: ./models/ControlsOnly , epochs: 30, learning_rate: 0.005000, decay: True , decay_step: 10 , decay_factor: 0.700000 , stop_loss: 0.000100 , keep_prob: 1.000000, activation_function: sigmoid, batch_size: 1, shuffle: False, optimizer: Adam, stopping_iteration: 15 
+Controls: hidden_nodes = 16,8, hidden_layers = 2, regularization_factor=  0
+
+
+ Start at: 2019-01-25 18:43:10.467854
+Model: ./models/LMOnly , epochs: 700, learning_rate: 0.000500, decay: True , decay_step: 10 , decay_factor: 0.800000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: sigmoid, batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 30 
+LM: hidden_nodes = 16,8, hidden_layers = 2, regularization_factor= 0.00500
+  *FOLD R^2: 0.5861 (MSE: 610.8864; MAE: 19.7823; mean train mae: 31.4874)
+  *FOLD R^2: 0.5046 (MSE: 971.0483; MAE: 24.0995; mean train mae: 33.4512)
+  *FOLD R^2: 0.5294 (MSE: 851.9662; MAE: 22.2202; mean train mae: 32.9954)
+  *FOLD R^2: 0.5159 (MSE: 1087.9163; MAE: 25.1257; mean train mae: 36.9698)
+  *FOLD R^2: 0.5759 (MSE: 779.1199; MAE: 21.7552; mean train mae: 35.1316)
+  *FOLD R^2: 0.5998 (MSE: 747.7788; MAE: 21.4559; mean train mae: 34.3756)
+  *FOLD R^2: 0.4517 (MSE: 1146.9729; MAE: 26.3495; mean train mae: 35.5784)
+  *FOLD R^2: 0.5519 (MSE: 915.4189; MAE: 23.3430; mean train mae: 36.6985)
+  *FOLD R^2: 0.4366 (MSE: 909.1480; MAE: 23.9461; mean train mae: 32.1991)
+  *FOLD R^2: 0.4922 (MSE: 903.2843; MAE: 23.0136; mean train mae: 33.6105)
+_*Overall R^2:          0.5265    
+_*Overall FOLDS R^2:    0.5244 (+- 0.0166)    
+_*R (sqrt R^2):         0.7256    
+_*Pearson r:            0.7272 (p = 0.00000)    
+_*Folds Pearson r:      0.7301 (p = 0.00000)    
+_*Spearman rho:         0.7440 (p = 0.00000)    
+_*Mean Squared Error:   892.4102    
+_*Mean Absolute Error:  23.1086    
+_*Train_Mean MAE:       27.5898
+
+Finished at: 2019-01-25 18:54:51.135861

@@ -113,19 +113,24 @@ class ffNN():
         # return yhat
 
     def initialize(self, x1_size=11,x2_size=11, y_size=1):
-
+        x_size = x1_size
+    #def initialize(self,x_size=11,y_size=1):
         print('initializing parameters')
-        self.X1 = tf.placeholder("float", shape=[None, x1_size], name='X1Value')
-        self.X2 = tf.placeholder("float", shape=[None, x2_size], name='X2Value')
+        #self.X1 = tf.placeholder("float", shape=[None, x1_size], name='X1Value')
+        #self.X2 = tf.placeholder("float", shape=[None, x2_size], name='X2Value')
 
-        self.learning_rate1 = tf.placeholder("float", shape=(), name='learning_rate1')
-        self.learning_rate2 = tf.placeholder("float", shape=(), name='learning_rate2')
-        self.learning_rate3 = tf.placeholder("float", shape=(), name='learning_rate3')
+        #self.learning_rate1 = tf.placeholder("float", shape=(), name='learning_rate1')
+        #self.learning_rate2 = tf.placeholder("float", shape=(), name='learning_rate2')
+        #self.learning_rate3 = tf.placeholder("float", shape=(), name='learning_rate3')
 
 
 
-        self.y = tf.placeholder("float", shape=[None, y_size], name='yValue')
-        self.keep_prob = tf.placeholder("float", shape=(), name='keep_prob')
+        #self.y = tf.placeholder("float", shape=[None, y_size], name='yValue')
+        #self.keep_prob = tf.placeholder("float", shape=(), name='keep_prob')
+        self.X = tf.placeholder("float", shape=[None, x_size],name='XValue')
+        self.y = tf.placeholder("float", shape=[None, y_size],name='yValue')
+        self.keep_prob = tf.placeholder("float",shape=(), name='keep_prob')
+
         batch = tf.Variable(0)
         # print('self.X size ', self.X.shape)
 
@@ -134,11 +139,13 @@ class ffNN():
         # w_hid,b_hid = init_weights((self.hidden_nodes,self.hidden_nodes))
         # w_hid2,b_hid2 = init_weights((self.hidden_nodes,self.hidden_nodes))
         # w_out,b_out = init_weights((self.hidden_nodes, y_size))
-        l2_norm1 = 0.
-        l2_norm2 = 0.
-        l2_norm3 = 0.
+        l2_norm = 0.
+        #l2_norm1 = 0.
+        #l2_norm2 = 0.
+        #l2_norm3 = 0.
         with tf.variable_scope("initialization", reuse=tf.AUTO_REUSE):
             # self.reg_factor = tf.get_variable( name='reg_factor',shape=(), dtype = tf.float32)
+            '''
             self.reg_factor = self.regularization_factor
 
 
@@ -210,12 +217,44 @@ class ffNN():
 
 
             self.final_opt = tf.group(self.updates1,self.updates2,self.updates3)
-
+            '''
+          self.reg_factor = self.regularization_factor
+          w_in,b_in = init_weights((x_size, self.hidden_nodes[0]))
+          h_out = self.forwardprop(self.X, w_in,b_in,self.keep_prob)
+          l2_norm = tf.add(tf.nn.l2_loss(w_in),l2_norm)
+          l2_norm = tf.add(tf.nn.l2_loss(b_in),l2_norm)
+          i = -1 #if it doesn't enter the loop it is used for the initial weight of the model after loop
+          # Forward propagation
+          for i in range(self.hidden_layers-1):
+             w_in,b_in = init_weights((self.hidden_nodes[i], self.hidden_nodes[i+1]))
+             h_out = self.forwardprop(h_out, w_in,b_in,self.keep_prob)
+             l2_norm = tf.add(tf.nn.l2_loss(w_in),l2_norm)
+             l2_norm = tf.add(tf.nn.l2_loss(b_in),l2_norm)
+          w_out,b_out = init_weights((self.hidden_nodes[i+1], y_size))
+          l2_norm = tf.add(tf.nn.l2_loss(w_out),l2_norm)
+          l2_norm = tf.add(tf.nn.l2_loss(b_out),l2_norm)
+          self.yhat = tf.add(tf.matmul(h_out, w_out),b_out)
+          # Backward propagation
+          # self.loss = tf.sqrt(tf.reduce_mean(tf.square(self.y - self.yhat)))
+          self.loss = tf.losses.mean_squared_error(labels= self.y ,predictions= self.yhat)
+          self.loss = tf.add(self.loss,self.reg_factor*l2_norm)
+          #update_ops = tf.get_collection(tf.GraphKeys.UPDATE_OPS)
+          #with tf.control_dependencies(update_ops):
+          #        self.updates = tf.train.AdamOptimizer(learning_rate=self.learning_rate).minimize(self.loss)
+          # updates = tf.train.GradientDescentOptimizer(0.01).minimize(loss)
+          learning_rate = tf.train.exponential_decay(self.learning_rate,batch,self.decay_step,self.decay_factor , staircase=True)
+          if self.optimizer == 'Adam':
+               self.updates = tf.train.AdamOptimizer(learning_rate=learning_rate).minimize(self.loss)
+          elif self.optimizer == 'SGD':
+               self.updates = tf.train.GradientDescentOptimizer(learning_rate=learning_rate).minimize(self.loss)
+          else:
+               self.updates = tf.train.AdadeltaOptimizer(learning_rate=learning_rate).minimize(self.loss)
 
     def train(self, train_X, train_y):
-            print('x_2 size %s %s' % train_X.shape)
+            #print('x_2 size %s %s' % train_X.shape)
             # print('y_2 size %s %s' % train_y.shape)
             # Run SGD
+            train_X = train_X[1]
             sess = tf.InteractiveSession()
             init = tf.global_variables_initializer()
             sess.run(init)
@@ -244,8 +283,8 @@ class ffNN():
                 for i in range(0, len(train_X) - self.batch_size +1, self.batch_size):
                     # x_input = list(map(float,train_X[i: i + 2].values.tolist()[0]))
                     # x_input = np.array([x_input],dtype=np.float64)
-                    x1_input = np.array(train_X[i: i + self.batch_size], dtype=np.float64)
-                    x2_input = np.array(train_X[i: i + self.batch_size], dtype=np.float64)
+                    x_input = np.array(train_X[i: i + self.batch_size], dtype=np.float64)
+                    #x2_input = np.array(train_X[i: i + self.batch_size], dtype=np.float64)
                     #y_input = list(map(float,train_y[i: i + 1].values.tolist()[0]))
                     #y_input = np.array([y_input,y_input],dtype=np.float64)
                     y_input = np.transpose(np.array([train_y[i: i + self.batch_size]],dtype=np.float64))
@@ -254,10 +293,11 @@ class ffNN():
                     #                                        self.keep_prob: self.keep_probability})
 
 
-                    _,loss1,loss2,loss3 = sess.run([self.final_opt,self.loss1,self.loss2,self.loss3],feed_dict={self.X1: x1_input, self.X2: x2_input, self.y: y_input,  self.keep_prob: self.keep_probability,self.learning_rate1: 0.1, self.learning_rate2: 0.1,self.learning_rate3: 0.1 })
+                    # _,loss1,loss2,loss3 = sess.run([self.final_opt,self.loss1,self.loss2,self.loss3],feed_dict={self.X1: x1_input, self.X2: x2_input, self.y: y_input,  self.keep_prob: self.keep_probability,self.learning_rate1: 0.1, self.learning_rate2: 0.1,self.learning_rate3: 0.1 })
 
+                    _,loss,y_out =sess.run([self.updates,self.loss,self.yhat], feed_dict={self.X: x_input, self.y: y_input,self.keep_prob: self.keep_probability})
 
-                    allcosts += loss1
+                    allcosts += loss
                     # print(i)
                 # if self.decay is True and epoch % self.decay_step ==0:
                 #    self.learning_rate  *= self.decay_factor
@@ -274,7 +314,7 @@ class ffNN():
                         print("Exited on epoch  %d, with loss  %.6f comparing with bestLoss: %.6f and stop_loss: %.6f" % (
                         epoch + 1, epoch_cost, bestLoss, self.stop_loss))
                         break
-                elif epoch_cost < bestLoss:
+                if epoch_cost < bestLoss:
                     if (epoch % self.saveFrequency == 0 and epoch != 0):
                         best_ckpt_saver.handle(epoch_cost, sess, global_step_tensor=tf.constant(epoch))
                     pass_best_epochs = 0
@@ -294,6 +334,7 @@ class ffNN():
         print('model path is %s' % model_path)
         sess = tf.InteractiveSession()
         saver = tf.train.Saver()
+        test_X = test_X[1]
         if not bestModel:
             # checkpoint =  tf.train.latest_checkpoint('data/models/'+entity.split()[0]+'/')
             checkpoint = tf.train.latest_checkpoint(model_path)
@@ -302,10 +343,11 @@ class ffNN():
         saver.restore(sess, checkpoint)
         predicted_y = []
         for i in range(len(test_X)):
-            x1_input = np.array(test_X[i: i + 1], dtype=np.float64)
-            x2_input = np.array(test_X[i: i + 1], dtype=np.float64)
-
-            yhat = sess.run([self.yhat3], feed_dict={self.X1: x1_input,self.X2: x2_input, self.keep_prob: 1.})
+            #x1_input = np.array(test_X[i: i + 1], dtype=np.float64)
+            #x2_input = np.array(test_X[i: i + 1], dtype=np.float64)
+            x_input = np.array(test_X[i: i + 1], dtype=np.float64)
+            yhat = sess.run([self.yhat], feed_dict={self.X: x_input,self.keep_prob : 1.})            
+            #yhat = sess.run([self.yhat3], feed_dict={self.X1: x1_input,self.X2: x2_input, self.keep_prob: 1.})
             predicted_y.append(yhat[0][0][0])
         sess.close()
         return (predicted_y)
