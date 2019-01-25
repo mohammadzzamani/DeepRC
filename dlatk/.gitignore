@@ -48,3 +48,6 @@ MANIFEST.in
 models  
 README.md  
 setup.py
+
+
+_.re*

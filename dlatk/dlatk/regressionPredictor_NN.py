@@ -16,8 +16,8 @@ import csv
 import pandas as pd
 import copy
 import operator
-#from feedforward_parallel import ffNN
 from feedforward_parallel import ffNN
+#from feedforward import ffNN
 from pprint import pprint
 import numbers
 
@@ -2036,25 +2036,25 @@ class RegressionPredictor:
                     regularization_factor = 0
                     parameters_str += 'Controls: hidden_nodes = %s, hidden_layers = %d, regularization_factor= %2.f'%(','.join(map(str,hidden_nodes)), hidden_layers, regularization_factor)
              else:
-                    hidden_nodes = [8]
+                    hidden_nodes = [16,8]
                     save_path = './models/LMOnly'
                     hidden_layers = len(hidden_nodes)
-                    regularization_factor = 0.0005
+                    regularization_factor = 0.005
                     parameters_str += 'LM: hidden_nodes = %s, hidden_layers = %d, regularization_factor= %.5f'%(','.join(map(str,hidden_nodes)), hidden_layers, regularization_factor)
              #hidden_nodes = 16 if X.shape[1] < 20 else 32
-             epochs = 200
+             epochs = 700
              learning_rate = 0.0005
-             decay = False
+             decay = True
              decay_step = 10
-             decay_factor = 0.7
+             decay_factor = 0.8
              stop_loss = 0.0001
              keep_prob = 0.9
              activation_function = 'sigmoid' # linear, sigmoid, tanh, relu
-             batch_size = 32
+             batch_size = 16
              shuffle = True
              optimizer='Adam' # Adam, SGD, Adadelta 
-             stopping_iteration = 15 # if the accuracy didnt improve after this many iterations stop
-             regressor= ffNN(hidden_nodes=hidden_nodes, epochs=epochs, learning_rate=learning_rate,saveFrequency=5,save_path = save_path,hidden_layers = hidden_layers, decay=decay, decay_step=decay_step, decay_factor=decay_factor, stop_loss=stop_loss, keep_probability = keep_prob, regularization_factor=regularization_factor,minimum_cost=0,activation_function=activation_function,batch_size=batch_size,shuffle=shuffle,optimizer=optimizer,stopping_iteration= stopping_iteration)
+             stopping_iteration = 30 # if the accuracy didnt improve after this many iterations stop
+             regressor= ffNN(hidden_nodes=hidden_nodes, epochs=epochs, learning_rate=learning_rate,saveFrequency=5,save_path = save_path,hidden_layers = hidden_layers, decay=decay, decay_step=decay_step, decay_factor=decay_factor, stop_loss=stop_loss, keep_probability = keep_prob, regularization_factor=regularization_factor,minimum_cost=0,activation_function=activation_function,batch_size=batch_size,shuffle=shuffle,optimizer=optimizer)#,stopping_iteration= stopping_iteration)
              #regressor.initialize(x1_size = X.shape[1],x2_size=X.shape[1])
              global history_counter
              if history_counter is None :
@@ -2065,12 +2065,12 @@ class RegressionPredictor:
                  history.close()
                  history_counter = True
              print('length of the multiX is %d'%len(multiX))
-             #try: 
-             #   regressor.initialize(x1_size = multiX[0].shape[1],x2_size=multiX[1].shape[1])
+             try: 
+                regressor.initialize(x1_size = multiX[1].shape[1],x2_size=multiX[0].shape[1])
              #   #regressor.set_params(**dict((k, v[0] if isinstance(v, list) else v) for k,v in self.cvParams[modelName][0].items()))
-             #except IndexError:
+             except IndexError:
              #    
-             #   print(" >>No CV parameters available")
+                print(" >>No CV parameters available")
              #   raise IndexError
              #print dict(self.cvParams[modelName][0])
 
