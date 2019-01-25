@@ -16,6 +16,7 @@ import csv
 import pandas as pd
 import copy
 import operator
+#from feedforward_parallel import ffNN
 from feedforward_parallel import ffNN
 from pprint import pprint
 import numbers
@@ -1872,9 +1873,9 @@ class RegressionPredictor:
         self.featureSelectionString = []
         print ('kbest: ' , k, '  , pca:  ' , n , ' dim: ', dim, ' DEFAULT_RANDOM_SEED: ', DEFAULT_RANDOM_SEED)
         for i in range(0,dim):
-            # MB
-            #self.featureSelectionString.append('Pipeline([("1_univariate_select",  SelectKBest(score_func=f_regression, k={0})) , ("2_rpca", RandomizedPCA(n_components=int({1}), random_state={2}, whiten=False, iterated_power=3))])'.format(k[i], n[i], DEFAULT_RANDOM_SEED) )
-            self.featureSelectionString.append('Pipeline([("1_univariate_select",  SelectKBest(score_func=f_regression, k={0})) ])'.format(k[i],  DEFAULT_RANDOM_SEED) )
+            ##MB #mb
+            self.featureSelectionString.append('Pipeline([("1_univariate_select",  SelectKBest(score_func=f_regression, k={0})) , ("2_rpca", RandomizedPCA(n_components=int({1}), random_state={2}, whiten=False, iterated_power=3))])'.format(k[i], n[i], DEFAULT_RANDOM_SEED) )
+            #self.featureSelectionString.append('Pipeline([("1_univariate_select",  SelectKBest(score_func=f_regression, k={0})) ])'.format(k[i],  DEFAULT_RANDOM_SEED) )
         print ('kbest: ' , k, '  , pca:  ' , n )
 
 
@@ -2035,13 +2036,13 @@ class RegressionPredictor:
                     regularization_factor = 0
                     parameters_str += 'Controls: hidden_nodes = %s, hidden_layers = %d, regularization_factor= %2.f'%(','.join(map(str,hidden_nodes)), hidden_layers, regularization_factor)
              else:
-                    hidden_nodes = [32,8]
+                    hidden_nodes = [8]
                     save_path = './models/LMOnly'
                     hidden_layers = len(hidden_nodes)
                     regularization_factor = 0.0005
                     parameters_str += 'LM: hidden_nodes = %s, hidden_layers = %d, regularization_factor= %.5f'%(','.join(map(str,hidden_nodes)), hidden_layers, regularization_factor)
              #hidden_nodes = 16 if X.shape[1] < 20 else 32
-             epochs = 1000
+             epochs = 200
              learning_rate = 0.0005
              decay = False
              decay_step = 10
@@ -2049,11 +2050,11 @@ class RegressionPredictor:
              stop_loss = 0.0001
              keep_prob = 0.9
              activation_function = 'sigmoid' # linear, sigmoid, tanh, relu
-             batch_size = 16
+             batch_size = 32
              shuffle = True
              optimizer='Adam' # Adam, SGD, Adadelta 
-             stopping_iteration = 20 # if the accuracy didnt improve after this many iterations stop
-             regressor= ffNN(hidden_nodes=hidden_nodes, epochs=epochs, learning_rate=learning_rate,save_path = save_path,hidden_layers = hidden_layers, decay=decay, decay_step=decay_step, decay_factor=decay_factor, stop_loss=stop_loss, keep_probability = keep_prob, regularization_factor=regularization_factor,minimum_cost=0,activation_function=activation_function,batch_size=batch_size,shuffle=shuffle,optimizer=optimizer,stopping_iteration= stopping_iteration)
+             stopping_iteration = 15 # if the accuracy didnt improve after this many iterations stop
+             regressor= ffNN(hidden_nodes=hidden_nodes, epochs=epochs, learning_rate=learning_rate,saveFrequency=5,save_path = save_path,hidden_layers = hidden_layers, decay=decay, decay_step=decay_step, decay_factor=decay_factor, stop_loss=stop_loss, keep_probability = keep_prob, regularization_factor=regularization_factor,minimum_cost=0,activation_function=activation_function,batch_size=batch_size,shuffle=shuffle,optimizer=optimizer,stopping_iteration= stopping_iteration)
              #regressor.initialize(x1_size = X.shape[1],x2_size=X.shape[1])
              global history_counter
              if history_counter is None :
@@ -2064,13 +2065,13 @@ class RegressionPredictor:
                  history.close()
                  history_counter = True
              print('length of the multiX is %d'%len(multiX))
-             try: 
-                regressor.initialize(x1_size = multiX[0].shape[1],x2_size=multiX[1].shape[1])
-                #regressor.set_params(**dict((k, v[0] if isinstance(v, list) else v) for k,v in self.cvParams[modelName][0].items()))
-             except IndexError:
-                 
-                print(" >>No CV parameters available")
-                raise IndexError
+             #try: 
+             #   regressor.initialize(x1_size = multiX[0].shape[1],x2_size=multiX[1].shape[1])
+             #   #regressor.set_params(**dict((k, v[0] if isinstance(v, list) else v) for k,v in self.cvParams[modelName][0].items()))
+             #except IndexError:
+             #    
+             #   print(" >>No CV parameters available")
+             #   raise IndexError
              #print dict(self.cvParams[modelName][0])
 
              try:

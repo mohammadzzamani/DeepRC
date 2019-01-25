@@ -203,3 +203,9 @@ _
   selection type , selection size:  
 rfe , 11
 _
+  Ranking:  
+['forgnbornHC03_VC134ACS3yr$10', 'marriedaveHC03_AC3yr$10', 'bachdegHC03_VC94ACS3yr$10', 'hsgradHC03_VC93ACS3yr$10', 'county_density', 'unemployAve_BLSLAUS$0910', 'femalePOP165210D$10', 'blackPOP255210D$10', 'median_age', 'logincomeHC01_VC85ACS3yr$10', 'hispanicPOP405210D$10'] 
+_
+  selection type , selection size:  
+rfe , 11
+_
