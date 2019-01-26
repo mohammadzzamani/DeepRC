@@ -177,7 +177,7 @@ class ffNN():
                  learning_rate1 = self.learning_rate1
             #self.updates1 = tf.train.AdamOptimizer(learning_rate=learning_rate1, beta1=0.99, beta2=0.999).minimize(self.loss1)
             self.updates1 = tf.train.AdamOptimizer(learning_rate=learning_rate1).minimize(self.loss1)
-            '''
+            
 
 
             w_in2, b_in2 = init_weights((x2_size, self.hidden_nodes[0]),trainable=self.trainable2)
@@ -207,13 +207,13 @@ class ffNN():
                 learning_rate2= self.learning_rate2
             self.updates2 = tf.train.AdamOptimizer(learning_rate=learning_rate2).minimize(self.loss2)
 
+            
 
 
-
-            #w_out3, b_out3 = init_weights((self.hidden_nodes[i + 1]*2, y_size),trainable=self.trainable3)
-            #self.yhat3 = self.forwardprop(tf.concat([h_out1,h_out2],axis=1), w_out3, b_out3, self.keep_prob)
-            w_out3, b_out3 = init_weights((2, y_size),trainable=self.trainable3)
-            self.yhat3 = self.forwardprop(tf.concat([self.yhat1, self.yhat2],axis=1), w_out3, b_out3, self.keep_prob)
+            w_out3, b_out3 = init_weights((self.hidden_nodes[i + 1]*2, y_size),trainable=self.trainable3)
+            self.yhat3 = self.forwardprop(tf.concat([h_out1,h_out2],axis=1), w_out3, b_out3, self.keep_prob)
+            #w_out3, b_out3 = init_weights((2, y_size),trainable=self.trainable3)
+            #self.yhat3 = self.forwardprop(tf.concat([self.yhat1, self.yhat2],axis=1), w_out3, b_out3, self.keep_prob)
             l2_norm3 = tf.add(tf.nn.l2_loss(w_out3), l2_norm3)
             l2_norm3 = tf.add(tf.nn.l2_loss(b_out3), l2_norm3)
             # self.yhat3 = tf.add(tf.matmul(h_out2, w_out3), b_out3)
@@ -229,7 +229,7 @@ class ffNN():
 
 
             self.final_opt = tf.group(self.updates1,self.updates2,self.updates3)
-            '''
+            
 
     def train(self, train_X, train_y):
             print('x_1 size %s %s' % train_X[0].shape)
@@ -258,7 +258,7 @@ class ffNN():
             phase = 0
             temp_regularization_factor = self.regularization_factor
             temp_keep_prob = self.keep_probability
-            max_phase = 0
+            max_phase = 3
             for epoch in range(self.epochs):
                 # Train with each example
                 allcosts = 0
@@ -313,15 +313,15 @@ class ffNN():
 
                     #batch += 1
                     #sess.run(self.increment_global_step)
-                    loss = sess.run([self.updates1,self.loss1],feed_dict={self.X1: x1_input, self.X2: x2_input, self.y: y_input,
+                    loss = sess.run([self.final_opt,self.loss1,self.loss2,self.loss3],feed_dict={self.X1: x1_input, self.X2: x2_input, self.y: y_input,
                                                            self.keep_prob: self.keep_probability,self.learning_rate1: self.learning_rate,
                                                               self.learning_rate2: learning_rate_phase2, self.learning_rate3:learning_rate_phase3 })
                     #loss = sess.run([self.final_opt,self.loss1,self.loss2,self.loss3],feed_dict={self.X1: x1_input, self.X2: x2_input, self.y: y_input,
                     #                                     #  self.keep_prob: self.keep_probability,self.learning_rate1: learning_rate_phase1,
                     #                                     #     self.learning_rate2: learning_rate_phase2, self.learning_rate3:learning_rate_phase3 })
                     
-                    allcosts += loss[1]
-                    #allcosts += loss[min(phase,2)+1]
+                    #allcosts += loss[1]
+                    allcosts += loss[min(phase,2)+1]
                 # if self.decay is True and epoch % self.decay_step ==0:
                 #    self.learning_rate  *= self.decay_factor
                 epoch_cost = float(allcosts) / len(train_X1)
@@ -347,8 +347,6 @@ class ffNN():
                         else:
                            break
                 if epoch_cost < bestLoss:
-                    if phase == max_phase:
-                        print ('epoch: {}, epoch_cost:{}, phase: {}, best_loss:{}'.format( epoch, epoch_cost, phase, bestLoss) )
                     if (phase == max_phase  and epoch - best_saved_epoch > self.saveFrequency and epoch != 0):
                         print ('phase: {}, best_loss:{}, epoch:{}, epoch_cost:{}'.format(phase, bestLoss, epoch, epoch_cost) )
                         best_ckpt_saver.handle(epoch_cost, sess, global_step_tensor=tf.constant(epoch))
@@ -384,7 +382,7 @@ class ffNN():
             x1_input = np.array(test_X1[i: i + 1], dtype=np.float64)
             x2_input = np.array(test_X2[i: i + 1], dtype=np.float64)
 
-            yhat = sess.run([self.yhat1], feed_dict={self.X1: x1_input,self.X2: x2_input, self.keep_prob: 1.})
+            yhat = sess.run([self.yhat3], feed_dict={self.X1: x1_input,self.X2: x2_input, self.keep_prob: 1.})
             predicted_y.append(yhat[0][0][0])
         sess.close()
         del test_X
