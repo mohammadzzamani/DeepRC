@@ -2967,3 +2967,4 @@ LM: hidden_nodes = 16,8, hidden_layers = 2, regularization_factor= 0.00500
   *FOLD R^2: 0.6505 (MSE: 632.7596; MAE: 18.6170; mean train mae: 32.9954)
   *FOLD R^2: 0.5870 (MSE: 928.0663; MAE: 23.0624; mean train mae: 36.9698)
   *FOLD R^2: 0.6686 (MSE: 608.6968; MAE: 19.1726; mean train mae: 35.1316)
+  *FOLD R^2: 0.6842 (MSE: 590.0570; MAE: 18.9452; mean train mae: 34.3756)
