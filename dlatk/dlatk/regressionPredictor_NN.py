@@ -2036,31 +2036,32 @@ class RegressionPredictor:
                     regularization_factor = 0
                     parameters_str += 'Controls: hidden_nodes = %s, hidden_layers = %d, regularization_factor= %2.f'%(','.join(map(str,hidden_nodes)), hidden_layers, regularization_factor)
              else:
-                    hidden_nodes = [16,8]
+                    hidden_nodes =[16,8] #[16,8]
                     save_path = './models/LMOnly'
                     hidden_layers = len(hidden_nodes)
-                    regularization_factor = 0.005
+                    regularization_factor = 0.005 #0.005
                     parameters_str += 'LM: hidden_nodes = %s, hidden_layers = %d, regularization_factor= %.5f'%(','.join(map(str,hidden_nodes)), hidden_layers, regularization_factor)
              #hidden_nodes = 16 if X.shape[1] < 20 else 32
-             epochs = 700
-             learning_rate = 0.0005
+             epochs = 1000 #700
+             learning_rate =[0.005 ,0.001, 0.0002]
              decay = True
-             decay_step = 10
-             decay_factor = 0.8
-             stop_loss = 0.0001
-             keep_prob = 0.9
-             activation_function = 'sigmoid' # linear, sigmoid, tanh, relu
-             batch_size = 16
+             decay_step =25
+             decay_factor = 0.9 #0.8
+             stop_loss =0.0001 #0.0001
+             keep_prob = 0.9 #0.9
+             activation_function = ['relu','relu','linear'] # linear, sigmoid, tanh, relu
+             batch_size = 16 #16
              shuffle = True
              optimizer='Adam' # Adam, SGD, Adadelta 
-             stopping_iteration = 30 # if the accuracy didnt improve after this many iterations stop
-             regressor= ffNN(hidden_nodes=hidden_nodes, epochs=epochs, learning_rate=learning_rate,saveFrequency=5,save_path = save_path,hidden_layers = hidden_layers, decay=decay, decay_step=decay_step, decay_factor=decay_factor, stop_loss=stop_loss, keep_probability = keep_prob, regularization_factor=regularization_factor,minimum_cost=0,activation_function=activation_function,batch_size=batch_size,shuffle=shuffle,optimizer=optimizer)#,stopping_iteration= stopping_iteration)
+             stopping_iteration = 20 # if the accuracy didnt improve after this many iterations stop
+             stddev = [0.5 , 0.1]
+             regressor= ffNN(hidden_nodes=hidden_nodes, epochs=epochs, learning_rate=learning_rate,saveFrequency=5,save_path = save_path,hidden_layers = hidden_layers, decay=decay, decay_step=decay_step, decay_factor=decay_factor, stop_loss=stop_loss, keep_probability = keep_prob, regularization_factor=regularization_factor,minimum_cost=0,activation_function=activation_function,batch_size=batch_size,shuffle=shuffle,optimizer=optimizer,stopping_iteration= stopping_iteration, stddev=stddev)
              #regressor.initialize(x1_size = X.shape[1],x2_size=X.shape[1])
              global history_counter
              if history_counter is None :
                  history = open('/home/mbastan/DeepRC/parameters_history.txt','a')
                  history.write('\n\n Start at: '+str(datetime.datetime.now())+'\n')
-                 history.write('Model: %s , epochs: %d, learning_rate: %f, decay: %s , decay_step: %d , decay_factor: %f , stop_loss: %f , keep_prob: %f, activation_function: %s, batch_size: %d, shuffle: %s, optimizer: %s, stopping_iteration: %d \n' %(save_path, epochs,  learning_rate, str(decay), decay_step, decay_factor, stop_loss, keep_prob,activation_function,batch_size,str(shuffle),optimizer ,stopping_iteration) )
+                 history.write('Model: %s , epochs: %d, learning_rates: %f, %f, %f, decay: %s , decay_step: %d , decay_factor: %f , stop_loss: %f , keep_prob: %f, activation_function: %s, batch_size: %d, shuffle: %s, optimizer: %s, stopping_iteration: %d \n' %(save_path, epochs,  learning_rate[0], learning_rate[1], learning_rate[2], str(decay), decay_step, decay_factor, stop_loss, keep_prob,activation_function,batch_size,str(shuffle),optimizer ,stopping_iteration) )
                  history.write(parameters_str+'\n')
                  history.close()
                  history_counter = True
