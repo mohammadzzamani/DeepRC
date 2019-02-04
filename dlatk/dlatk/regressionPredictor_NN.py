@@ -1012,7 +1012,7 @@ class RegressionPredictor:
                                 else:
                                     (regressor, multiScalers, multiFSelectors) = self._multiXtrain(multiXtrain, ytrain, standardize, sparse = sparse, weightedSample=sampleWeights, featureSelectionParameters = featureSelectionParameters)
                                     ypred = self._multiXpredict(regressor, multiXtest, multiScalers = multiScalers, multiFSelectors = multiFSelectors, sparse = sparse)
-                                predictions.update(dict(zip(testGroupsOrder,ypred)))
+                                predictions.update(dict(zip(testGroupsOrder,ypred[len(ypred)-1])))
                                 #pprint(ypred[:10])
                                 ##4 a) save accuracy stats:
                                 ## TODO: calculate all this at end instead
@@ -1020,18 +1020,22 @@ class RegressionPredictor:
                                 print('ytest')
                                 print(ytest)
                                 print('ypred')
-                                print(ypred) 
-                                R2 = metrics.r2_score(ytest, ypred)
-                                mse = metrics.mean_squared_error(ytest, ypred)
-                                mae = metrics.mean_absolute_error(ytest, ypred)
+                                print(ypred[len(ypred)-1]) 
+                                R2 = [metrics.r2_score(ytest, ypr) for ypr in ypred ] 
+                                mse = [metrics.mean_squared_error(ytest, ypr) for ypr in ypred]
+                                mae = [metrics.mean_absolute_error(ytest, ypr) for ypr in ypred]
                                 train_mean = mean(ytrain)
                                 train_mean_mae = metrics.mean_absolute_error(ytest, [train_mean]*len(ytest))
                                 if withLanguage: 
                                    history = open('/home/mbastan/DeepRC/parameters_history.txt','a')
-                                   history.write("  *FOLD R^2: %.4f (MSE: %.4f; MAE: %.4f; mean train mae: %.4f)\n"% (R2, mse, mae, train_mean_mae) )
+                                   for i in range(len(ypred)):
+                                       history.write("  *FOLD R^2: %.4f (MSE: %.4f; MAE: %.4f; mean train mae: %.4f)\n"% (R2[i], mse[i], mae[i], train_mean_mae) )
+                                       print("  *FOLD R^2: %.4f (MSE: %.4f; MAE: %.4f; mean train mae: %.4f)"% (R2[i], mse[i], mae[i], train_mean_mae))
                                    history.close()
-                                   print("  *FOLD R^2: %.4f (MSE: %.4f; MAE: %.4f; mean train mae: %.4f)"% (R2, mse, mae, train_mean_mae))
+                                 
 
+
+                                ypred, R2, mse, mae = ypred[len(ypred)-1], R2[len(ypred)-1], mse[len(ypred)-1], mae[len(ypred)-1]
                                 if report: self.addToReport(outputName+'_.result', Str = "  *FOLD: %d  R^2: %.4f (MSE: %.4f; MAE: %.4f; mean train mae: %.4f)\n_"% (testChunk, R2, mse, mae, train_mean_mae))
                                 testStats['R2_folds'].append(R2)
                                 (pearsr, r_p) = pearsonr(ytest, ypred)
@@ -1055,6 +1059,8 @@ class RegressionPredictor:
                                     except ValueError as err:
                                         print("WLS threw ValueError: %s\nresult not included" % str(err))
                                 del regressor
+                                #MB mb
+                                print('regressor deleted')
                                 import gc
                                 gc.collect()
                             #########################
@@ -2031,37 +2037,37 @@ class RegressionPredictor:
              parameters_str = ""
              if X.shape[1] < 20:
                     hidden_nodes = [8]
-                    save_path = './models/ControlsOnly'
-                    hidden_layers = len(hidden_nodes)
+                    save_path = '/home/mbastan/DeepRC/dlatk/models/ControlsOnly'
                     regularization_factor = 0
-                    parameters_str += 'Controls: hidden_nodes = %s, hidden_layers = %d, regularization_factor= %2.f'%(','.join(map(str,hidden_nodes)), hidden_layers, regularization_factor)
+                    parameters_str += 'Controls: hidden_nodes = %s,  regularization_factor= %2.f'%(','.join(map(str,hidden_nodes)), regularization_factor)
              else:
-                    hidden_nodes =[16,8] #[16,8]
-                    save_path = './models/LMOnly'
-                    hidden_layers = len(hidden_nodes)
-                    regularization_factor = 0.005 #0.005
-                    parameters_str += 'LM: hidden_nodes = %s, hidden_layers = %d, regularization_factor= %.5f'%(','.join(map(str,hidden_nodes)), hidden_layers, regularization_factor)
+                    hidden_nodes =[[64,64],[64,16]] #[16,8]
+                    save_path = '/home/mbastan/DeepRC/dlatk/models/LMOnly'
+                    regularization_factor = 0.001 #0.005
+                    parameters_str += 'LM: hidden_nodes = %s, regularization_factor= %.5f'%(','.join(map(str,hidden_nodes)),  regularization_factor)
              #hidden_nodes = 16 if X.shape[1] < 20 else 32
-             epochs = 1000 #700
-             learning_rate =[0.005 ,0.001, 0.0002]
+             epochs = 1000#700
+             learning_rate =[0.001 ,0.005, 0.0002]
              decay = True
-             decay_step =25
-             decay_factor = 0.9 #0.8
+             decay_step =1
+             decay_factor = 0.99 #0.8
              stop_loss =0.0001 #0.0001
              keep_prob = 0.9 #0.9
-             activation_function = ['relu','relu','linear'] # linear, sigmoid, tanh, relu
+             activation_function = ['relu','sigmoid','linear'] # linear, sigmoid, tanh, relu
              batch_size = 16 #16
              shuffle = True
              optimizer='Adam' # Adam, SGD, Adadelta 
-             stopping_iteration = 20 # if the accuracy didnt improve after this many iterations stop
-             stddev = [0.5 , 0.1]
-             regressor= ffNN(hidden_nodes=hidden_nodes, epochs=epochs, learning_rate=learning_rate,saveFrequency=5,save_path = save_path,hidden_layers = hidden_layers, decay=decay, decay_step=decay_step, decay_factor=decay_factor, stop_loss=stop_loss, keep_probability = keep_prob, regularization_factor=regularization_factor,minimum_cost=0,activation_function=activation_function,batch_size=batch_size,shuffle=shuffle,optimizer=optimizer,stopping_iteration= stopping_iteration, stddev=stddev)
-             #regressor.initialize(x1_size = X.shape[1],x2_size=X.shape[1])
+             stopping_iteration = 1 # if the accuracy didnt improve after this many iterations stop
+             stddev = [0.1 , 0.1, 0.05]
+             max_phase = 3
+             start_phase = 0
+             regressor= ffNN(hidden_nodes=hidden_nodes, epochs=epochs, learning_rate=learning_rate,saveFrequency=5,save_path = save_path, decay=decay, decay_step=decay_step, decay_factor=decay_factor, stop_loss=stop_loss, keep_probability = keep_prob, regularization_factor=regularization_factor,minimum_cost=0,activation_function=activation_function,batch_size=batch_size,shuffle=shuffle,optimizer=optimizer,stopping_iteration= stopping_iteration, stddev=stddev,max_phase=max_phase,start_phase=start_phase)
+             #regressor.initialize(x1_size = X.thape[1],x2_size=X.shape[1])
              global history_counter
              if history_counter is None :
                  history = open('/home/mbastan/DeepRC/parameters_history.txt','a')
                  history.write('\n\n Start at: '+str(datetime.datetime.now())+'\n')
-                 history.write('Model: %s , epochs: %d, learning_rates: %f, %f, %f, decay: %s , decay_step: %d , decay_factor: %f , stop_loss: %f , keep_prob: %f, activation_function: %s, batch_size: %d, shuffle: %s, optimizer: %s, stopping_iteration: %d \n' %(save_path, epochs,  learning_rate[0], learning_rate[1], learning_rate[2], str(decay), decay_step, decay_factor, stop_loss, keep_prob,activation_function,batch_size,str(shuffle),optimizer ,stopping_iteration) )
+                 history.write('Model: %s , epochs: %d, learning_rates: %f, %f, %f, decay: %s , decay_step: %d , decay_factor: %f , stop_loss: %f , keep_prob: %f, activation_function: %s, batch_size: %d, shuffle: %s, optimizer: %s, stopping_iteration: %d, stddev: %3f, %3f,max_phase: %d , start phase: %d \n' %(save_path, epochs,  learning_rate[0], learning_rate[1], learning_rate[2], str(decay), decay_step, decay_factor, stop_loss, keep_prob,activation_function,batch_size,str(shuffle),optimizer ,stopping_iteration,stddev[0],stddev[1],max_phase,start_phase) )
                  history.write(parameters_str+'\n')
                  history.close()
                  history_counter = True
@@ -2077,6 +2083,7 @@ class RegressionPredictor:
 
              try:
                 try:
+                    #multiX[0] = np.zeros((multiX[0].shape[0], multiX[0].shape[1]))
                     regressor.train(multiX,y)
                     #regressor.fit(X, y, sample_weight = weightedSample)
                 except TypeError:
@@ -2197,11 +2204,16 @@ class RegressionPredictor:
         print("[PREDICT] combined X shape: %s" % str(X.shape)) #debu
         if hasattr(regressor, 'intercept_'):
             print("[PREDICT] regression intercept: %f" % regressor.intercept_)
-
+       
         if len(multiX) > 1:
-            return multiScalers[len(multiScalers)-1].inverse_transform(np.array(regressor.predict(multiX)).reshape(-1,1)).reshape(-1)
+            predictions = []
+            for i in range(3):
+                print('phase %d'%i)
+                predictions.append(regressor.predict(multiX,phase=i,bestModel=False))
+            predictions.append(regressor.predict(multiX, reset_graph=True))
+            return [ multiScalers[len(multiScalers)-1].inverse_transform(np.array(pr).reshape(-1,1)).reshape(-1) for pr in predictions ]
         else:
-            return regressor.predict(X)
+            return [regressor.predict(X)]
 
     ######################
     def load(self, filename, pickle2_7=True):
