@@ -1029,8 +1029,9 @@ class RegressionPredictor:
                                 if withLanguage: 
                                    history = open('/home/mbastan/DeepRC/parameters_history.txt','a')
                                    for i in range(len(ypred)):
-                                       history.write("  *FOLD R^2: %.4f (MSE: %.4f; MAE: %.4f; mean train mae: %.4f)\n"% (R2[i], mse[i], mae[i], train_mean_mae) )
-                                       print("  *FOLD R^2: %.4f (MSE: %.4f; MAE: %.4f; mean train mae: %.4f)"% (R2[i], mse[i], mae[i], train_mean_mae))
+                                       history.write("  *FOLD: %d  R^2: %.4f (MSE: %.4f; MAE: %.4f; mean train mae: %.4f)\n"% (testChunk, R2[i], mse[i], mae[i], train_mean_mae) )
+                                       print("  *FOLD: %d  R^2: %.4f (MSE: %.4f; MAE: %.4f; mean train mae: %.4f)"% (testChunk, R2[i], mse[i], mae[i], train_mean_mae))
+                                   history.write('-------')
                                    history.close()
                                  
 
@@ -2057,7 +2058,7 @@ class RegressionPredictor:
              batch_size = 16 #16
              shuffle = True
              optimizer='Adam' # Adam, SGD, Adadelta 
-             stopping_iteration = 1 # if the accuracy didnt improve after this many iterations stop
+             stopping_iteration = 10 # if the accuracy didnt improve after this many iterations stop
              stddev = [0.1 , 0.1, 0.05]
              max_phase = 3
              start_phase = 0
