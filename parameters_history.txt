@@ -2717,82 +2717,6 @@ Finished at: 2019-02-04 16:29:36.109029
 
 
 
-
- Start at: 2019-02-04 17:27:42.581985
-Model: ./models/LMOnly , epochs: 1000, learning_rates: 0.001000, 0.005000, 0.000200, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 20, stddev: 0.100000, 0.100000,max_phase: 3 , start phase: 0 
-LM: hidden_nodes = [64, 64],[64, 64], regularization_factor= 0.00100
-
-
- Start at: 2019-02-04 17:32:14.889943
-Model: ./models/LMOnly , epochs: 1000, learning_rates: 0.001000, 0.005000, 0.000200, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 1, stddev: 0.100000, 0.100000,max_phase: 3 , start phase: 0 
-LM: hidden_nodes = [64, 64],[64, 16], regularization_factor= 0.00100
-
-
- Start at: 2019-02-04 17:34:03.165231
-Model: ./models/LMOnly , epochs: 1000, learning_rates: 0.001000, 0.005000, 0.000200, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 1, stddev: 0.100000, 0.100000,max_phase: 3 , start phase: 0 
-LM: hidden_nodes = [64, 64],[64, 16], regularization_factor= 0.00100
-
-
- Start at: 2019-02-04 17:45:17.328883
-Model: ./models/LMOnly , epochs: 1000, learning_rates: 0.001000, 0.005000, 0.000200, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 1, stddev: 0.100000, 0.100000,max_phase: 3 , start phase: 0 
-LM: hidden_nodes = [64, 64],[64, 16], regularization_factor= 0.00100
-
-
- Start at: 2019-02-04 17:51:30.165849
-Model: ./models/LMOnly , epochs: 1000, learning_rates: 0.001000, 0.005000, 0.000200, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 1, stddev: 0.100000, 0.100000,max_phase: 3 , start phase: 0 
-LM: hidden_nodes = [64, 64],[64, 16], regularization_factor= 0.00100
-
-
- Start at: 2019-02-04 17:53:27.579721
-Model: ./models/LMOnly , epochs: 1000, learning_rates: 0.001000, 0.005000, 0.000200, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 1, stddev: 0.100000, 0.100000,max_phase: 3 , start phase: 0 
-LM: hidden_nodes = [64, 64],[64, 16], regularization_factor= 0.00100
-
-
- Start at: 2019-02-04 17:59:23.967511
-Model: ./models/LMOnly , epochs: 1000, learning_rates: 0.001000, 0.005000, 0.000200, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 1, stddev: 0.100000, 0.100000,max_phase: 3 , start phase: 0 
-LM: hidden_nodes = [64, 64],[64, 16], regularization_factor= 0.00100
-
-
- Start at: 2019-02-04 18:07:34.034646
-Model: ./models/LMOnly , epochs: 1000, learning_rates: 0.001000, 0.005000, 0.000200, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 1, stddev: 0.100000, 0.100000,max_phase: 3 , start phase: 0 
-LM: hidden_nodes = [64, 64],[64, 16], regularization_factor= 0.00100
-
-
- Start at: 2019-02-04 18:11:17.151357
-Model: /home/mbastan/DeepRC/dlatk/models/LMOnly , epochs: 1000, learning_rates: 0.001000, 0.005000, 0.000200, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 1, stddev: 0.100000, 0.100000,max_phase: 3 , start phase: 0 
-LM: hidden_nodes = [64, 64],[64, 16], regularization_factor= 0.00100
-
-
- Start at: 2019-02-04 18:16:44.855087
-Model: /home/mbastan/DeepRC/dlatk/models/LMOnly , epochs: 1000, learning_rates: 0.001000, 0.005000, 0.000200, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 1, stddev: 0.100000, 0.100000,max_phase: 3 , start phase: 0 
-LM: hidden_nodes = [64, 64],[64, 16], regularization_factor= 0.00100
-
-
- Start at: 2019-02-04 18:24:03.539252
-Model: /home/mbastan/DeepRC/dlatk/models/LMOnly , epochs: 1000, learning_rates: 0.001000, 0.005000, 0.000200, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 1, stddev: 0.100000, 0.100000,max_phase: 3 , start phase: 0 
-LM: hidden_nodes = [64, 64],[64, 16], regularization_factor= 0.00100
-
-
- Start at: 2019-02-04 18:27:31.322456
-Model: /home/mbastan/DeepRC/dlatk/models/LMOnly , epochs: 1000, learning_rates: 0.001000, 0.005000, 0.000200, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 1, stddev: 0.100000, 0.100000,max_phase: 3 , start phase: 0 
-LM: hidden_nodes = [64, 64],[64, 16], regularization_factor= 0.00100
-
-
- Start at: 2019-02-04 18:29:05.098701
-Model: /home/mbastan/DeepRC/dlatk/models/LMOnly , epochs: 1000, learning_rates: 0.001000, 0.005000, 0.000200, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 1, stddev: 0.100000, 0.100000,max_phase: 3 , start phase: 0 
-LM: hidden_nodes = [64, 64],[64, 16], regularization_factor= 0.00100
-
-
- Start at: 2019-02-04 18:33:04.356779
-Model: /home/mbastan/DeepRC/dlatk/models/LMOnly , epochs: 1000, learning_rates: 0.001000, 0.005000, 0.000200, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 1, stddev: 0.100000, 0.100000,max_phase: 3 , start phase: 0 
-LM: hidden_nodes = [64, 64],[64, 16], regularization_factor= 0.00100
-
-
- Start at: 2019-02-04 18:34:44.390462
-Model: /home/mbastan/DeepRC/dlatk/models/LMOnly , epochs: 1000, learning_rates: 0.001000, 0.005000, 0.000200, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 1, stddev: 0.100000, 0.100000,max_phase: 3 , start phase: 0 
-LM: hidden_nodes = [64, 64],[64, 16], regularization_factor= 0.00100
-
-
  Start at: 2019-02-04 18:36:38.739027
 Model: /home/mbastan/DeepRC/dlatk/models/LMOnly , epochs: 1000, learning_rates: 0.001000, 0.005000, 0.000200, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 1, stddev: 0.100000, 0.100000,max_phase: 3 , start phase: 0 
 LM: hidden_nodes = [64, 64],[64, 16], regularization_factor= 0.00100
@@ -2847,3 +2771,534 @@ _*Mean Absolute Error:  21.6831
 _*Train_Mean MAE:       25.8434
 
 Finished at: 2019-02-04 18:42:59.988850
+
+
+ Start at: 2019-02-04 18:49:05.806968
+Model: /home/mbastan/DeepRC/dlatk/models/LMOnly , epochs: 1000, learning_rates: 0.001000, 0.005000, 0.000200, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 10, stddev: 0.100000, 0.100000,max_phase: 3 , start phase: 0 
+LM: hidden_nodes = [64, 64],[64, 16], regularization_factor= 0.00100
+
+
+ Start at: 2019-02-04 18:54:34.795035
+Model: /home/mbastan/DeepRC/dlatk/models/LMOnly , epochs: 1000, learning_rates: 0.001000, 0.005000, 0.000200, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 10, stddev: 0.100000, 0.100000,max_phase: 3 , start phase: 0 
+LM: hidden_nodes = [64, 64],[64, 16], regularization_factor= 0.00100
+  *FOLD: 0  R^2: 0.5763 (MSE: 625.4236; MAE: 19.4893; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.6386 (MSE: 533.4133; MAE: 17.8981; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.6435 (MSE: 526.2804; MAE: 17.3070; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.6667 (MSE: 491.9524; MAE: 17.1967; mean train mae: 31.4874)
+-------  *FOLD: 1  R^2: 0.6235 (MSE: 737.9976; MAE: 20.8940; mean train mae: 33.4512)
+  *FOLD: 1  R^2: 0.5729 (MSE: 837.1852; MAE: 22.5782; mean train mae: 33.4512)
+  *FOLD: 1  R^2: 0.5840 (MSE: 815.4059; MAE: 21.3877; mean train mae: 33.4512)
+  *FOLD: 1  R^2: 0.5797 (MSE: 823.7743; MAE: 21.4786; mean train mae: 33.4512)
+-------  *FOLD: 2  R^2: 0.5601 (MSE: 796.4341; MAE: 20.6680; mean train mae: 32.9954)
+  *FOLD: 2  R^2: 0.5386 (MSE: 835.4023; MAE: 22.3224; mean train mae: 32.9954)
+  *FOLD: 2  R^2: 0.5795 (MSE: 761.3231; MAE: 20.5238; mean train mae: 32.9954)
+  *FOLD: 2  R^2: 0.5615 (MSE: 793.9246; MAE: 21.8562; mean train mae: 32.9954)
+-------  *FOLD: 3  R^2: 0.5702 (MSE: 965.8092; MAE: 23.7410; mean train mae: 36.9698)
+  *FOLD: 3  R^2: 0.5264 (MSE: 1064.2570; MAE: 24.0913; mean train mae: 36.9698)
+  *FOLD: 3  R^2: 0.5707 (MSE: 964.7164; MAE: 22.5141; mean train mae: 36.9698)
+  *FOLD: 3  R^2: 0.5692 (MSE: 968.1995; MAE: 22.3501; mean train mae: 36.9698)
+-------  *FOLD: 4  R^2: 0.5983 (MSE: 737.9590; MAE: 20.7604; mean train mae: 35.1316)
+  *FOLD: 4  R^2: 0.5699 (MSE: 790.0240; MAE: 22.9115; mean train mae: 35.1316)
+  *FOLD: 4  R^2: 0.6839 (MSE: 580.6686; MAE: 18.9372; mean train mae: 35.1316)
+  *FOLD: 4  R^2: 0.6572 (MSE: 629.7392; MAE: 19.5517; mean train mae: 35.1316)
+-------  *FOLD: 5  R^2: 0.6323 (MSE: 687.1017; MAE: 20.4050; mean train mae: 34.3756)
+  *FOLD: 5  R^2: 0.6017 (MSE: 744.2753; MAE: 21.0138; mean train mae: 34.3756)
+  *FOLD: 5  R^2: 0.6089 (MSE: 730.7805; MAE: 20.1722; mean train mae: 34.3756)
+  *FOLD: 5  R^2: 0.5937 (MSE: 759.2728; MAE: 21.0400; mean train mae: 34.3756)
+-------  *FOLD: 6  R^2: 0.5292 (MSE: 984.8452; MAE: 24.2387; mean train mae: 35.5784)
+  *FOLD: 6  R^2: 0.6073 (MSE: 821.4796; MAE: 21.5872; mean train mae: 35.5784)
+  *FOLD: 6  R^2: 0.6063 (MSE: 823.6855; MAE: 21.3068; mean train mae: 35.5784)
+  *FOLD: 6  R^2: 0.6224 (MSE: 789.9899; MAE: 20.8059; mean train mae: 35.5784)
+-------  *FOLD: 7  R^2: 0.5402 (MSE: 939.2171; MAE: 23.8746; mean train mae: 36.6985)
+  *FOLD: 7  R^2: 0.5496 (MSE: 920.1495; MAE: 23.2954; mean train mae: 36.6985)
+  *FOLD: 7  R^2: 0.5622 (MSE: 894.3061; MAE: 22.7123; mean train mae: 36.6985)
+  *FOLD: 7  R^2: 0.5632 (MSE: 892.2838; MAE: 23.6538; mean train mae: 36.6985)
+-------  *FOLD: 8  R^2: 0.4665 (MSE: 860.8296; MAE: 22.7470; mean train mae: 32.1991)
+  *FOLD: 8  R^2: 0.5163 (MSE: 780.5550; MAE: 21.5828; mean train mae: 32.1991)
+  *FOLD: 8  R^2: 0.5667 (MSE: 699.2234; MAE: 20.1247; mean train mae: 32.1991)
+  *FOLD: 8  R^2: 0.5263 (MSE: 764.4271; MAE: 20.9615; mean train mae: 32.1991)
+-------  *FOLD: 9  R^2: 0.5278 (MSE: 839.9509; MAE: 22.3511; mean train mae: 33.6105)
+  *FOLD: 9  R^2: 0.5816 (MSE: 744.1602; MAE: 20.6515; mean train mae: 33.6105)
+  *FOLD: 9  R^2: 0.5588 (MSE: 784.7185; MAE: 20.7034; mean train mae: 33.6105)
+  *FOLD: 9  R^2: 0.5784 (MSE: 749.8629; MAE: 21.2371; mean train mae: 33.6105)
+-------_*Overall R^2:          0.5934    
+_*Overall FOLDS R^2:    0.5918 (+- 0.0133)    
+_*R (sqrt R^2):         0.7703    
+_*Pearson r:            0.7703 (p = 0.00000)    
+_*Folds Pearson r:      0.7723 (p = 0.00000)    
+_*Spearman rho:         0.7780 (p = 0.00000)    
+_*Mean Squared Error:   766.2579    
+_*Mean Absolute Error:  21.0143    
+_*Train_Mean MAE:       27.1874
+
+Finished at: 2019-02-04 19:20:03.672465
+
+
+
+
+ Start at: 2019-02-05 11:33:12.131204
+
+
+ Start at: 2019-02-05 11:36:25.477715
+Model: /home/mbastan/DeepRC/dlatk/models/LMOnly , epochs: 1000, learning_rates: 0.001000, 0.005000, 0.000200, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 10,10,1,1, stddev: 0.100000, 0.100000,max_phase: 3 , start phase: 0 
+LM: hidden_nodes = [64, 64],[64, 16], regularization_factor= 0.00100
+  *FOLD: 0  R^2: 0.6323 (MSE: 542.7572; MAE: 18.0629; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.6549 (MSE: 509.4326; MAE: 17.6201; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.6763 (MSE: 477.8033; MAE: 16.4034; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.6493 (MSE: 517.7111; MAE: 17.9156; mean train mae: 31.4874)
+-------
+  *FOLD: 1  R^2: 0.6022 (MSE: 779.6250; MAE: 21.4824; mean train mae: 33.4512)
+  *FOLD: 1  R^2: 0.5523 (MSE: 877.4966; MAE: 21.6399; mean train mae: 33.4512)
+  *FOLD: 1  R^2: 0.6276 (MSE: 729.9427; MAE: 20.5622; mean train mae: 33.4512)
+  *FOLD: 1  R^2: 0.5427 (MSE: 896.3329; MAE: 22.8330; mean train mae: 33.4512)
+-------
+  *FOLD: 2  R^2: 0.5739 (MSE: 771.4185; MAE: 20.9779; mean train mae: 32.9954)
+  *FOLD: 2  R^2: 0.5798 (MSE: 760.7898; MAE: 20.9022; mean train mae: 32.9954)
+  *FOLD: 2  R^2: 0.6303 (MSE: 669.4249; MAE: 19.1859; mean train mae: 32.9954)
+  *FOLD: 2  R^2: 0.5748 (MSE: 769.8291; MAE: 21.2108; mean train mae: 32.9954)
+-------
+  *FOLD: 3  R^2: 0.5345 (MSE: 1046.1724; MAE: 25.3791; mean train mae: 36.9698)
+  *FOLD: 3  R^2: 0.4868 (MSE: 1153.2644; MAE: 24.7458; mean train mae: 36.9698)
+  *FOLD: 3  R^2: 0.5905 (MSE: 920.1244; MAE: 23.0164; mean train mae: 36.9698)
+  *FOLD: 3  R^2: 0.5313 (MSE: 1053.3325; MAE: 23.7400; mean train mae: 36.9698)
+-------
+  *FOLD: 4  R^2: 0.5852 (MSE: 762.0467; MAE: 21.4675; mean train mae: 35.1316)
+  *FOLD: 4  R^2: 0.5715 (MSE: 787.1487; MAE: 22.8787; mean train mae: 35.1316)
+  *FOLD: 4  R^2: 0.6788 (MSE: 590.0877; MAE: 19.2569; mean train mae: 35.1316)
+  *FOLD: 4  R^2: 0.6135 (MSE: 710.0543; MAE: 20.8500; mean train mae: 35.1316)
+-------
+  *FOLD: 5  R^2: 0.6268 (MSE: 697.3066; MAE: 20.3458; mean train mae: 34.3756)
+  *FOLD: 5  R^2: 0.5909 (MSE: 764.4802; MAE: 19.8862; mean train mae: 34.3756)
+  *FOLD: 5  R^2: 0.6299 (MSE: 691.5406; MAE: 19.2013; mean train mae: 34.3756)
+  *FOLD: 5  R^2: 0.5863 (MSE: 773.1322; MAE: 21.1154; mean train mae: 34.3756)
+-------
+  *FOLD: 6  R^2: 0.5298 (MSE: 983.5966; MAE: 23.8898; mean train mae: 35.5784)
+  *FOLD: 6  R^2: 0.6099 (MSE: 816.1001; MAE: 21.3848; mean train mae: 35.5784)
+  *FOLD: 6  R^2: 0.6466 (MSE: 739.3274; MAE: 20.4462; mean train mae: 35.5784)
+  *FOLD: 6  R^2: 0.6005 (MSE: 835.6235; MAE: 21.9000; mean train mae: 35.5784)
+-------
+  *FOLD: 7  R^2: 0.5338 (MSE: 952.3362; MAE: 24.0493; mean train mae: 36.6985)
+  *FOLD: 7  R^2: 0.5158 (MSE: 989.2450; MAE: 24.4109; mean train mae: 36.6985)
+  *FOLD: 7  R^2: 0.6160 (MSE: 784.5355; MAE: 21.7488; mean train mae: 36.6985)
+  *FOLD: 7  R^2: 0.5585 (MSE: 901.9341; MAE: 23.4895; mean train mae: 36.6985)
+-------
+  *FOLD: 8  R^2: 0.4794 (MSE: 840.1444; MAE: 22.5500; mean train mae: 32.1991)
+  *FOLD: 8  R^2: 0.5115 (MSE: 788.2350; MAE: 21.4710; mean train mae: 32.1991)
+  *FOLD: 8  R^2: 0.5818 (MSE: 674.8167; MAE: 19.7134; mean train mae: 32.1991)
+  *FOLD: 8  R^2: 0.5272 (MSE: 762.9102; MAE: 21.0667; mean train mae: 32.1991)
+-------
+  *FOLD: 9  R^2: 0.5102 (MSE: 871.1795; MAE: 22.5377; mean train mae: 33.6105)
+  *FOLD: 9  R^2: 0.5716 (MSE: 762.0985; MAE: 20.6944; mean train mae: 33.6105)
+  *FOLD: 9  R^2: 0.5953 (MSE: 719.9402; MAE: 20.1668; mean train mae: 33.6105)
+  *FOLD: 9  R^2: 0.5766 (MSE: 753.1005; MAE: 21.1098; mean train mae: 33.6105)
+-------
+_*Overall R^2:          0.5770    
+_*Overall FOLDS R^2:    0.5761 (+- 0.0115)    
+_*R (sqrt R^2):         0.7596    
+_*Pearson r:            0.7606 (p = 0.00000)    
+_*Folds Pearson r:      0.7639 (p = 0.00000)    
+_*Spearman rho:         0.7660 (p = 0.00000)    
+_*Mean Squared Error:   797.1681    
+_*Mean Absolute Error:  21.5210    
+_*Train_Mean MAE:       26.3310
+
+Finished at: 2019-02-05 11:47:06.094778
+
+
+ Start at: 2019-02-05 11:49:34.041258
+Model: /home/mbastan/DeepRC/dlatk/models/LMOnly , epochs: 1000, learning_rates: 0.001000, 0.005000, 0.000200, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 10,10,1,1, stddev: 0.100000, 0.100000,max_phase: 2 , start phase: 0 
+LM: hidden_nodes = [64, 64],[64, 16], regularization_factor= 0.00100
+  *FOLD: 0  R^2: 0.6352 (MSE: 538.4213; MAE: 18.0715; mean train mae: 31.4874)
+  *FOLD: 0  R^2: -9.3844 (MSE: 15328.2784; MAE: 117.6953; mean train mae: 31.4874)
+  *FOLD: 0  R^2: -3.6721 (MSE: 6896.4864; MAE: 74.4160; mean train mae: 31.4874)
+-------
+  *FOLD: 1  R^2: 0.6129 (MSE: 758.7723; MAE: 21.3202; mean train mae: 33.4512)
+  *FOLD: 1  R^2: -7.6354 (MSE: 16925.7782; MAE: 122.3345; mean train mae: 33.4512)
+  *FOLD: 1  R^2: -3.0865 (MSE: 8009.7759; MAE: 78.6066; mean train mae: 33.4512)
+-------
+  *FOLD: 2  R^2: 0.5640 (MSE: 789.3667; MAE: 20.8666; mean train mae: 32.9954)
+  *FOLD: 2  R^2: -7.9705 (MSE: 16240.9945; MAE: 120.1270; mean train mae: 32.9954)
+  *FOLD: 2  R^2: -3.0877 (MSE: 7400.6706; MAE: 75.4593; mean train mae: 32.9954)
+-------
+  *FOLD: 3  R^2: 0.5532 (MSE: 1004.1535; MAE: 24.2007; mean train mae: 36.9698)
+  *FOLD: 3  R^2: -6.7189 (MSE: 17345.8998; MAE: 122.8768; mean train mae: 36.9698)
+  *FOLD: 3  R^2: -3.5211 (MSE: 10159.6911; MAE: 89.5667; mean train mae: 36.9698)
+-------
+  *FOLD: 4  R^2: 0.5949 (MSE: 744.1994; MAE: 20.7535; mean train mae: 35.1316)
+  *FOLD: 4  R^2: -7.5485 (MSE: 15703.7486; MAE: 117.7571; mean train mae: 35.1316)
+  *FOLD: 4  R^2: -3.4654 (MSE: 8203.0416; MAE: 80.8319; mean train mae: 35.1316)
+-------
+
+
+ Start at: 2019-02-05 12:10:00.825068
+Model: /home/mbastan/DeepRC/dlatk/models/LMOnly , epochs: 1000, learning_rates: 0.001000, 0.005000, 0.000200, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 10,10,1,1, stddev: 0.100000, 0.100000,max_phase: 2 , start phase: 0 
+LM: hidden_nodes = [64, 64],[64, 16], regularization_factor= 0.00100
+  *FOLD: 0  R^2: 0.6326 (MSE: 542.2787; MAE: 18.0682; mean train mae: 31.4874)
+  *FOLD: 0  R^2: -9.3844 (MSE: 15328.2784; MAE: 117.6953; mean train mae: 31.4874)
+  *FOLD: 0  R^2: -0.5719 (MSE: 2320.1987; MAE: 41.2477; mean train mae: 31.4874)
+-------
+
+
+ Start at: 2019-02-05 12:12:51.701476
+Model: /home/mbastan/DeepRC/dlatk/models/LMOnly , epochs: 1000, learning_rates: 0.001000, 0.005000, 0.000200, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 10,10,1,1, stddev: 0.100000, 0.100000,max_phase: 1 , start phase: 0 
+LM: hidden_nodes = [64, 64],[64, 16], regularization_factor= 0.00100
+
+
+ Start at: 2019-02-05 12:15:29.393812
+Model: /home/mbastan/DeepRC/dlatk/models/LMOnly , epochs: 1000, learning_rates: 0.001000, 0.005000, 0.000200, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 10,10,1,1, stddev: 0.100000, 0.100000,max_phase: 1 , start phase: 0 
+LM: hidden_nodes = [64, 64],[64, 16], regularization_factor= 0.00100
+
+
+ Start at: 2019-02-05 12:16:49.413653
+Model: /home/mbastan/DeepRC/dlatk/models/LMOnly , epochs: 1000, learning_rates: 0.001000, 0.005000, 0.000200, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 10,10,1,1, stddev: 0.100000, 0.100000,max_phase: 1 , start phase: 0 
+LM: hidden_nodes = [64, 64],[64, 16], regularization_factor= 0.00100
+  *FOLD: 0  R^2: 0.6392 (MSE: 532.6007; MAE: 17.9172; mean train mae: 31.4874)
+  *FOLD: 0  R^2: -4.1485 (MSE: 7599.6702; MAE: 79.0086; mean train mae: 31.4874)
+-------
+
+
+ Start at: 2019-02-05 12:23:11.791818
+Model: /home/mbastan/DeepRC/dlatk/models/LMOnly , epochs: 1000, learning_rates: 0.001000, 0.005000, 0.000200, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 10,10,1,1, stddev: 0.100000, 0.100000,max_phase: 1 , start phase: 0 
+LM: hidden_nodes = [64, 64],[64, 16], regularization_factor= 0.00100
+  *FOLD: 0  R^2: 0.5831 (MSE: 615.3741; MAE: 19.5319; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.3373 (MSE: 978.2420; MAE: 25.3921; mean train mae: 31.4874)
+-------
+  *FOLD: 1  R^2: 0.6107 (MSE: 762.9982; MAE: 21.3906; mean train mae: 33.4512)
+  *FOLD: 1  R^2: 0.3537 (MSE: 1266.8734; MAE: 26.9797; mean train mae: 33.4512)
+-------
+  *FOLD: 2  R^2: 0.5669 (MSE: 784.1483; MAE: 21.3325; mean train mae: 32.9954)
+  *FOLD: 2  R^2: 0.4958 (MSE: 912.8157; MAE: 23.0046; mean train mae: 32.9954)
+-------
+  *FOLD: 3  R^2: 0.5532 (MSE: 1004.1019; MAE: 24.4625; mean train mae: 36.9698)
+  *FOLD: 3  R^2: 0.4351 (MSE: 1269.3888; MAE: 26.0268; mean train mae: 36.9698)
+-------
+  *FOLD: 4  R^2: 0.5776 (MSE: 775.9499; MAE: 21.7512; mean train mae: 35.1316)
+  *FOLD: 4  R^2: 0.4773 (MSE: 960.2528; MAE: 24.4902; mean train mae: 35.1316)
+-------
+
+
+ Start at: 2019-02-05 12:29:14.168702
+Model: /home/mbastan/DeepRC/dlatk/models/LMOnly , epochs: 1000, learning_rates: 0.001000, 0.005000, 0.000200, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 10,10,1,1, stddev: 0.100000, 0.100000,max_phase: 2 , start phase: 0 
+LM: hidden_nodes = [64, 64],[64, 16], regularization_factor= 0.00100
+  *FOLD: 0  R^2: 0.6040 (MSE: 584.5265; MAE: 19.1662; mean train mae: 31.4874)
+  *FOLD: 0  R^2: -9.3844 (MSE: 15328.2784; MAE: 117.6953; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.3307 (MSE: 987.9035; MAE: 25.3024; mean train mae: 31.4874)
+-------
+  *FOLD: 1  R^2: 0.6273 (MSE: 730.5637; MAE: 20.8340; mean train mae: 33.4512)
+  *FOLD: 1  R^2: -7.6354 (MSE: 16925.7782; MAE: 122.3345; mean train mae: 33.4512)
+  *FOLD: 1  R^2: -0.6263 (MSE: 3187.5873; MAE: 44.3298; mean train mae: 33.4512)
+-------
+
+
+ Start at: 2019-02-05 12:35:42.935013
+Model: /home/mbastan/DeepRC/dlatk/models/LMOnly , epochs: 1000, learning_rates: 0.001000, 0.005000, 0.000200, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 10,10,1,1, stddev: 0.100000, 0.100000,max_phase: 3 , start phase: 0 
+LM: hidden_nodes = [64, 64],[64, 16], regularization_factor= 0.00100
+  *FOLD: 0  R^2: 0.6436 (MSE: 526.0160; MAE: 17.8765; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.6200 (MSE: 560.8434; MAE: 18.4786; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.6868 (MSE: 462.2867; MAE: 16.2086; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.6564 (MSE: 507.1312; MAE: 17.6330; mean train mae: 31.4874)
+-------
+  *FOLD: 1  R^2: 0.6225 (MSE: 739.9983; MAE: 20.9371; mean train mae: 33.4512)
+  *FOLD: 1  R^2: 0.5755 (MSE: 831.9657; MAE: 22.4992; mean train mae: 33.4512)
+  *FOLD: 1  R^2: 0.6266 (MSE: 731.8824; MAE: 20.2796; mean train mae: 33.4512)
+  *FOLD: 1  R^2: 0.5538 (MSE: 874.6267; MAE: 22.6109; mean train mae: 33.4512)
+-------
+  *FOLD: 2  R^2: 0.5738 (MSE: 771.6704; MAE: 20.6299; mean train mae: 32.9954)
+  *FOLD: 2  R^2: 0.5635 (MSE: 790.3284; MAE: 21.3394; mean train mae: 32.9954)
+  *FOLD: 2  R^2: 0.6284 (MSE: 672.8475; MAE: 19.2434; mean train mae: 32.9954)
+  *FOLD: 2  R^2: 0.5599 (MSE: 796.7072; MAE: 21.6308; mean train mae: 32.9954)
+-------
+  *FOLD: 3  R^2: 0.5587 (MSE: 991.6237; MAE: 24.3862; mean train mae: 36.9698)
+  *FOLD: 3  R^2: 0.5257 (MSE: 1065.8243; MAE: 25.2787; mean train mae: 36.9698)
+  *FOLD: 3  R^2: 0.5845 (MSE: 933.7003; MAE: 23.0731; mean train mae: 36.9698)
+  *FOLD: 3  R^2: 0.5439 (MSE: 1024.8634; MAE: 24.1553; mean train mae: 36.9698)
+-------
+  *FOLD: 4  R^2: 0.5982 (MSE: 738.2004; MAE: 21.1414; mean train mae: 35.1316)
+  *FOLD: 4  R^2: 0.6288 (MSE: 681.9871; MAE: 20.7399; mean train mae: 35.1316)
+  *FOLD: 4  R^2: 0.6862 (MSE: 576.5446; MAE: 18.5774; mean train mae: 35.1316)
+  *FOLD: 4  R^2: 0.6019 (MSE: 731.4050; MAE: 21.5257; mean train mae: 35.1316)
+-------
+  *FOLD: 5  R^2: 0.6273 (MSE: 696.4569; MAE: 20.8119; mean train mae: 34.3756)
+  *FOLD: 5  R^2: 0.5339 (MSE: 870.9841; MAE: 22.4851; mean train mae: 34.3756)
+  *FOLD: 5  R^2: 0.6509 (MSE: 652.3600; MAE: 19.3990; mean train mae: 34.3756)
+  *FOLD: 5  R^2: 0.5842 (MSE: 777.0304; MAE: 21.3695; mean train mae: 34.3756)
+-------
+  *FOLD: 6  R^2: 0.5289 (MSE: 985.5413; MAE: 24.4951; mean train mae: 35.5784)
+  *FOLD: 6  R^2: 0.5996 (MSE: 837.5097; MAE: 21.9039; mean train mae: 35.5784)
+  *FOLD: 6  R^2: 0.6309 (MSE: 772.1900; MAE: 21.3232; mean train mae: 35.5784)
+  *FOLD: 6  R^2: 0.6003 (MSE: 836.2383; MAE: 21.8739; mean train mae: 35.5784)
+-------
+  *FOLD: 7  R^2: 0.5332 (MSE: 953.5518; MAE: 23.9141; mean train mae: 36.6985)
+  *FOLD: 7  R^2: 0.5283 (MSE: 963.6182; MAE: 24.0941; mean train mae: 36.6985)
+  *FOLD: 7  R^2: 0.6132 (MSE: 790.2502; MAE: 21.7975; mean train mae: 36.6985)
+  *FOLD: 7  R^2: 0.5801 (MSE: 857.7495; MAE: 22.7634; mean train mae: 36.6985)
+-------
+  *FOLD: 8  R^2: 0.4668 (MSE: 860.3529; MAE: 22.7246; mean train mae: 32.1991)
+  *FOLD: 8  R^2: 0.5185 (MSE: 777.0068; MAE: 21.9026; mean train mae: 32.1991)
+  *FOLD: 8  R^2: 0.5623 (MSE: 706.3694; MAE: 20.2142; mean train mae: 32.1991)
+  *FOLD: 8  R^2: 0.5197 (MSE: 775.0105; MAE: 21.5900; mean train mae: 32.1991)
+-------
+  *FOLD: 9  R^2: 0.5192 (MSE: 855.2792; MAE: 22.3136; mean train mae: 33.6105)
+  *FOLD: 9  R^2: 0.5896 (MSE: 729.9743; MAE: 21.2049; mean train mae: 33.6105)
+  *FOLD: 9  R^2: 0.5988 (MSE: 713.6548; MAE: 20.2047; mean train mae: 33.6105)
+  *FOLD: 9  R^2: 0.5794 (MSE: 748.0663; MAE: 21.3060; mean train mae: 33.6105)
+-------
+_*Overall R^2:          0.5794    
+_*Overall FOLDS R^2:    0.5780 (+- 0.0113)    
+_*R (sqrt R^2):         0.7612    
+_*Pearson r:            0.7618 (p = 0.00000)    
+_*Folds Pearson r:      0.7656 (p = 0.00000)    
+_*Spearman rho:         0.7674 (p = 0.00000)    
+_*Mean Squared Error:   792.6522    
+_*Mean Absolute Error:  21.6441    
+_*Train_Mean MAE:       26.3509
+
+Finished at: 2019-02-05 12:46:14.003893
+
+
+ Start at: 2019-02-05 12:47:35.572978
+Model: /home/mbastan/DeepRC/dlatk/models/LMOnly , epochs: 1000, learning_rates: 0.001000, 0.005000, 0.000200, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 10,10,1,1, stddev: 0.100000, 0.100000,max_phase: 3 , start phase: 0 
+LM: hidden_nodes = [64, 64],[64, 16], regularization_factor= 0.00100
+  *FOLD: 0  R^2: 0.6295 (MSE: 546.8766; MAE: 18.2193; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.6595 (MSE: 502.5947; MAE: 17.3648; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.6936 (MSE: 452.2505; MAE: 15.9937; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.6314 (MSE: 544.0651; MAE: 18.2605; mean train mae: 31.4874)
+-------
+
+
+ Start at: 2019-02-05 12:49:28.318997
+Model: /home/mbastan/DeepRC/dlatk/models/LMOnly , epochs: 1000, learning_rates: 0.001000, 0.005000, 0.000200, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 10,10,1,1, stddev: 0.100000, 0.100000,max_phase: 2 , start phase: 0 
+LM: hidden_nodes = [64, 64],[64, 16], regularization_factor= 0.00100
+  *FOLD: 0  R^2: 0.6381 (MSE: 534.1695; MAE: 18.0131; mean train mae: 31.4874)
+  *FOLD: 0  R^2: -9.3844 (MSE: 15328.2784; MAE: 117.6953; mean train mae: 31.4874)
+  *FOLD: 0  R^2: -3.1199 (MSE: 6081.3487; MAE: 73.2168; mean train mae: 31.4874)
+-------
+
+
+ Start at: 2019-02-05 12:57:42.596194
+Model: /home/mbastan/DeepRC/dlatk/models/LMOnly , epochs: 1000, learning_rates: 0.001000, 0.005000, 0.000200, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 10,10,1,1, stddev: 0.100000, 0.100000,max_phase: 2 , start phase: 0 
+LM: hidden_nodes = [64, 64],[64, 16], regularization_factor= 0.00100
+  *FOLD: 0  R^2: 0.6358 (MSE: 537.6153; MAE: 18.1597; mean train mae: 31.4874)
+  *FOLD: 0  R^2: -9.3844 (MSE: 15328.2784; MAE: 117.6953; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.6057 (MSE: 582.0155; MAE: 19.6487; mean train mae: 31.4874)
+-------
+
+
+ Start at: 2019-02-05 12:59:46.943790
+Model: /home/mbastan/DeepRC/dlatk/models/LMOnly , epochs: 1000, learning_rates: 0.001000, 0.005000, 0.000200, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 10,10,1,1, stddev: 0.100000, 0.100000,max_phase: 2 , start phase: 0 
+LM: hidden_nodes = [64, 64],[64, 16], regularization_factor= 0.00100
+  *FOLD: 0  R^2: 0.6167 (MSE: 565.8231; MAE: 18.4063; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.5521 (MSE: 661.0853; MAE: 19.9814; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.6088 (MSE: 577.4901; MAE: 18.7823; mean train mae: 31.4874)
+-------
+
+
+ Start at: 2019-02-05 13:01:59.298879
+Model: /home/mbastan/DeepRC/dlatk/models/LMOnly , epochs: 1000, learning_rates: 0.001000, 0.005000, 0.000200, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 10,10,1,1, stddev: 0.100000, 0.100000,max_phase: 3 , start phase: 0 
+LM: hidden_nodes = [64, 64],[64, 16], regularization_factor= 0.00100
+  *FOLD: 0  R^2: 0.6252 (MSE: 553.2247; MAE: 18.3792; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.6196 (MSE: 561.5020; MAE: 18.0791; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.6108 (MSE: 574.4347; MAE: 19.0542; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.6652 (MSE: 494.1635; MAE: 17.6311; mean train mae: 31.4874)
+-------
+  *FOLD: 1  R^2: 0.6300 (MSE: 725.1675; MAE: 20.5458; mean train mae: 33.4512)
+  *FOLD: 1  R^2: 0.5045 (MSE: 971.1554; MAE: 23.5280; mean train mae: 33.4512)
+  *FOLD: 1  R^2: 0.4979 (MSE: 984.1314; MAE: 24.1778; mean train mae: 33.4512)
+  *FOLD: 1  R^2: 0.5511 (MSE: 879.9187; MAE: 22.8629; mean train mae: 33.4512)
+-------
+  *FOLD: 2  R^2: 0.5605 (MSE: 795.6813; MAE: 20.3788; mean train mae: 32.9954)
+  *FOLD: 2  R^2: 0.5598 (MSE: 797.0267; MAE: 21.1462; mean train mae: 32.9954)
+  *FOLD: 2  R^2: 0.5317 (MSE: 847.8428; MAE: 22.5816; mean train mae: 32.9954)
+  *FOLD: 2  R^2: 0.5634 (MSE: 790.4076; MAE: 21.5595; mean train mae: 32.9954)
+-------
+  *FOLD: 3  R^2: 0.5483 (MSE: 1015.0459; MAE: 23.7622; mean train mae: 36.9698)
+  *FOLD: 3  R^2: 0.5454 (MSE: 1021.5814; MAE: 24.0559; mean train mae: 36.9698)
+  *FOLD: 3  R^2: 0.5016 (MSE: 1119.9611; MAE: 24.7330; mean train mae: 36.9698)
+  *FOLD: 3  R^2: 0.5365 (MSE: 1041.6615; MAE: 23.6481; mean train mae: 36.9698)
+-------
+
+
+ Start at: 2019-02-05 13:07:25.127988
+Model: /home/mbastan/DeepRC/dlatk/models/LMOnly , epochs: 1000, learning_rates: 0.001000, 0.005000, 0.000200, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 10,10,1,1, stddev: 0.100000, 0.100000,max_phase: 3 , start phase: 0 
+LM: hidden_nodes = [64, 64],[64, 16], regularization_factor= 0.00100
+  *FOLD: 0  R^2: 0.6457 (MSE: 523.0492; MAE: 17.6365; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.6608 (MSE: 500.6704; MAE: 18.0815; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.6274 (MSE: 549.9629; MAE: 18.5382; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.6678 (MSE: 490.3575; MAE: 16.8024; mean train mae: 31.4874)
+-------
+  *FOLD: 1  R^2: 0.6054 (MSE: 773.3601; MAE: 21.3739; mean train mae: 33.4512)
+  *FOLD: 1  R^2: 0.5702 (MSE: 842.4594; MAE: 21.9153; mean train mae: 33.4512)
+  *FOLD: 1  R^2: 0.5082 (MSE: 963.9467; MAE: 23.8029; mean train mae: 33.4512)
+  *FOLD: 1  R^2: 0.6361 (MSE: 713.1790; MAE: 20.2225; mean train mae: 33.4512)
+-------
+  *FOLD: 2  R^2: 0.5810 (MSE: 758.5980; MAE: 20.7735; mean train mae: 32.9954)
+  *FOLD: 2  R^2: 0.5468 (MSE: 820.5008; MAE: 21.2912; mean train mae: 32.9954)
+  *FOLD: 2  R^2: 0.5329 (MSE: 845.6987; MAE: 22.5906; mean train mae: 32.9954)
+  *FOLD: 2  R^2: 0.6305 (MSE: 668.9839; MAE: 19.2253; mean train mae: 32.9954)
+-------
+  *FOLD: 3  R^2: 0.5588 (MSE: 991.4662; MAE: 23.8036; mean train mae: 36.9698)
+  *FOLD: 3  R^2: 0.4943 (MSE: 1136.3435; MAE: 24.0976; mean train mae: 36.9698)
+  *FOLD: 3  R^2: 0.5059 (MSE: 1110.2285; MAE: 24.8948; mean train mae: 36.9698)
+  *FOLD: 3  R^2: 0.5850 (MSE: 932.6488; MAE: 22.4954; mean train mae: 36.9698)
+-------
+  *FOLD: 4  R^2: 0.5936 (MSE: 746.6308; MAE: 21.4442; mean train mae: 35.1316)
+  *FOLD: 4  R^2: 0.6348 (MSE: 670.8626; MAE: 21.0346; mean train mae: 35.1316)
+  *FOLD: 4  R^2: 0.5656 (MSE: 798.0929; MAE: 22.0439; mean train mae: 35.1316)
+  *FOLD: 4  R^2: 0.7065 (MSE: 539.1903; MAE: 18.2610; mean train mae: 35.1316)
+-------
+  *FOLD: 5  R^2: 0.6179 (MSE: 714.0211; MAE: 21.1230; mean train mae: 34.3756)
+  *FOLD: 5  R^2: 0.5039 (MSE: 927.1003; MAE: 21.9963; mean train mae: 34.3756)
+  *FOLD: 5  R^2: 0.5519 (MSE: 837.2982; MAE: 22.3750; mean train mae: 34.3756)
+  *FOLD: 5  R^2: 0.6335 (MSE: 684.8117; MAE: 19.5657; mean train mae: 34.3756)
+-------
+  *FOLD: 6  R^2: 0.5104 (MSE: 1024.1759; MAE: 24.3176; mean train mae: 35.5784)
+  *FOLD: 6  R^2: 0.5750 (MSE: 888.9911; MAE: 22.4227; mean train mae: 35.5784)
+  *FOLD: 6  R^2: 0.5639 (MSE: 912.2396; MAE: 22.7818; mean train mae: 35.5784)
+  *FOLD: 6  R^2: 0.6440 (MSE: 744.7164; MAE: 20.6137; mean train mae: 35.5784)
+-------
+  *FOLD: 7  R^2: 0.5356 (MSE: 948.8053; MAE: 24.3464; mean train mae: 36.6985)
+  *FOLD: 7  R^2: 0.5127 (MSE: 995.5312; MAE: 24.8989; mean train mae: 36.6985)
+  *FOLD: 7  R^2: 0.5341 (MSE: 951.8229; MAE: 23.8788; mean train mae: 36.6985)
+  *FOLD: 7  R^2: 0.6213 (MSE: 773.5957; MAE: 21.3231; mean train mae: 36.6985)
+-------
+  *FOLD: 8  R^2: 0.4699 (MSE: 855.4147; MAE: 22.7285; mean train mae: 32.1991)
+  *FOLD: 8  R^2: 0.5118 (MSE: 787.7739; MAE: 21.5209; mean train mae: 32.1991)
+  *FOLD: 8  R^2: 0.5014 (MSE: 804.5686; MAE: 21.8189; mean train mae: 32.1991)
+  *FOLD: 8  R^2: 0.5833 (MSE: 672.4714; MAE: 19.5903; mean train mae: 32.1991)
+-------
+  *FOLD: 9  R^2: 0.5293 (MSE: 837.3078; MAE: 22.3967; mean train mae: 33.6105)
+  *FOLD: 9  R^2: 0.5573 (MSE: 787.5282; MAE: 21.7856; mean train mae: 33.6105)
+  *FOLD: 9  R^2: 0.5356 (MSE: 826.0958; MAE: 21.8242; mean train mae: 33.6105)
+  *FOLD: 9  R^2: 0.6134 (MSE: 687.7027; MAE: 20.0340; mean train mae: 33.6105)
+-------
+_*Overall R^2:          0.6335    
+_*Overall FOLDS R^2:    0.6321 (+- 0.0110)    
+_*R (sqrt R^2):         0.7959    
+_*Pearson r:            0.7959 (p = 0.00000)    
+_*Folds Pearson r:      0.7989 (p = 0.00000)    
+_*Spearman rho:         0.8080 (p = 0.00000)    
+_*Mean Squared Error:   690.7500    
+_*Mean Absolute Error:  19.8145    
+_*Train_Mean MAE:       28.4124
+
+Finished at: 2019-02-05 13:17:39.479269
+
+
+ Start at: 2019-02-05 13:19:30.806555
+Model: /home/mbastan/DeepRC/dlatk/models/LMOnly , epochs: 1000, learning_rates: 0.001000, 0.005000, 0.000200, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 10,10,1,1, stddev: 0.100000, 0.100000,max_phase: 3 , start phase: 0 
+LM: hidden_nodes = [64, 64],[64, 16], regularization_factor= 0.00100
+  *FOLD: 0  R^2: 0.6466 (MSE: 521.6331; MAE: 17.7133; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.6488 (MSE: 518.3733; MAE: 17.9909; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.6160 (MSE: 566.8622; MAE: 18.8200; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.6160 (MSE: 566.8622; MAE: 18.8200; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.6751 (MSE: 479.6247; MAE: 16.6227; mean train mae: 31.4874)
+-------
+
+
+ Start at: 2019-02-05 13:26:06.356155
+Model: /home/mbastan/DeepRC/dlatk/models/LMOnly , epochs: 1000, learning_rates: 0.001000, 0.005000, 0.000200, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 10,10,1,1, stddev: 0.100000, 0.100000,max_phase: 3 , start phase: 0 
+LM: hidden_nodes = [64, 64],[64, 16], regularization_factor= 0.00100
+  *FOLD: 0  R^2: 0.6477 (MSE: 520.0645; MAE: 17.7990; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.6212 (MSE: 559.1828; MAE: 18.5895; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.6216 (MSE: 558.6149; MAE: 18.6736; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.6216 (MSE: 558.6149; MAE: 18.6736; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.6970 (MSE: 447.2876; MAE: 15.8951; mean train mae: 31.4874)
+-------
+  *FOLD: 1  R^2: 0.6323 (MSE: 720.6415; MAE: 20.6765; mean train mae: 33.4512)
+  *FOLD: 1  R^2: 0.5543 (MSE: 873.5521; MAE: 21.8259; mean train mae: 33.4512)
+  *FOLD: 1  R^2: 0.4895 (MSE: 1000.6088; MAE: 24.1096; mean train mae: 33.4512)
+  *FOLD: 1  R^2: 0.4895 (MSE: 1000.6088; MAE: 24.1096; mean train mae: 33.4512)
+  *FOLD: 1  R^2: 0.6098 (MSE: 764.8556; MAE: 21.1658; mean train mae: 33.4512)
+-------
+
+
+ Start at: 2019-02-05 13:30:16.848494
+Model: /home/mbastan/DeepRC/dlatk/models/LMOnly , epochs: 1000, learning_rates: 0.001000, 0.005000, 0.000200, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 10,10,1,1, stddev: 0.100000, 0.100000,max_phase: 3 , start phase: 0 
+LM: hidden_nodes = [64, 64],[64, 16], regularization_factor= 0.00100
+
+
+ Start at: 2019-02-05 13:33:17.803883
+Model: /home/mbastan/DeepRC/dlatk/models/LMOnly , epochs: 1000, learning_rates: 0.001000, 0.005000, 0.000200, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 10,10,1,1, stddev: 0.100000, 0.100000,max_phase: 3 , start phase: 0 
+LM: hidden_nodes = [64, 64],[64, 16], regularization_factor= 0.00100
+  *FOLD: 0  R^2: -2.7156 (MSE: 5484.4984; MAE: 65.6494; mean train mae: 31.4874)
+  *FOLD: 0  R^2: -5.6002 (MSE: 9742.4311; MAE: 90.3393; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.6059 (MSE: 581.6876; MAE: 19.1120; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.6965 (MSE: 448.0180; MAE: 16.2158; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.6965 (MSE: 448.0180; MAE: 16.2158; mean train mae: 31.4874)
+-------
+
+
+ Start at: 2019-02-05 13:36:21.439538
+Model: /home/mbastan/DeepRC/dlatk/models/LMOnly , epochs: 1000, learning_rates: 0.001000, 0.005000, 0.000200, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.900000, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 10,10,1,1, stddev: 0.100000, 0.100000,max_phase: 3 , start phase: 0 
+LM: hidden_nodes = [64, 64],[64, 16], regularization_factor= 0.00100
+  *FOLD: 0  R^2: 0.6299 (MSE: 546.3517; MAE: 17.9620; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.6585 (MSE: 504.0191; MAE: 17.5066; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.6041 (MSE: 584.3487; MAE: 19.1781; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.7052 (MSE: 435.1718; MAE: 15.4992; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.7052 (MSE: 435.1718; MAE: 15.4992; mean train mae: 31.4874)
+-------
+  *FOLD: 1  R^2: 0.6019 (MSE: 780.3216; MAE: 21.5565; mean train mae: 33.4512)
+  *FOLD: 1  R^2: 0.5641 (MSE: 854.4651; MAE: 22.6678; mean train mae: 33.4512)
+  *FOLD: 1  R^2: 0.5282 (MSE: 924.8388; MAE: 23.3866; mean train mae: 33.4512)
+  *FOLD: 1  R^2: 0.5999 (MSE: 784.1666; MAE: 21.0892; mean train mae: 33.4512)
+  *FOLD: 1  R^2: 0.5999 (MSE: 784.1666; MAE: 21.0892; mean train mae: 33.4512)
+-------
+  *FOLD: 2  R^2: 0.5599 (MSE: 796.8833; MAE: 21.4892; mean train mae: 32.9954)
+  *FOLD: 2  R^2: 0.5490 (MSE: 816.5696; MAE: 21.7471; mean train mae: 32.9954)
+  *FOLD: 2  R^2: 0.5368 (MSE: 838.5519; MAE: 22.2911; mean train mae: 32.9954)
+  *FOLD: 2  R^2: 0.6175 (MSE: 692.4562; MAE: 19.5358; mean train mae: 32.9954)
+  *FOLD: 2  R^2: 0.6175 (MSE: 692.4562; MAE: 19.5358; mean train mae: 32.9954)
+-------
+  *FOLD: 3  R^2: 0.5674 (MSE: 972.1140; MAE: 23.7444; mean train mae: 36.9698)
+  *FOLD: 3  R^2: 0.5453 (MSE: 1021.8968; MAE: 23.2351; mean train mae: 36.9698)
+  *FOLD: 3  R^2: 0.5082 (MSE: 1105.1869; MAE: 25.1256; mean train mae: 36.9698)
+  *FOLD: 3  R^2: 0.5759 (MSE: 952.9462; MAE: 22.2625; mean train mae: 36.9698)
+  *FOLD: 3  R^2: 0.5759 (MSE: 952.9462; MAE: 22.2625; mean train mae: 36.9698)
+-------
+  *FOLD: 4  R^2: 0.5547 (MSE: 817.9419; MAE: 22.3877; mean train mae: 35.1316)
+  *FOLD: 4  R^2: 0.6297 (MSE: 680.2743; MAE: 20.7709; mean train mae: 35.1316)
+  *FOLD: 4  R^2: 0.5666 (MSE: 796.1788; MAE: 22.1824; mean train mae: 35.1316)
+  *FOLD: 4  R^2: 0.7019 (MSE: 547.5509; MAE: 18.2376; mean train mae: 35.1316)
+  *FOLD: 4  R^2: 0.7019 (MSE: 547.5509; MAE: 18.2376; mean train mae: 35.1316)
+-------
+  *FOLD: 5  R^2: 0.6259 (MSE: 699.1523; MAE: 20.5782; mean train mae: 34.3756)
+  *FOLD: 5  R^2: 0.5321 (MSE: 874.4394; MAE: 22.3496; mean train mae: 34.3756)
+  *FOLD: 5  R^2: 0.5538 (MSE: 833.8059; MAE: 22.1403; mean train mae: 34.3756)
+  *FOLD: 5  R^2: 0.6520 (MSE: 650.3898; MAE: 18.8754; mean train mae: 34.3756)
+  *FOLD: 5  R^2: 0.6520 (MSE: 650.3898; MAE: 18.8754; mean train mae: 34.3756)
+-------
+  *FOLD: 6  R^2: 0.4860 (MSE: 1075.2946; MAE: 24.7636; mean train mae: 35.5784)
+  *FOLD: 6  R^2: 0.6050 (MSE: 826.2769; MAE: 22.6041; mean train mae: 35.5784)
+  *FOLD: 6  R^2: 0.5700 (MSE: 899.4325; MAE: 22.8486; mean train mae: 35.5784)
+  *FOLD: 6  R^2: 0.6448 (MSE: 743.0666; MAE: 20.6154; mean train mae: 35.5784)
+  *FOLD: 6  R^2: 0.6448 (MSE: 743.0666; MAE: 20.6154; mean train mae: 35.5784)
+-------
+  *FOLD: 7  R^2: 0.5542 (MSE: 910.6123; MAE: 23.4431; mean train mae: 36.6985)
+  *FOLD: 7  R^2: 0.5491 (MSE: 921.0456; MAE: 23.8714; mean train mae: 36.6985)
+  *FOLD: 7  R^2: 0.5419 (MSE: 935.9200; MAE: 23.9347; mean train mae: 36.6985)
+  *FOLD: 7  R^2: 0.6109 (MSE: 794.8379; MAE: 21.6214; mean train mae: 36.6985)
+  *FOLD: 7  R^2: 0.6109 (MSE: 794.8379; MAE: 21.6214; mean train mae: 36.6985)
+-------
+  *FOLD: 8  R^2: 0.4659 (MSE: 861.8595; MAE: 22.9826; mean train mae: 32.1991)
+  *FOLD: 8  R^2: 0.5271 (MSE: 763.1640; MAE: 21.3528; mean train mae: 32.1991)
+  *FOLD: 8  R^2: 0.5038 (MSE: 800.6502; MAE: 21.7707; mean train mae: 32.1991)
+  *FOLD: 8  R^2: 0.5788 (MSE: 679.6256; MAE: 19.7644; mean train mae: 32.1991)
+  *FOLD: 8  R^2: 0.5788 (MSE: 679.6256; MAE: 19.7644; mean train mae: 32.1991)
+-------
+  *FOLD: 9  R^2: 0.5451 (MSE: 809.1478; MAE: 21.9465; mean train mae: 33.6105)
+  *FOLD: 9  R^2: 0.5624 (MSE: 778.4041; MAE: 21.1982; mean train mae: 33.6105)
+  *FOLD: 9  R^2: 0.5517 (MSE: 797.4716; MAE: 21.5383; mean train mae: 33.6105)
+  *FOLD: 9  R^2: 0.6009 (MSE: 709.8108; MAE: 20.1825; mean train mae: 33.6105)
+  *FOLD: 9  R^2: 0.6009 (MSE: 709.8108; MAE: 20.1825; mean train mae: 33.6105)
+-------
+_*Overall R^2:          0.6291    
+_*Overall FOLDS R^2:    0.6288 (+- 0.0139)    
+_*R (sqrt R^2):         0.7931    
+_*Pearson r:            0.7936 (p = 0.00000)    
+_*Folds Pearson r:      0.7954 (p = 0.00000)    
+_*Spearman rho:         0.8058 (p = 0.00000)    
+_*Mean Squared Error:   699.0579    
+_*Mean Absolute Error:  19.7705    
+_*Train_Mean MAE:       27.8551
+
+Finished at: 2019-02-05 13:47:22.839204

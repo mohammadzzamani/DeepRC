@@ -1031,7 +1031,7 @@ class RegressionPredictor:
                                    for i in range(len(ypred)):
                                        history.write("  *FOLD: %d  R^2: %.4f (MSE: %.4f; MAE: %.4f; mean train mae: %.4f)\n"% (testChunk, R2[i], mse[i], mae[i], train_mean_mae) )
                                        print("  *FOLD: %d  R^2: %.4f (MSE: %.4f; MAE: %.4f; mean train mae: %.4f)"% (testChunk, R2[i], mse[i], mae[i], train_mean_mae))
-                                   history.write('-------')
+                                   history.write('-------\n')
                                    history.close()
                                  
 
@@ -2058,17 +2058,19 @@ class RegressionPredictor:
              batch_size = 16 #16
              shuffle = True
              optimizer='Adam' # Adam, SGD, Adadelta 
-             stopping_iteration = 10 # if the accuracy didnt improve after this many iterations stop
+             stopping_iteration = [10,10,1,1] # if the accuracy didnt improve after this many iterations stop
              stddev = [0.1 , 0.1, 0.05]
-             max_phase = 3
-             start_phase = 0
+             self.max_phase = 3
+             max_phase = self.max_phase
+             self.start_phase = 0
+             start_phase =self.start_phase
              regressor= ffNN(hidden_nodes=hidden_nodes, epochs=epochs, learning_rate=learning_rate,saveFrequency=5,save_path = save_path, decay=decay, decay_step=decay_step, decay_factor=decay_factor, stop_loss=stop_loss, keep_probability = keep_prob, regularization_factor=regularization_factor,minimum_cost=0,activation_function=activation_function,batch_size=batch_size,shuffle=shuffle,optimizer=optimizer,stopping_iteration= stopping_iteration, stddev=stddev,max_phase=max_phase,start_phase=start_phase)
              #regressor.initialize(x1_size = X.thape[1],x2_size=X.shape[1])
              global history_counter
              if history_counter is None :
                  history = open('/home/mbastan/DeepRC/parameters_history.txt','a')
                  history.write('\n\n Start at: '+str(datetime.datetime.now())+'\n')
-                 history.write('Model: %s , epochs: %d, learning_rates: %f, %f, %f, decay: %s , decay_step: %d , decay_factor: %f , stop_loss: %f , keep_prob: %f, activation_function: %s, batch_size: %d, shuffle: %s, optimizer: %s, stopping_iteration: %d, stddev: %3f, %3f,max_phase: %d , start phase: %d \n' %(save_path, epochs,  learning_rate[0], learning_rate[1], learning_rate[2], str(decay), decay_step, decay_factor, stop_loss, keep_prob,activation_function,batch_size,str(shuffle),optimizer ,stopping_iteration,stddev[0],stddev[1],max_phase,start_phase) )
+                 history.write('Model: %s , epochs: %d, learning_rates: %f, %f, %f, decay: %s , decay_step: %d , decay_factor: %f , stop_loss: %f , keep_prob: %f, activation_function: %s, batch_size: %d, shuffle: %s, optimizer: %s, stopping_iteration: %s, stddev: %3f, %3f,max_phase: %d , start phase: %d \n' %(save_path, epochs,  learning_rate[0], learning_rate[1], learning_rate[2], str(decay), decay_step, decay_factor, stop_loss, keep_prob,activation_function,batch_size,str(shuffle),optimizer ,','.join(map(str,stopping_iteration)),stddev[0],stddev[1],max_phase,start_phase) )
                  history.write(parameters_str+'\n')
                  history.close()
                  history_counter = True
@@ -2208,10 +2210,11 @@ class RegressionPredictor:
        
         if len(multiX) > 1:
             predictions = []
-            for i in range(3):
+            for i in range(self.start_phase,self.max_phase):
                 print('phase %d'%i)
                 predictions.append(regressor.predict(multiX,phase=i,bestModel=False))
-            predictions.append(regressor.predict(multiX, reset_graph=True))
+            predictions.append(regressor.predict(multiX, bestModel=False))
+            predictions.append(regressor.predict(multiX, reset_graph=True,phase=min(self.max_phase,2)))
             return [ multiScalers[len(multiScalers)-1].inverse_transform(np.array(pr).reshape(-1,1)).reshape(-1) for pr in predictions ]
         else:
             return [regressor.predict(X)]

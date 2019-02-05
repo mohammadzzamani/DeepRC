@@ -46,7 +46,7 @@ class ffNN():
     def __init__(self, hidden_nodes=[[8,2],[32,8]], epochs=3, learning_rate=0.1, saveFrequency=1,
                  save_path='./models/ControlOnly', decay=False, decay_step=10, decay_factor=0.7,
                  stop_loss=0.0001, regularization_factor=0.01, keep_probability=0.7, minimum_cost=0.2,
-                 activation_function='sigmoid', batch_size=1,shuffle=True,optimizer='Adam',stopping_iteration=10, stddev=[0.5,0.1],max_phase=3,start_phase=0):
+                 activation_function='sigmoid', batch_size=1,shuffle=True,optimizer='Adam',stopping_iteration=[10,10,1,1], stddev=[0.5,0.1],max_phase=3,start_phase=0):
         self.hidden_nodes = hidden_nodes
         self.epochs = epochs
         self.learning_rate = learning_rate
@@ -271,7 +271,7 @@ class ffNN():
             sess = tf.InteractiveSession()
             init = tf.global_variables_initializer()
             sess.run(init)
-            saver = tf.train.Saver(save_relative_paths=True,max_to_keep = 30)
+            saver = tf.train.Saver(save_relative_paths=True,max_to_keep = 300)
             bestLoss = np.inf
             import os
             import shutil
@@ -281,7 +281,7 @@ class ffNN():
             os.makedirs(best_save_dir)
             best_ckpt_saver = BestCheckpointSaver(
                 save_dir=best_save_dir,
-                num_to_keep=30,
+                num_to_keep=1,
                 maximize=False
             )
             train_X1 = train_X[1]
@@ -306,7 +306,6 @@ class ffNN():
                    learning_rate_phase2 = 0.
                    learning_rate_phase3 = 0.
                    self.regularization_factor = 0.
-                   #self.keep_probability = 1.0
                   
                 elif phase == 1:
                    learning_rate_phase1 = 0.
@@ -339,8 +338,6 @@ class ffNN():
                 else:
                    learning_rate_phase1 = 0. #float(self.learning_rate)/100
                    learning_rate_phase2 = 0. #float(self.learning_rate)/10
-                   #print (' self.last_learning_rate : ' , self.last_learning_rate)
-                   #learning_rate_phase3 = (self.last_learning_rate + self.learning_rate[2])/2
                    self.trainable1= True
                    self.trainable2= True
                    self.regularization_factor = temp_regularization_factor
@@ -396,7 +393,7 @@ class ffNN():
                         print ('phase: {}, best_loss:{}, epoch:{}, epoch_cost:{}'.format(phase, bestLoss, epoch, epoch_cost) )
                         best_ckpt_saver.handle(epoch_cost, sess, global_step_tensor=tf.constant(epoch))
                         saver.save(sess, self.save_path + "/pretrained_lstm.ckpt", global_step=epoch)
-                        saver.save(sess, self.save_path +'_'+str(phase)+"/pretrained_lstm.ckpt",global_step=epoch)
+                        #saver.save(sess, self.save_path +'_'+str(phase)+"/pretrained_lstm.ckpt",global_step=epoch)
                         best_saved_epoch = epoch
 
                 #if bestLoss - epoch_cost < self.stop_loss  or ( epoch_cost < 0.75 * self.desired_epoch_cost and self.desired_epoch_cost is not np.inf):
@@ -404,7 +401,7 @@ class ffNN():
                     # print("Exited on epoch  %d, with loss  %.6f comparing with bestLoss: %.6f and stop_loss: %.6f" % (epoch + 1, epoch_cost, bestLoss, epoch_cost))
                     # print('absoulute error difference %f'%( abs( bestLoss - epoch_cost)))
                     pass_best_epochs += 1
-                    if  pass_best_epochs > self.stopping_iteration:
+                    if  pass_best_epochs > self.stopping_iteration[phase]:
                     #if pass_best_epochs > self.stopping_iteration or ( epoch_cost < 0.75 * self.desired_epoch_cost and self.desired_epoch_cost is not np.inf):
                     #if phase==2 or pass_best_epochs > self.stopping_iteration or ( epoch_cost < 0.75 * self.desired_epoch_cost and self.desired_epoch_cost is not np.inf):
                         print("Exited on epoch  %d, with loss  %.6f comparing with bestLoss: %.6f and stop_loss: %.6f" % (
@@ -438,22 +435,25 @@ class ffNN():
 
             sess.close()
 
-    def predict(self, test_X, bestModel=True, model_path=None,phase=2, reset_graph=False):
+    def predict(self, test_X, bestModel=True, model_path=None,phase=None, reset_graph=False):
         if model_path == None:
             model_path = self.save_path
         sess = tf.InteractiveSession()
-        saver = tf.train.Saver(save_relative_paths=True,max_to_keep = 30)
+        saver = tf.train.Saver(save_relative_paths=True,max_to_keep = 300)
         if not bestModel:
             # checkpoint =  tf.train.latest_checkpoint('data/models/'+entity.split()[0]+'/')
-            checkpoint = tf.train.latest_checkpoint(model_path+'_'+str(phase+1))
-            print('model path: %s' % model_path+'_'+str(phase+1))
+            load_path = model_path if phase is None else model_path+'_'+str(phase+1)
+            phase = self.max_phase-1 if phase is None else phase 
+            checkpoint = tf.train.latest_checkpoint(load_path)
+            print('model path: %s' %(checkpoint))
+            
         else:
             checkpoint = checkmate.get_best_checkpoint(model_path + "/bestModel/", select_maximum_value=True)
-            print('model path: %s' % model_path + "/bestModel/")
+            print('model path: %s' % (checkpoint))
         saver.restore(sess, checkpoint)
         predicted_y = []
-        test_X1 = test_X[1]
-        test_X2 = test_X[0]
+        test_X1 = test_X[1] # control input
+        test_X2 = test_X[0] # language input
         for i in range(len(test_X1)):
             x1_input = np.array(test_X1[i: i + 1], dtype=np.float64)
             x2_input = np.array(test_X2[i: i + 1], dtype=np.float64)
