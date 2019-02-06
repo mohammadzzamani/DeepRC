@@ -945,7 +945,8 @@ class RegressionPredictor:
                             
                             ###############################
                             #3a) iterate over nfold groups:
-                          
+                            ##mb
+                            R2_avg, mse_avg, mae_avg = None, None, None
                             for testChunk in range(0, len(groupFolds)):
                                 trainGroups = set()
                                 for chunk in (groupFolds[:testChunk]+groupFolds[(testChunk+1):]):
@@ -1005,6 +1006,11 @@ class RegressionPredictor:
 
                                 ################################
                                 #4) fit model and test accuracy:
+                                global history_counter
+                                if history_counter is None and withLanguage:
+                                   history = open('/home/mbastan/DeepRC/parameters_history.txt','a')
+                                   history.write('>>>>>>>>outcome name: %s '%outcomeName)
+                                   history.close()
                                 ypred = None
                                 if factor_adaptation:
                                     (regressor, multiScalers, multiFSelectors, factorScalers) = self._multiXtrain(multiXtrain, ytrain, standardize, sparse = sparse, weightedSample=sampleWeights, factorAdaptation = factor_adaptation, featureSelectionParameters = featureSelectionParameters, factorAddition = factor_addition, factors = factorTrain)
@@ -1033,7 +1039,10 @@ class RegressionPredictor:
                                        print("  *FOLD: %d  R^2: %.4f (MSE: %.4f; MAE: %.4f; mean train mae: %.4f)"% (testChunk, R2[i], mse[i], mae[i], train_mean_mae))
                                    history.write('-------\n')
                                    history.close()
-                                 
+                                
+                                R2_avg = R2_avg + np.array(R2) if R2_avg is not None else np.array(R2)
+                                mse_avg = mse_avg + np.array(mse) if mse_avg is not None else  np.array(mse)
+                                mae_avg = mae_avg + np.array(mae) if mae_avg is not None else np.array(mae)
 
 
                                 ypred, R2, mse, mae = ypred[len(ypred)-1], R2[len(ypred)-1], mse[len(ypred)-1], mae[len(ypred)-1]
@@ -1143,7 +1152,14 @@ class RegressionPredictor:
                             Str = "_*Overall R^2:          %.4f    \n_*Overall FOLDS R^2:    %.4f (+- %.4f)    \n_*R (sqrt R^2):         %.4f    \n_*Pearson r:            %.4f (p = %.5f)    \n_*Folds Pearson r:      %.4f (p = %.5f)    \n_*Spearman rho:         %.4f (p = %.5f)    \n_*Mean Squared Error:   %.4f    \n_*Mean Absolute Error:  %.4f    \n_*Train_Mean MAE:       %.4f\n\n" % (reportStats['R2'], reportStats['R2_folds'], reportStats['se_R2_folds'], reportStats['R'], reportStats['r'], reportStats['r_p'], reportStats['r_folds'], reportStats['r_p_folds'], reportStats['rho'], reportStats['rho_p'], reportStats['mse'], reportStats['mae'], reportStats['train_mean_mae'])
 
                             if withLanguage:
+                               R2_avg /= len(groupFolds)
+                               mse_avg /= len(groupFolds)
+                               mae_avg /= len(groupFolds)
+                               R2_str =  ', '.join(map(str,list(R2_avg)))
+                               mse_str =  ', '.join(map(str,list(mse_avg)))
+                               mae_str =  ', '.join(map(str,list(mae_avg)))
                                history = open('/home/mbastan/DeepRC/parameters_history.txt','a')
+                               Str = "_*Overall R^2:          %.4f    \n_*Overall FOLDS R^2:    %.4f (+- %.4f) (( %s ))   \n_*R (sqrt R^2):         %.4f    \n_*Pearson r:            %.4f (p = %.5f)    \n_*Folds Pearson r:      %.4f (p = %.5f)    \n_*Spearman rho:         %.4f (p = %.5f)    \n_*Mean Squared Error:   %.4f  (( %s ))  \n_*Mean Absolute Error:  %.4f  (( %s ))  \n_*Train_Mean MAE:       %.4f\n\n" % (reportStats['R2'], reportStats['R2_folds'] , reportStats['se_R2_folds'],R2_str, reportStats['R'], reportStats['r'], reportStats['r_p'], reportStats['r_folds'], reportStats['r_p_folds'], reportStats['rho'], reportStats['rho_p'], reportStats['mse'], mse_str,  reportStats['mae'], mae_str, reportStats['train_mean_mae'])
                                history.write(Str)
                                history.write('Finished at: '+str(datetime.datetime.now())+'\n')
                                history.close()
@@ -2042,13 +2058,13 @@ class RegressionPredictor:
                     regularization_factor = 0
                     parameters_str += 'Controls: hidden_nodes = %s,  regularization_factor= %2.f'%(','.join(map(str,hidden_nodes)), regularization_factor)
              else:
-                    hidden_nodes =[[64,64],[64,16]] #[16,8]
+                    hidden_nodes =[[64,64],[256,64]] #[16,8]
                     save_path = '/home/mbastan/DeepRC/dlatk/models/LMOnly'
                     regularization_factor = 0.001 #0.005
                     parameters_str += 'LM: hidden_nodes = %s, regularization_factor= %.5f'%(','.join(map(str,hidden_nodes)),  regularization_factor)
              #hidden_nodes = 16 if X.shape[1] < 20 else 32
              epochs = 1000#700
-             learning_rate =[0.001 ,0.005, 0.0002]
+             learning_rate =[0.001 ,0.001, 0.0002]
              decay = True
              decay_step =1
              decay_factor = 0.99 #0.8
@@ -2058,13 +2074,13 @@ class RegressionPredictor:
              batch_size = 16 #16
              shuffle = True
              optimizer='Adam' # Adam, SGD, Adadelta 
-             stopping_iteration = [10,10,1,1] # if the accuracy didnt improve after this many iterations stop
+             stopping_iteration = [10,10,3,3] # if the accuracy didnt improve after this many iterations stop
              stddev = [0.1 , 0.1, 0.05]
-             self.max_phase = 3
+             self.max_phase =1 
              max_phase = self.max_phase
-             self.start_phase = 0
+             self.start_phase = 1
              start_phase =self.start_phase
-             regressor= ffNN(hidden_nodes=hidden_nodes, epochs=epochs, learning_rate=learning_rate,saveFrequency=5,save_path = save_path, decay=decay, decay_step=decay_step, decay_factor=decay_factor, stop_loss=stop_loss, keep_probability = keep_prob, regularization_factor=regularization_factor,minimum_cost=0,activation_function=activation_function,batch_size=batch_size,shuffle=shuffle,optimizer=optimizer,stopping_iteration= stopping_iteration, stddev=stddev,max_phase=max_phase,start_phase=start_phase)
+             regressor= ffNN(hidden_nodes=hidden_nodes, epochs=epochs, learning_rate=learning_rate,saveFrequency=2,save_path = save_path, decay=decay, decay_step=decay_step, decay_factor=decay_factor, stop_loss=stop_loss, keep_probability = keep_prob, regularization_factor=regularization_factor,minimum_cost=0,activation_function=activation_function,batch_size=batch_size,shuffle=shuffle,optimizer=optimizer,stopping_iteration= stopping_iteration, stddev=stddev,max_phase=max_phase,start_phase=start_phase)
              #regressor.initialize(x1_size = X.thape[1],x2_size=X.shape[1])
              global history_counter
              if history_counter is None :

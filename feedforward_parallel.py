@@ -235,7 +235,10 @@ class ffNN():
             #self.b_out3 = tf.Variable(tf.zeros(1, dtype=tf.float32))
             ##self.b_out3 = tf.Variable(tf.zeros(1, dtype=tf.float32),trainable=False)
             ##self.yhat3 = self.forwardprop(tf.concat([self.yhat1, self.yhat2],axis=1), self.w_out3, self.b_out3, self.keep_prob, self.activation_function[2])
+            ##l2_norm3 = tf.add_n([tf.nn.l2_loss(w_in3),tf.nn.l2_loss(b_in3)])
             l2_norm3 = tf.add_n([tf.nn.l2_loss(w_in3),tf.nn.l2_loss(b_in3),l2_norm1,l2_norm2])
+            #l2_norm3 = tf.add_n([tf.nn.l2_loss(w_in3),tf.nn.l2_loss(b_in3)])
+            #l2_norm3 = tf.add_n([tf.nn.l2_loss(w_in3),tf.nn.l2_loss(b_in3),l2_norm1,l2_norm2])
             ###l2_norm3 = tf.add_n([tf.nn.l2_loss(w_in3),tf.nn.l2_loss(b_in3),tf.nn.l2_loss(b_out3),tf.nn.l2_loss(w_out3),l2_norm1,l2_norm2])
             # self.yhat3 = tf.add(tf.matmul(h_out2, w_out3), b_out3)
             # Backward propagation
@@ -251,6 +254,8 @@ class ffNN():
                self.learning_rate3_adam = self.learning_rate3
             
             self.updates3 = tf.train.AdamOptimizer(learning_rate=self.learning_rate3_adam).minimize(self.loss3)
+
+
 
 
             self.final_opt = tf.group(self.updates1,self.updates2,self.updates3)
@@ -341,6 +346,7 @@ class ffNN():
                    self.trainable1= True
                    self.trainable2= True
                    self.regularization_factor = temp_regularization_factor
+                   ###self.keep_probability = temp_keep_prob  
                 import random
                 if self.shuffle:
                    s = np.arange(0, len(train_X1), 1)
@@ -388,13 +394,16 @@ class ffNN():
                 #if (phase == 3 and epoch - best_saved_epoch > self.saveFrequency and epoch != 0):
                 #    saver.save(sess, self.save_path + "/pretrained_lstm.ckpt", global_step=epoch)
                 if epoch_cost < bestLoss:
-                    #if (epoch - best_saved_epoch > self.saveFrequency and epoch != 0):
-                    if (phase == max_phase  and epoch - best_saved_epoch > self.saveFrequency and epoch != 0):
-                        print ('phase: {}, best_loss:{}, epoch:{}, epoch_cost:{}'.format(phase, bestLoss, epoch, epoch_cost) )
-                        best_ckpt_saver.handle(epoch_cost, sess, global_step_tensor=tf.constant(epoch))
-                        saver.save(sess, self.save_path + "/pretrained_lstm.ckpt", global_step=epoch)
-                        #saver.save(sess, self.save_path +'_'+str(phase)+"/pretrained_lstm.ckpt",global_step=epoch)
-                        best_saved_epoch = epoch
+                    if (epoch - best_saved_epoch > self.saveFrequency and epoch != 0):
+                       bestLoss = epoch_cost
+                       pass_best_epochs = 0
+                       #if (epoch - best_saved_epoch > self.saveFrequency and epoch != 0):
+                       if (phase == max_phase):
+                         print ('phase: {}, best_loss:{}, epoch:{}, epoch_cost:{}'.format(phase, bestLoss, epoch, epoch_cost) )
+                         best_ckpt_saver.handle(epoch_cost, sess, global_step_tensor=tf.constant(epoch))
+                         saver.save(sess, self.save_path + "/pretrained_lstm.ckpt", global_step=epoch)
+                         #saver.save(sess, self.save_path +'_'+str(phase)+"/pretrained_lstm.ckpt",global_step=epoch)
+                         best_saved_epoch = epoch
 
                 #if bestLoss - epoch_cost < self.stop_loss  or ( epoch_cost < 0.75 * self.desired_epoch_cost and self.desired_epoch_cost is not np.inf):
                 if bestLoss - epoch_cost < self.stop_loss:
@@ -422,11 +431,11 @@ class ffNN():
                            print('saved to: ' , self.save_path +'_'+str(phase)+"/pretrained_lstm.ckpt")
                            continue
                         else:
+                           saver.save(sess, self.save_path +"/pretrained_lstm.ckpt",global_step=epoch)
                            break
-                if epoch_cost < bestLoss:
-                    pass_best_epochs = 0
-                    bestLoss = epoch_cost
-
+                #if epoch_cost < bestLoss:
+                    #pass_best_epochs = 0
+                    #bestLoss = epoch_cost
                     # if epoch_cost < self.minimum_cost :
                 #       print("Exited on epoch  %d, with loss  %.6f" % (epoch + 1, epoch_cost))
                 #        break
@@ -443,7 +452,7 @@ class ffNN():
         if not bestModel:
             # checkpoint =  tf.train.latest_checkpoint('data/models/'+entity.split()[0]+'/')
             load_path = model_path if phase is None else model_path+'_'+str(phase+1)
-            phase = self.max_phase-1 if phase is None else phase 
+            phase = min(self.max_phase,2) if phase is None else phase 
             checkpoint = tf.train.latest_checkpoint(load_path)
             print('model path: %s' %(checkpoint))
             
