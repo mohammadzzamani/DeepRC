@@ -182,7 +182,7 @@ def alignDictsAsy(y, *yhats, **kwargs):
     return tuple([listy]) + tuple(listyhats)
 
 class RegressionPredictor:
-    root_path = '/users/mzamani'
+    root_path = '/home/mbastan'
     """Handles prediction of continuous outcomes
     
     Attributes
@@ -2061,7 +2061,7 @@ class RegressionPredictor:
              else:
                     hidden_nodes =[[64,64],[256,64]] #[16,8]
                     save_path = self.root_path+'/DeepRC/dlatk/models/LMOnly'
-                    regularization_factor = 0.001 #0.005
+                    regularization_factor = 0.005 #0.005
                     parameters_str += 'LM: hidden_nodes = %s, regularization_factor= %.5f'%(','.join(map(str,hidden_nodes)),  regularization_factor)
              #hidden_nodes = 16 if X.shape[1] < 20 else 32
              epochs = 1000#700
@@ -2075,7 +2075,7 @@ class RegressionPredictor:
              batch_size = 16 #16
              shuffle = True
              optimizer='Adam' # Adam, SGD, Adadelta 
-             stopping_iteration = [10,10,1,1] # if the accuracy didnt improve after this many iterations stop
+             stopping_iteration = [10,10,5,5] # if the accuracy didnt improve after this many iterations stop
              stddev = [0.1 , 0.1, 0.05]
              self.max_phase =3
              max_phase = self.max_phase
