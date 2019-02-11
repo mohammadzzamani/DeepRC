@@ -71,9 +71,6 @@ class ffNN():
         self.stddev=stddev
         self.max_phase=max_phase
         self.start_phase=start_phase
-        self.trainable1= True
-        self.trainable2= True 
-        self.trainable3= True
         print('model started working :D')
 
     def forwardprop(self, X, w_in, b_in, keep_prob,activation_func):
@@ -134,9 +131,6 @@ class ffNN():
         self.learning_rate3 = tf.placeholder("float", shape=(), name='learning_rate3')
         self.learning_rate4 = tf.placeholder("float", shape=(), name='learning_rate4')
 
-        #self.trainable_PH1 = tf.placeholder(tf.bool, shape=(), name='learning_rate1')
-        #self.trainable_PH2 = tf.placeholder(tf.bool, shape=(), name='learning_rate2')
-        #self.trainable_PH3 = tf.placeholder(tf.bool, shape=(), name='learning_rate3')
         self.reg_factor =tf.placeholder("float", name='reg_factor',shape=())
 
         self.y = tf.placeholder("float", shape=[None, y_size], name='yValue')
@@ -159,18 +153,18 @@ class ffNN():
             self.increment_global_step = tf.assign_add(self.global_step,1,name = 'increment_global_step')
 
             
-            w_in1, b_in1 = init_weights((x1_size, self.hidden_nodes[0][0]),trainable=self.trainable1, stddev=self.stddev[0],name='in00')
+            w_in1, b_in1 = init_weights((x1_size, self.hidden_nodes[0][0]), stddev=self.stddev[0],name='in00')
             h_out1 = self.forwardprop(self.X1, w_in1, b_in1, self.keep_prob,self.activation_function[0])
             l2_norm1 = tf.add(tf.nn.l2_loss(w_in1), l2_norm1)
             l2_norm1 = tf.add(tf.nn.l2_loss(b_in1), l2_norm1)
             # Forward propagation
             for i in range(len(self.hidden_nodes[0]) - 1):
             #for i in range(self.hidden_layers - 1):
-                w_in1, b_in1 = init_weights((self.hidden_nodes[0][i], self.hidden_nodes[0][i + 1]),trainable=self.trainable1, stddev=self.stddev[0],name='in0'+str(i+1))
+                w_in1, b_in1 = init_weights((self.hidden_nodes[0][i], self.hidden_nodes[0][i + 1]), stddev=self.stddev[0],name='in0'+str(i+1))
                 h_out1 = self.forwardprop(h_out1, w_in1, b_in1, self.keep_prob,self.activation_function[1])
                 l2_norm1 = tf.add(tf.nn.l2_loss(w_in1), l2_norm1)
                 l2_norm1 = tf.add(tf.nn.l2_loss(b_in1), l2_norm1)
-            w_out1, b_out1 = init_weights((self.hidden_nodes[0][-1], y_size),trainable=self.trainable1, stddev=self.stddev[0],name='out0')
+            w_out1, b_out1 = init_weights((self.hidden_nodes[0][-1], y_size), stddev=self.stddev[0],name='out0')
             l2_norm1 = tf.add(tf.nn.l2_loss(w_out1), l2_norm1)
             l2_norm1 = tf.add(tf.nn.l2_loss(b_out1), l2_norm1)
             self.yhat1 = tf.add(tf.matmul(h_out1, w_out1), b_out1)
@@ -192,7 +186,7 @@ class ffNN():
             
 
 
-            w_in2, b_in2 = init_weights((x2_size, self.hidden_nodes[1][0]),trainable=self.trainable2, stddev=self.stddev[1],name='in10')
+            w_in2, b_in2 = init_weights((x2_size, self.hidden_nodes[1][0]), stddev=self.stddev[1],name='in10')
             h_out2 = self.forwardprop(self.X2, w_in2, b_in2, self.keep_prob,self.activation_function[0])
             l2_norm2 = tf.add(tf.nn.l2_loss(w_in2), l2_norm2)
             l2_norm2 = tf.add(tf.nn.l2_loss(b_in2), l2_norm2)
@@ -201,11 +195,11 @@ class ffNN():
             # # Forward propagation
             #for i in range(self.hidden_layers - 1):
             for i in range(len(self.hidden_nodes[1]) - 1):
-                w_in2, b_in2 = init_weights((self.hidden_nodes[1][i], self.hidden_nodes[1][i + 1]),trainable=self.trainable2, stddev=self.stddev[1],name='in1'+str(i+1))
+                w_in2, b_in2 = init_weights((self.hidden_nodes[1][i], self.hidden_nodes[1][i + 1]), stddev=self.stddev[1],name='in1'+str(i+1))
                 h_out2 = self.forwardprop(h_out2, w_in2, b_in2, self.keep_prob,self.activation_function[1])
                 l2_norm2 = tf.add(tf.nn.l2_loss(w_in2), l2_norm2)
                 l2_norm2 = tf.add(tf.nn.l2_loss(b_in2), l2_norm2)
-            w_out2, b_out2 = init_weights((self.hidden_nodes[1][-1], y_size),trainable=self.trainable2, stddev=self.stddev[1],name='out1')
+            w_out2, b_out2 = init_weights((self.hidden_nodes[1][-1], y_size), stddev=self.stddev[1],name='out1')
             l2_norm2 = tf.add(tf.nn.l2_loss(w_out2), l2_norm2)
             l2_norm2 = tf.add(tf.nn.l2_loss(b_out2), l2_norm2)
             #w_out2 = tf.Print(w_out2,[w_out2],message='wout phase 2',summarize=30) # Backward propagation
@@ -236,9 +230,9 @@ class ffNN():
 
             ###self.yhat3 = tf.add(tf.matmul(h_out3, w_out3), b_out3)
             #self.w_out3 = tf.Variable((np.ones([2,1]) * np.array([[0.5], [0.5]])).astype(np.float32 ))
-            self.w_out3 = tf.Variable((np.ones([2,1]) * np.array([[0.5], [0.5]])).astype(np.float32 ),trainable=self.trainable3,name='w_out3')
+            self.w_out3 = tf.Variable((np.ones([2,1]) * np.array([[0.5], [0.5]])).astype(np.float32 ),name='w_out3')
             #self.b_out3 = tf.Variable(tf.zeros(1, dtype=tf.float32))
-            self.b_out3 = tf.Variable(tf.zeros(1, dtype=tf.float32),trainable=self.trainable3,name='b_out3')
+            self.b_out3 = tf.Variable(tf.zeros(1, dtype=tf.float32),name='b_out3')
             self.yhat3 = self.forwardprop(tf.concat([self.yhat1, self.yhat2],axis=1), self.w_out3, self.b_out3, self.keep_prob,self.activation_function[2]) 
             ##self.yhat3 = self.forwardprop(tf.concat([self.yhat1, self.yhat2],axis=1), self.w_out3, self.b_out3, self.keep_prob, self.activation_function[2])
             ##l2_norm3 = tf.add_n([tf.nn.l2_loss(w_in3),tf.nn.l2_loss(b_in3)])
@@ -322,7 +316,7 @@ class ffNN():
 
                 # Train with each example
                 yhats = []
-                MSE = 0
+                MSE, MSE0, MSE1, MSE2 = 0, 0 , 0 , 0
                 allcosts = 0
                 weights = []
                 weight_b = -100
@@ -331,11 +325,6 @@ class ffNN():
                    learning_rate_phase2 = 0.
                    learning_rate_phase3 = 0.
                    learning_rate_phase4 = 0.
-                   self.regularization_factor = 0.
-                   self.trainable1= True
-                   self.trainable2= False
-                   self.trainable3= False
-                  
                 elif phase == 1:
                    learning_rate_phase1 = 0.
                    learning_rate_phase2 = self.learning_rate[1]
@@ -343,9 +332,6 @@ class ffNN():
                    learning_rate_phase4 = 0.
                    self.regularization_factor = temp_regularization_factor
                    self.keep_probability = temp_keep_prob
-                   self.trainable1= False
-                   self.trainable2= True
-                   self.trainable3= False
                    '''
                   elif phase == 2:
                    learning_rate_phase1 = 0.
@@ -367,9 +353,6 @@ class ffNN():
                    learning_rate_phase3 = self.learning_rate[2]
                    learning_rate_phase4 = 0.
                    self.keep_probability = 1.
-                   self.trainable1= False
-                   self.trainable2= False
-                   self.trainable3= True
                    '''
                    trainable_collection = tf.get_collection_ref(tf.GraphKeys.TRAINABLE_VARIABLES)
                    #variables_to_remove = list()
@@ -391,9 +374,6 @@ class ffNN():
                    learning_rate_phase3 = 0. 
                    learning_rate_phase4 = self.learning_rate[2]
                    self.regularization_factor = temp_regularization_factor
-                   self.trainable1= True
-                   self.trainable2= True
-                   self.trainable3= True
                    '''
                    trainable_collection = tf.get_collection_ref(tf.GraphKeys.TRAINABLE_VARIABLES)
                    for rem in variables_to_remove:
@@ -439,6 +419,10 @@ class ffNN():
                     learning_rates_adam = loss[5:8]
                     #MSE += loss[8]
                     MSE +=  loss[8+ phase]
+                    MSE0 +=  loss[8]
+                    MSE1 +=  loss[9]
+                    MSE2 +=  loss[10]
+                    
                     yhats = loss[12:15]
                     weights = loss[15]
                     weight_b = loss[16]
@@ -496,8 +480,8 @@ class ffNN():
                     # if epoch_cost < self.minimum_cost :
                 #       print("Exited on epoch  %d, with loss  %.6f" % (epoch + 1, epoch_cost))
                 #        break
-                print("Epoch = %d, train cost = %.6f, train mse:%.6f, lra0: %.6f , lra1: %.6f , lra2: %.6f, weights: %s , weight_b: %.6f"
-                      % (epoch + 1, epoch_cost, epoch_MSE, learning_rates_adam[0], learning_rates_adam[1], learning_rates_adam[2], ', '.join(map(str, weights)), weight_b) )
+                print("Epoch = %d, train cost = %.6f, train mse:%.6f,MSE0: %.6f , MSE1: %.6f ,MSE2: %.6f, weights: %s , weight_b: %.6f"
+                      % (epoch + 1, epoch_cost, epoch_MSE, MSE0, MSE1, MSE2, ', '.join(map(str, weights)), weight_b) )
 
             sess.close()
 
