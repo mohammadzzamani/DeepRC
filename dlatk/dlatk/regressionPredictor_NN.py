@@ -182,7 +182,7 @@ def alignDictsAsy(y, *yhats, **kwargs):
     return tuple([listy]) + tuple(listyhats)
 
 class RegressionPredictor:
-    root_path = '/home/mbastan'
+    root_path = '/home/mbastan/'
     """Handles prediction of continuous outcomes
     
     Attributes
@@ -654,7 +654,7 @@ class RegressionPredictor:
                 result_output_s.write(str(Str))
             result_output_s.close()
 
-    def selectAdaptationFactors(self, allFactors, groupsOrder, outcomes,  nFactors, factorSelectionType='rfe', pairedFactors='False', sparse = False, report = True, outputName=''):
+    def selectAdaptationFactors(self, allFactors, groupsOrder, outcomes,  nFactors, factorSelectionType='rfe', pairedFactors='False', sparse = False, report = False, outputName=''):
         
         factorNames = list(allFactors.keys())
         factorValues = list(allFactors.values()) 
@@ -706,7 +706,7 @@ class RegressionPredictor:
     def testControlCombos(self, standardize = True, sparse = False, saveModels = False, blacklist = None, noLang = False, 
                           allControlsOnly = False, comboSizes = None, nFolds = 2, savePredictions = False, weightedEvalOutcome = None, 
                           residualizedControls = False, groupsWhere = '', weightedSample = '', adaptationFactorsName=[], 
-                          featureSelectionParameters=None, numOfFactors = [] , factorSelectionType='rfe' , pairedFactors=False, outputName='', report=True, integrationMethod=''):
+                          featureSelectionParameters=None, numOfFactors = [] , factorSelectionType='rfe' , pairedFactors=False, outputName='DeepRC', report=True, integrationMethod=''):
         """Tests regressors, by cross-validating over folds with different combinations of controls"""
         
         ###################################
@@ -1009,7 +1009,7 @@ class RegressionPredictor:
                                 #4) fit model and test accuracy:
                                 global history_counter
                                 if history_counter is None and withLanguage:
-                                   history = open(self.root_path +'/DeepRC/parameters_history.txt','a')
+                                   history = open(self.root_path + outputName +'/parameters_history.txt','a')
                                    history.write('\n\n>>>>>>>>outcome name: %s '%outcomeName)
                                    history.close()
                                 ypred = None
@@ -1017,7 +1017,7 @@ class RegressionPredictor:
                                     (regressor, multiScalers, multiFSelectors, factorScalers) = self._multiXtrain(multiXtrain, ytrain, standardize, sparse = sparse, weightedSample=sampleWeights, factorAdaptation = factor_adaptation, featureSelectionParameters = featureSelectionParameters, factorAddition = factor_addition, factors = factorTrain)
                                     ypred = self._multiXpredict(regressor, multiXtest, multiScalers = multiScalers, multiFSelectors = multiFSelectors, sparse = sparse, factorScalers = factorScalers, factorAddition = factor_addition, factorAdaptation = factor_adaptation, factors = factorTest)
                                 else:
-                                    (regressor, multiScalers, multiFSelectors) = self._multiXtrain(multiXtrain, ytrain, standardize, sparse = sparse, weightedSample=sampleWeights, featureSelectionParameters = featureSelectionParameters)
+                                    (regressor, multiScalers, multiFSelectors) = self._multiXtrain(multiXtrain, ytrain, standardize, sparse = sparse, weightedSample=sampleWeights, featureSelectionParameters = featureSelectionParameters, outputName=outputName)
                                     ypred = self._multiXpredict(regressor, multiXtest, multiScalers = multiScalers, multiFSelectors = multiFSelectors, sparse = sparse)
                                 predictions.update(dict(zip(testGroupsOrder,ypred[len(ypred)-1])))
                                 #pprint(ypred[:10])
@@ -1034,7 +1034,7 @@ class RegressionPredictor:
                                 train_mean = mean(ytrain)
                                 train_mean_mae = metrics.mean_absolute_error(ytest, [train_mean]*len(ytest))
                                 if withLanguage: 
-                                   history = open(self.root_path + '/DeepRC/parameters_history.txt','a')
+                                   history = open(self.root_path + outputName + '/parameters_history.txt' ,'a')
                                    for i in range(len(ypred)):
                                        history.write("  *FOLD: %d  R^2: %.4f (MSE: %.4f; MAE: %.4f; mean train mae: %.4f)\n"% (testChunk, R2[i], mse[i], mae[i], train_mean_mae) )
                                        print("  *FOLD: %d  R^2: %.4f (MSE: %.4f; MAE: %.4f; mean train mae: %.4f)"% (testChunk, R2[i], mse[i], mae[i], train_mean_mae))
@@ -1159,7 +1159,7 @@ class RegressionPredictor:
                                R2_str =  ', '.join(map(str,list(R2_avg)))
                                mse_str =  ', '.join(map(str,list(mse_avg)))
                                mae_str =  ', '.join(map(str,list(mae_avg)))
-                               history = open(self.root_path + '/DeepRC/parameters_history.txt','a')
+                               history = open(self.root_path + outputName + '/parameters_history.txt','a')
                                Str = "_*Overall R^2:          %.4f    \n_*Overall FOLDS R^2:    %.4f (+- %.4f) (( %s ))   \n_*R (sqrt R^2):         %.4f    \n_*Pearson r:            %.4f (p = %.5f)    \n_*Folds Pearson r:      %.4f (p = %.5f)    \n_*Spearman rho:         %.4f (p = %.5f)    \n_*Mean Squared Error:   %.4f  (( %s ))  \n_*Mean Absolute Error:  %.4f  (( %s ))  \n_*Train_Mean MAE:       %.4f\n\n" % (reportStats['R2'], reportStats['R2_folds'] , reportStats['se_R2_folds'],R2_str, reportStats['R'], reportStats['r'], reportStats['r_p'], reportStats['r_folds'], reportStats['r_p_folds'], reportStats['rho'], reportStats['rho_p'], reportStats['mse'], mse_str,  reportStats['mae'], mae_str, reportStats['train_mean_mae'])
                                history.write(Str)
                                history.write('Finished at: '+str(datetime.datetime.now())+'\n')
@@ -2055,12 +2055,12 @@ class RegressionPredictor:
              parameters_str = ""
              if X.shape[1] < 20:
                     hidden_nodes = [8]
-                    save_path = self.root_path + '/DeepRC/dlatk/models/ControlsOnly'
+                    save_path = self.root_path + outputName + '/models/ControlsOnly'
                     regularization_factor = 0
                     parameters_str += 'Controls: hidden_nodes = %s,  regularization_factor= %2.f'%(','.join(map(str,hidden_nodes)), regularization_factor)
              else:
-                    hidden_nodes =[[64,64],[256,64]] #[16,8]
-                    save_path = self.root_path+'/DeepRC/dlatk/models/LMOnly'
+                    hidden_nodes =[[64,64],[256,64],[4]] #[16,8]
+                    save_path = self.root_path+ outputName + '/models/LMOnly'
                     regularization_factor = 0.005 #0.005
                     parameters_str += 'LM: hidden_nodes = %s, regularization_factor= %.5f'%(','.join(map(str,hidden_nodes)),  regularization_factor)
              #hidden_nodes = 16 if X.shape[1] < 20 else 32
@@ -2076,7 +2076,7 @@ class RegressionPredictor:
              shuffle = True
              optimizer='Adam' # Adam, SGD, Adadelta 
              stopping_iteration = [10,10,5,5] # if the accuracy didnt improve after this many iterations stop
-             stddev = [0.1 , 0.1, 0.05]
+             stddev = [0.1 , 0.1, 0.1]
              self.max_phase =3 
              max_phase = self.max_phase
              self.start_phase =0
@@ -2085,7 +2085,7 @@ class RegressionPredictor:
              #regressor.initialize(x1_size = X.thape[1],x2_size=X.shape[1])
              global history_counter
              if history_counter is None :
-                 history = open(self.root_path + '/DeepRC/parameters_history.txt','a')
+                 history = open(self.root_path + outputName + '/parameters_history.txt','a')
                  history.write('\n\n Start at: '+str(datetime.datetime.now())+'\n')
                  history.write('Model: %s , epochs: %d, learning_rates: %f, %f, %f, decay: %s , decay_step: %d , decay_factor: %f , stop_loss: %f , keep_prob: %f, activation_function: %s, batch_size: %d, shuffle: %s, optimizer: %s, stopping_iteration: %s, stddev: %3f, %3f,max_phase: %d , start phase: %d \n' %(save_path, epochs,  learning_rate[0], learning_rate[1], learning_rate[2], str(decay), decay_step, decay_factor, stop_loss, keep_prob,activation_function,batch_size,str(shuffle),optimizer ,','.join(map(str,stopping_iteration)),stddev[0],stddev[1],max_phase,start_phase) )
                  history.write(parameters_str+'\n')
@@ -2231,7 +2231,7 @@ class RegressionPredictor:
                 print('phase %d'%i)
                 predictions.append(regressor.predict(multiX,phase=i,bestModel=False))
             predictions.append(regressor.predict(multiX, bestModel=False))
-            predictions.append(regressor.predict(multiX, reset_graph=True,phase=min(self.max_phase,2)))
+            predictions.append(regressor.predict(multiX, reset_graph=True,phase=self.max_phase))
             return [ multiScalers[len(multiScalers)-1].inverse_transform(np.array(pr).reshape(-1,1)).reshape(-1) for pr in predictions ]
         else:
             return [regressor.predict(X)]
