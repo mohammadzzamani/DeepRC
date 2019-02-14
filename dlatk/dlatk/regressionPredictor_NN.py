@@ -948,7 +948,7 @@ class RegressionPredictor:
                             #3a) iterate over nfold groups:
                             ##mb
                             R2_avg, mse_avg, mae_avg = None, None, None
-                            for testChunk in range(len(groupFolds)-1, -1 , -1):
+                            for testChunk in range(0, len(groupFolds)):
                                 trainGroups = set()
                                 for chunk in (groupFolds[:testChunk]+groupFolds[(testChunk+1):]):
                                     for c in chunk:
@@ -2065,7 +2065,7 @@ class RegressionPredictor:
                     parameters_str += 'LM: hidden_nodes = %s, regularization_factor= %.5f'%(','.join(map(str,hidden_nodes)),  regularization_factor)
              #hidden_nodes = 16 if X.shape[1] < 20 else 32
              epochs = 1000#700
-             learning_rate =[0.001 ,0.001, 0.0002] #.0002]
+             learning_rate =[0.001 ,0.001, 0.0002]
              decay = True
              decay_step =1
              decay_factor = 0.99 #0.8
@@ -2076,12 +2076,12 @@ class RegressionPredictor:
              shuffle = True
              optimizer='Adam' # Adam, SGD, Adadelta 
              stopping_iteration = [10,10,5,5] # if the accuracy didnt improve after this many iterations stop
-             stddev = [0.1 , 0.1, 0.1]
-             self.max_phase =3 
+             stddev = [0.1 , 0.1, 0.05]
+             self.max_phase =3
              max_phase = self.max_phase
-             self.start_phase =0
+             self.start_phase = 0
              start_phase =self.start_phase
-             regressor= ffNN(hidden_nodes=hidden_nodes, epochs=epochs, learning_rate=learning_rate,saveFrequency=2,save_path = save_path, decay=decay, decay_step=decay_step, decay_factor=decay_factor, stop_loss=stop_loss, keep_probability = keep_prob, regularization_factor=regularization_factor,minimum_cost=0,activation_function=activation_function,batch_size=batch_size,shuffle=shuffle,optimizer=optimizer,stopping_iteration= stopping_iteration, stddev=stddev,max_phase=max_phase,start_phase=start_phase,RC=False,FA=False)
+             regressor= ffNN(hidden_nodes=hidden_nodes, epochs=epochs, learning_rate=learning_rate,saveFrequency=2,save_path = save_path, decay=decay, decay_step=decay_step, decay_factor=decay_factor, stop_loss=stop_loss, keep_probability = keep_prob, regularization_factor=regularization_factor,minimum_cost=0,activation_function=activation_function,batch_size=batch_size,shuffle=shuffle,optimizer=optimizer,stopping_iteration= stopping_iteration, stddev=stddev,max_phase=max_phase,start_phase=start_phase)
              #regressor.initialize(x1_size = X.thape[1],x2_size=X.shape[1])
              global history_counter
              if history_counter is None :

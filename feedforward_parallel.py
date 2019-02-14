@@ -50,7 +50,7 @@ class ffNN():
     def __init__(self, hidden_nodes=[[8,2],[32,8]], epochs=3, learning_rate=0.1, saveFrequency=1,
                  save_path='./models/ControlOnly', decay=False, decay_step=10, decay_factor=0.7,
                  stop_loss=0.0001, regularization_factor=0.01, keep_probability=0.7, minimum_cost=0.2,
-                 activation_function='sigmoid', batch_size=1,shuffle=True,optimizer='Adam',stopping_iteration=[10,10,1,1], stddev=[0.5,0.1],max_phase=3,start_phase=0,RC=False,FA=False):
+                 activation_function='sigmoid', batch_size=1,shuffle=True,optimizer='Adam',stopping_iteration=[10,10,1,1], stddev=[0.5,0.1],max_phase=3,start_phase=0):
         self.hidden_nodes = hidden_nodes
         self.epochs = epochs
         self.learning_rate = learning_rate
@@ -71,8 +71,6 @@ class ffNN():
         self.stddev=stddev
         self.max_phase=max_phase
         self.start_phase=start_phase
-        self.RC=RC
-        self.FA=FA
         print('model started working :D')
 
     def forwardprop(self, X, w_in, b_in, keep_prob,activation_func):
@@ -149,7 +147,6 @@ class ffNN():
         l2_norm1 = 0.
         l2_norm2 = 0.
         l2_norm3 = 0.
-        l2_normA = 0.
         with tf.variable_scope("initialization", reuse=tf.AUTO_REUSE):
             # self.reg_factor = tf.get_variable( name='reg_factor',shape=(), dtype = tf.float32)
             #self.reg_factor = self.regularization_factor
@@ -170,7 +167,7 @@ class ffNN():
             w_out1, b_out1 = init_weights((self.hidden_nodes[0][-1], y_size), stddev=self.stddev[0],name='out0')
             l2_norm1 = tf.add(tf.nn.l2_loss(w_out1), l2_norm1)
             l2_norm1 = tf.add(tf.nn.l2_loss(b_out1), l2_norm1)
-            self.yhat1 =tf.add(tf.matmul(h_out1, w_out1), b_out1)
+            self.yhat1 = tf.add(tf.matmul(h_out1, w_out1), b_out1)
             # Backward propagation
             self.mse1 = tf.losses.mean_squared_error(labels=self.y, predictions=self.yhat1)
             self.loss1 = tf.add(self.mse1,self.reg_factor * l2_norm1)
@@ -222,7 +219,6 @@ class ffNN():
             #self.learning_rate2_adam = tf.Print(self.learning_rate2_adam , [self.learning_rate2 , self.learning_rate2_adam ],message='lr: ') 
             self.updates2 = tf.train.AdamOptimizer(learning_rate=self.learning_rate2_adam).minimize(self.loss2)
 
-            
             if self.FA:
                ############### FA  ###############
                self.XAdapted = tf.multiply(tf.reshape(self.X1,[-1,1,x1_size]), tf.reshape(self.X2,[-1,x2_size,1]))
@@ -262,6 +258,12 @@ class ffNN():
             ###b_in3 = tf.Variable(tf.zeros(1, dtype=tf.float32))
             ####self.w_out3, self.b_out3 = init_weights((last_layer_nodes, 1),stddev=self.stddev[2],name='out3')
             ####self.yhat3 = self.forwardprop(tf.concat([h_out1,h_out2],axis=1), self.w_out3,self.b_out3, self.keep_prob,self.activation_function[1])
+            last_layer_nodes = 2 #self.hidden_nodes[0][-1]+self.hidden_nodes[1][-1]
+
+            ###w_in3  = tf.Variable( (np.ones([last_layer_nodes,4]) *  np.array([[1./(last_layer_nodes)] for j in range(last_layer_nodes)])).astype(np.float32 ) ) 
+            ###b_in3 = tf.Variable(tf.zeros(1, dtype=tf.float32))
+            #####w_in3, b_in3 = init_weights((last_layer_nodes, 1),trainable=self.trainable3,stddev=self.stddev[2])
+            #####self.yhat3 = self.forwardprop(tf.concat([h_out1,h_out2],axis=1), w_in3, b_in3, self.keep_prob,self.activation_function[2])
             ###w_out3  = tf.Variable( (np.ones([4,1]) *  np.array([[1./(4)] for j in range(4)])).astype(np.float32 ) )
             ###b_out3 = tf.Variable(tf.zeros(1, dtype=tf.float32))
 
@@ -269,7 +271,6 @@ class ffNN():
             #self.w_out3 = tf.Variable((np.ones([2,1]) * np.array([[0.5], [0.5]])).astype(np.float32 ))
             self.w_out3 = tf.Variable((np.ones([2,1]) * np.array([[0.5], [0.5]])).astype(np.float32 ),name='w_out3')
             #self.b_out3 = tf.Variable(tf.zeros(1, dtype=tf.float32))
-            ####self.w_out3, self.b_out3 = init_weights((2, 1),stddev=self.stddev[2],name='out3')
             self.b_out3 = tf.Variable(tf.zeros(1, dtype=tf.float32),name='b_out3')
             self.yhat3 = self.forwardprop(tf.concat([self.yhat1, self.yhat2],axis=1), self.w_out3, self.b_out3, self.keep_prob,self.activation_function[2]) 
             ##self.yhat3 = self.forwardprop(tf.concat([self.yhat1, self.yhat2],axis=1), self.w_out3, self.b_out3, self.keep_prob, self.activation_function[2])
@@ -300,33 +301,28 @@ class ffNN():
             self.loss3 = self.mse3 #tf.add(self.mse3,self.reg_factor* l2_norm3)
             #self.learning_rate3 = self.apply_decay(self.learning_rate3, self.global_step )
             #self.learning_rate3 = tf.Print(self.learning_rate3 , [self.learning_rate3],message='lr: ')
+            
             if self.decay == 1 or  self.decay is True:
                self.learning_rate3_adam = tf.train.exponential_decay(self.learning_rate3,self.global_step,  self.decay_step, self.decay_factor,
                                                        staircase=True)
             else:
                self.learning_rate3_adam = self.learning_rate3
+            
             self.updates3 = tf.train.AdamOptimizer(learning_rate=self.learning_rate3_adam).minimize(self.loss3,var_list=[v for v in tf.trainable_variables() if v.name.endswith('3:0')])
+            self.loss4 = tf.add(self.mse3,self.reg_factor* l2_norm2)
 
-
-
-            #self.w_out4 = tf.Variable((np.ones([3,1]) * np.array([[0.33], [0.33],[0.33]])).astype(np.float32 ),name='w_out4')
-            #self.b_out4 = tf.Variable(tf.zeros(1, dtype=tf.float32),name='b_out4')
-            self.yhat4 = self.yhat3 #self.forwardprop(tf.concat([self.yhat1, self.yhat2,self.yhat3],axis=1), self.w_out4, self.b_out4, self.keep_prob,self.activation_function[2])
-            self.mse4 = self.mse3 #tf.losses.mean_squared_error(labels=self.y, predictions=self.yhat4)
-            self.loss4 = tf.add(self.mse4,self.reg_factor* l2_norm2)
-            ###self.loss4 = tf.add(self.loss4,self.reg_factor* l2_normA)
             if self.decay == 1 or  self.decay is True:
                self.learning_rate4_adam = tf.train.exponential_decay(self.learning_rate4,self.global_step,  self.decay_step, self.decay_factor,
                                                        staircase=True)
             else:
                self.learning_rate4_adam = self.learning_rate4
+
             self.updates4 = tf.train.AdamOptimizer(learning_rate=self.learning_rate4_adam).minimize(self.loss4)
             
 
 
 
             self.final_opt = tf.group(self.updates1,self.updates2,self.updates3,self.updates4)
-            #self.final_opt = tf.group(self.updates1,self.updates4)
            
     def apply_decay(self, lr, epoch ):
         lr = tf.Print(lr , [lr, lr * self.decay_factor, epoch , self.decay_step, epoch % self.decay_step , self.decay ],message='lr inside apply_decay: ')
@@ -364,7 +360,7 @@ class ffNN():
             best_saved_epoch = -10
             phase = self.start_phase #1
             temp_regularization_factor = self.regularization_factor 
-            temp2_regularization_factor = self.regularization_factor * 5
+            temp2_regularization_factor = self.regularization_factor * 10
             temp_keep_prob = self.keep_probability
             max_phase = self.max_phase # 1
             learning_rates_adam = []
@@ -382,7 +378,6 @@ class ffNN():
                    learning_rate_phase2 = 0.
                    learning_rate_phase3 = 0.
                    learning_rate_phase4 = 0.
-                   self.regularization_factor = 0.
                 elif phase == 1:
                    learning_rate_phase1 = 0.
                    learning_rate_phase2 = self.learning_rate[1]
@@ -390,6 +385,20 @@ class ffNN():
                    learning_rate_phase4 = 0.
                    self.regularization_factor = temp_regularization_factor
                    self.keep_probability = temp_keep_prob
+                   '''
+                  elif phase == 2:
+                   learning_rate_phase1 = 0.
+                   learning_rate_phase2 = self.learning_rate[1]
+                   learning_rate_phase3 = 0.
+                   self.regularization_factor = temp_regularization_factor
+                   self.keep_probability = temp_keep_prob
+                elif phase == 3:
+                   learning_rate_phase1 = 0.
+                   learning_rate_phase2 = self.learning_rate[1]
+                   learning_rate_phase3 = 0.
+                   self.regularization_factor = temp_regularization_factor
+                   self.keep_probability = temp_keep_prob
+                   '''
                 elif phase == 2:
                    self.regularization_factor = 0. #temp2_regularization_factor
                    learning_rate_phase1 = 0. #float(self.learning_rate)/100
@@ -413,7 +422,6 @@ class ffNN():
                    #print('variables to remove>>>',variables_to_remove)
 
                 else:
-                   #self.keep_probability = 1.
                    learning_rate_phase1 = 0. #float(self.learning_rate)/100
                    learning_rate_phase2 = 0. #float(self.learning_rate)/10
                    learning_rate_phase3 = 0. 
@@ -453,7 +461,7 @@ class ffNN():
                     #loss = sess.run([self.updates2,self.loss1,self.loss2,self.loss3],feed_dict={self.X1: x1_input, self.X2: x2_input, self.y: y_input,
                     #                                       self.keep_prob: self.keep_probability,self.learning_rate1: self.learning_rate,
                     #                                          self.learning_rate2: learning_rate_phase2, self.learning_rate3:learning_rate_phase3 })
-                    loss = sess.run([self.final_opt,self.loss1,self.loss2,self.loss3,self.loss4, self.learning_rate1_adam, self.learning_rate2_adam, self.learning_rate3_adam,self.learning_rate4_adam, self.mse1, self.mse2, self.mse3,self.mse4,self.yhat1,self.yhat2,self.yhat3,self.yhat4, self.w_out3, self.b_out3],feed_dict={self.reg_factor: self.regularization_factor,self.X1: x1_input, self.X2: x2_input, self.y: y_input, self.keep_prob: self.keep_probability,self.learning_rate1: learning_rate_phase1,
+                    loss = sess.run([self.final_opt,self.loss1,self.loss2,self.loss3,self.loss4, self.learning_rate1_adam, self.learning_rate2_adam, self.learning_rate3_adam,self.mse1, self.mse2, self.mse3,self.mse3,self.yhat1,self.yhat2,self.yhat3, self.w_out3, self.b_out3],feed_dict={self.reg_factor: self.regularization_factor,self.X1: x1_input, self.X2: x2_input, self.y: y_input, self.keep_prob: self.keep_probability,self.learning_rate1: learning_rate_phase1,
                                                               self.learning_rate2: learning_rate_phase2, self.learning_rate3:learning_rate_phase3,self.learning_rate4:learning_rate_phase4  })
                     #loss = sess.run([self.final_opt,self.loss1,self.loss2,self.loss3],feed_dict={self.X1: x1_input, self.X2: x2_input, self.y: y_input,
                     #                                     #  self.keep_prob: self.keep_probability,self.learning_rate1: learning_rate_phase1,
@@ -489,17 +497,7 @@ class ffNN():
                          saver.save(sess, self.save_path + "/pretrained_lstm.ckpt", global_step=epoch)
                          #saver.save(sess, self.save_path +'_'+str(phase)+"/pretrained_lstm.ckpt",global_step=epoch)
                          best_saved_epoch = epoch
-                if self.RC:
-                  #### Active for RC Model
-                  if phase == 1 or phase == 2:
-                    phase +=1
-                    sess.run(self.initialize_global_step)
-                    pass_best_epochs = 0 
-                    print ('phase: {}, best_loss:{}, epoch:{}, epoch_cost:{}'.format(phase, bestLoss, epoch, epoch_cost) )
-                    best_ckpt_saver.handle(epoch_cost, sess, global_step_tensor=tf.constant(epoch))
-                    saver.save(sess, self.save_path +'_'+str(phase)+"/pretrained_lstm.ckpt",global_step=epoch)
-                    bestLoss = np.inf
-                    continue
+
                 #if bestLoss - epoch_cost < self.stop_loss  or ( epoch_cost < 0.75 * self.desired_epoch_cost and self.desired_epoch_cost is not np.inf):
                 if bestLoss - epoch_cost < self.stop_loss:
                     # print("Exited on epoch  %d, with loss  %.6f comparing with bestLoss: %.6f and stop_loss: %.6f" % (epoch + 1, epoch_cost, bestLoss, epoch_cost))
@@ -535,10 +533,9 @@ class ffNN():
                     # if epoch_cost < self.minimum_cost :
                 #       print("Exited on epoch  %d, with loss  %.6f" % (epoch + 1, epoch_cost))
                 #        break
-                #print("Epoch = %d, train cost = %.6f, train mse:%.6f,  learning_rates_adam1: %.6f , learning_rates_adam4: %.6f , learning_rates_adam4: %.6f"#, weights: %s , weight_b: %.6f"
-                #      % (epoch + 1, epoch_cost, epoch_MSE, learning_rates_adam[0], learning_rates_adam[2], learning_rates_adam[2]))#, ', '.join(map(str, weights)), weight_b) )
-                print("Epoch = %d, train cost = %.6f, train mse:%.6f"#, weights: %s , learning_rate:%.6f"
-                      % (epoch + 1, epoch_cost, epoch_MSE))#,  ', '.join(map(str, weights)), learning_rates_adam[phase]) )
+                print("Epoch = %d, train cost = %.6f, train mse:%.6f,MSE0: %.6f , MSE1: %.6f ,MSE2: %.6f, weights: %s , weight_b: %.6f"
+                      % (epoch + 1, epoch_cost, epoch_MSE, MSE0, MSE1, MSE2, ', '.join(map(str, weights)), weight_b) )
+
             sess.close()
 
     def predict(self, test_X, bestModel=True, model_path=None,phase=None, reset_graph=False):
