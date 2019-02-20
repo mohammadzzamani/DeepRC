@@ -1,0 +1,32 @@
+
+
+>>>>>>>>outcome name: 01hea_aar 
+
+ Start at: 2019-02-15 15:57:34.454247
+Model: /home/mbastan/DeepRC/model_complex/models/LMOnly , epochs: 1000, learning_rates: 0.001000, 0.001000, 0.000200, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.9, 1.0, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 10,10,5,5, stddev: 0.100000, 0.100000,max_phase: 4 , start phase: 1, RC: False, FA: False, PCA: False 
+LM: hidden_nodes = [64, 64],[256, 64],[256, 256, 256], regularization_factor= 0.005, 0.005, 0.0, 0.005
+  *FOLD: 0  R^2: 0.5743 (MSE: 628.3301; MAE: 19.9967; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.6082 (MSE: 578.3751; MAE: 19.0649; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.5888 (MSE: 606.9948; MAE: 19.0611; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.6441 (MSE: 525.3083; MAE: 16.8937; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.6041 (MSE: 584.3770; MAE: 18.3121; mean train mae: 31.4874)
+-------
+  *FOLD: 1  R^2: 0.4652 (MSE: 1048.2127; MAE: 24.2152; mean train mae: 33.4512)
+  *FOLD: 1  R^2: 0.5291 (MSE: 923.0798; MAE: 23.1098; mean train mae: 33.4512)
+  *FOLD: 1  R^2: 0.5991 (MSE: 785.7714; MAE: 21.6245; mean train mae: 33.4512)
+  *FOLD: 1  R^2: 0.6378 (MSE: 709.9711; MAE: 20.0663; mean train mae: 33.4512)
+  *FOLD: 1  R^2: 0.6357 (MSE: 713.9687; MAE: 20.1731; mean train mae: 33.4512)
+-------
+
+
+>>>>>>>>outcome name: 01hea_aar 
+
+ Start at: 2019-02-15 16:02:43.681916
+Model: /home/mbastan/DeepRC/model_complex/models/LMOnly , epochs: 1000, learning_rates: 0.001000, 0.001000, 0.000200, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.9, 1.0, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 10,10,5,5, stddev: 0.100000, 0.100000,max_phase: 4 , start phase: 1, RC: False, FA: False, PCA: False 
+LM: hidden_nodes = [64, 64],[256, 64],[256, 256, 256], regularization_factor= 0.005, 0.005, 0.005, 0.005
+  *FOLD: 0  R^2: 0.5797 (MSE: 620.3740; MAE: 19.9238; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.6068 (MSE: 580.3980; MAE: 19.2217; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.6363 (MSE: 536.7919; MAE: 17.9296; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.5895 (MSE: 605.9105; MAE: 18.5620; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.6040 (MSE: 584.4682; MAE: 18.0783; mean train mae: 31.4874)
+-------

@@ -706,7 +706,7 @@ class RegressionPredictor:
     def testControlCombos(self, standardize = True, sparse = False, saveModels = False, blacklist = None, noLang = False, 
                           allControlsOnly = False, comboSizes = None, nFolds = 2, savePredictions = False, weightedEvalOutcome = None, 
                           residualizedControls = False, groupsWhere = '', weightedSample = '', adaptationFactorsName=[], 
-                          featureSelectionParameters=None, numOfFactors = [] , factorSelectionType='rfe' , pairedFactors=False, outputName='DeepRC', report=True, integrationMethod=''):
+                          featureSelectionParameters=None, numOfFactors = [] , factorSelectionType='rfe' , pairedFactors=False, outputName='DeepRC', report=False, integrationMethod=''):
         """Tests regressors, by cross-validating over folds with different combinations of controls"""
         
         ###################################
@@ -1898,8 +1898,8 @@ class RegressionPredictor:
         print ('kbest: ' , k, '  , pca:  ' , n , ' dim: ', dim, ' DEFAULT_RANDOM_SEED: ', DEFAULT_RANDOM_SEED)
         for i in range(0,dim):
             ##MB #mb
-            self.featureSelectionString.append('Pipeline([("1_univariate_select",  SelectKBest(score_func=f_regression, k={0})) , ("2_rpca", RandomizedPCA(n_components=int({1}), random_state={2}, whiten=False, iterated_power=3))])'.format(k[i], n[i], DEFAULT_RANDOM_SEED) )
-            #self.featureSelectionString.append('Pipeline([("1_univariate_select",  SelectKBest(score_func=f_regression, k={0})) ])'.format(k[i],  DEFAULT_RANDOM_SEED) )
+            #self.featureSelectionString.append('Pipeline([("1_univariate_select",  SelectKBest(score_func=f_regression, k={0})) , ("2_rpca", RandomizedPCA(n_components=int({1}), random_state={2}, whiten=False, iterated_power=3))])'.format(k[i], n[i], DEFAULT_RANDOM_SEED) )
+            self.featureSelectionString.append('Pipeline([("1_univariate_select",  SelectKBest(score_func=f_regression, k={0})) ])'.format(k[i],  DEFAULT_RANDOM_SEED) )
         print ('kbest: ' , k, '  , pca:  ' , n )
 
 
@@ -2059,41 +2059,45 @@ class RegressionPredictor:
                     regularization_factor = 0
                     parameters_str += 'Controls: hidden_nodes = %s,  regularization_factor= %2.f'%(','.join(map(str,hidden_nodes)), regularization_factor)
              else:
-                    hidden_nodes =[[64,64],[256,64],[4]] #[16,8]
+                    hidden_nodes =[[64,64],[256,64],[2]] #[16,8]
                     save_path = self.root_path+ outputName + '/models/LMOnly'
-                    regularization_factor = 0.005 #0.005
-                    parameters_str += 'LM: hidden_nodes = %s, regularization_factor= %.5f'%(','.join(map(str,hidden_nodes)),  regularization_factor)
+                    regularization_factor = [0.005,0.005,0.,0.005,0.005] #0.005
+                    parameters_str += 'LM: hidden_nodes = %s, regularization_factor= %s'%(','.join(map(str,hidden_nodes)),  ', '.join(map(str,regularization_factor)))
              #hidden_nodes = 16 if X.shape[1] < 20 else 32
-             epochs = 1000#700
+             epochs = 600#700
              learning_rate =[0.001 ,0.001, 0.0002]
              decay = True
              decay_step =1
              decay_factor = 0.99 #0.8
              stop_loss =0.0001 #0.0001
-             keep_prob = 0.9 #0.9
+             keep_prob = [0.9,1.] #0.9
              activation_function = ['relu','sigmoid','linear'] # linear, sigmoid, tanh, relu
              batch_size = 16 #16
              shuffle = True
              optimizer='Adam' # Adam, SGD, Adadelta 
              stopping_iteration = [10,10,5,5] # if the accuracy didnt improve after this many iterations stop
-             stddev = [0.1 , 0.1, 0.05]
-             self.max_phase =3
+             stddev = [0.1 , 0.1, 0.01]
+             self.max_phase =4 # between 1 to 4
              max_phase = self.max_phase
-             self.start_phase = 0
+             self.start_phase =1 # between 1 to 4
              start_phase =self.start_phase
-             regressor= ffNN(hidden_nodes=hidden_nodes, epochs=epochs, learning_rate=learning_rate,saveFrequency=2,save_path = save_path, decay=decay, decay_step=decay_step, decay_factor=decay_factor, stop_loss=stop_loss, keep_probability = keep_prob, regularization_factor=regularization_factor,minimum_cost=0,activation_function=activation_function,batch_size=batch_size,shuffle=shuffle,optimizer=optimizer,stopping_iteration= stopping_iteration, stddev=stddev,max_phase=max_phase,start_phase=start_phase)
+             RC = False
+             FA = False
+             PCA = False
+             combine_model = 'yhat' #yhat or hout             
+             regressor= ffNN(hidden_nodes=hidden_nodes, epochs=epochs, learning_rate=learning_rate,saveFrequency=2,save_path = save_path, decay=decay, decay_step=decay_step, decay_factor=decay_factor, stop_loss=stop_loss, keep_probability = keep_prob, regularization_factor=regularization_factor,minimum_cost=0,activation_function=activation_function,batch_size=batch_size,shuffle=shuffle,optimizer=optimizer,stopping_iteration= stopping_iteration, stddev=stddev,max_phase=max_phase,start_phase=start_phase,RC=RC,FA=FA,combine_model=combine_model)
              #regressor.initialize(x1_size = X.thape[1],x2_size=X.shape[1])
              global history_counter
              if history_counter is None :
                  history = open(self.root_path + outputName + '/parameters_history.txt','a')
                  history.write('\n\n Start at: '+str(datetime.datetime.now())+'\n')
-                 history.write('Model: %s , epochs: %d, learning_rates: %f, %f, %f, decay: %s , decay_step: %d , decay_factor: %f , stop_loss: %f , keep_prob: %f, activation_function: %s, batch_size: %d, shuffle: %s, optimizer: %s, stopping_iteration: %s, stddev: %3f, %3f,max_phase: %d , start phase: %d \n' %(save_path, epochs,  learning_rate[0], learning_rate[1], learning_rate[2], str(decay), decay_step, decay_factor, stop_loss, keep_prob,activation_function,batch_size,str(shuffle),optimizer ,','.join(map(str,stopping_iteration)),stddev[0],stddev[1],max_phase,start_phase) )
+                 history.write('Model: %s , epochs: %d, learning_rates: %f, %f, %f, decay: %s , decay_step: %d , decay_factor: %f , stop_loss: %f , keep_prob: %s, activation_function: %s, batch_size: %d, shuffle: %s, optimizer: %s, stopping_iteration: %s, stddev: %s,max_phase: %d , start phase: %d, RC: %s, FA: %s, PCA: %s, combine: %s \n' %(save_path, epochs,  learning_rate[0], learning_rate[1], learning_rate[2], str(decay), decay_step, decay_factor, stop_loss, ', '.join(map(str,keep_prob)),activation_function,batch_size,str(shuffle),optimizer ,', '.join(map(str,stopping_iteration)),', '.join(map(str,stddev)),max_phase,start_phase,str(RC),str(FA), str(PCA), combine_model) )
                  history.write(parameters_str+'\n')
                  history.close()
                  history_counter = True
              print('length of the multiX is %d'%len(multiX))
              try: 
-                regressor.initialize(x1_size = multiX[1].shape[1],x2_size=multiX[0].shape[1])
+                regressor.initialize(x1_size = multiX[len(multiX) -1].shape[1],x2_size=multiX[0].shape[1],x2n_size=multiX[len(multiX) -2].shape[1])#,xA_size=multiX[2].shape[1])
              #   #regressor.set_params(**dict((k, v[0] if isinstance(v, list) else v) for k,v in self.cvParams[modelName][0].items()))
              except IndexError:
              #    
@@ -2231,7 +2235,7 @@ class RegressionPredictor:
                 print('phase %d'%i)
                 predictions.append(regressor.predict(multiX,phase=i,bestModel=False))
             predictions.append(regressor.predict(multiX, bestModel=False))
-            predictions.append(regressor.predict(multiX, reset_graph=True,phase=self.max_phase))
+            predictions.append(regressor.predict(multiX, reset_graph=True,phase=min(3,self.max_phase)))
             return [ multiScalers[len(multiScalers)-1].inverse_transform(np.array(pr).reshape(-1,1)).reshape(-1) for pr in predictions ]
         else:
             return [regressor.predict(X)]
