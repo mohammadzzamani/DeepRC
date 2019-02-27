@@ -46,3 +46,51 @@ _*Mean Absolute Error:  19.3716  (( 19.3729325923, 19.3687303742 ))
 _*Train_Mean MAE:       29.6940
 
 Finished at: 2019-02-15 15:22:35.423302
+
+
+>>>>>>>>outcome name: 01hea_aar 
+
+ Start at: 2019-02-20 18:07:31.865896
+Model: /home/mbastan/DeepRC/outputs/end2end/models/LMOnly , epochs: 600, learning_rates: 0.001000, 0.001000, 0.000200, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.9, 1.0, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 10, 10, 5, 5, stddev: 0.1, 0.1, 0.01,max_phase: 4 , start phase: 4, RC: False, FA: True, PCA: False, combine: yhat 
+LM: hidden_nodes = [64, 64],[256, 64],[2], regularization_factor= 0.005, 0.005, 0.0, 0.005, 0.005
+  *FOLD: 9  R^2: 0.5820 (MSE: 743.4338; MAE: 20.4274; mean train mae: 33.6105)
+  *FOLD: 9  R^2: 0.5736 (MSE: 758.3815; MAE: 20.4874; mean train mae: 33.6105)
+-------
+  *FOLD: 8  R^2: 0.5826 (MSE: 673.5758; MAE: 19.7816; mean train mae: 32.1991)
+  *FOLD: 8  R^2: 0.5845 (MSE: 670.4466; MAE: 19.7848; mean train mae: 32.1991)
+-------
+  *FOLD: 7  R^2: 0.5847 (MSE: 848.4829; MAE: 20.7253; mean train mae: 36.6985)
+  *FOLD: 7  R^2: 0.5769 (MSE: 864.4198; MAE: 21.1274; mean train mae: 36.6985)
+-------
+  *FOLD: 6  R^2: 0.6216 (MSE: 791.6661; MAE: 21.2941; mean train mae: 35.5784)
+  *FOLD: 6  R^2: 0.6228 (MSE: 789.0796; MAE: 21.2402; mean train mae: 35.5784)
+-------
+  *FOLD: 5  R^2: 0.6860 (MSE: 586.7948; MAE: 18.8284; mean train mae: 34.3756)
+  *FOLD: 5  R^2: 0.6818 (MSE: 594.5645; MAE: 18.9061; mean train mae: 34.3756)
+-------
+  *FOLD: 4  R^2: 0.6788 (MSE: 590.1232; MAE: 18.2233; mean train mae: 35.1316)
+  *FOLD: 4  R^2: 0.6676 (MSE: 610.5935; MAE: 18.7165; mean train mae: 35.1316)
+-------
+  *FOLD: 3  R^2: 0.6264 (MSE: 839.6002; MAE: 22.0137; mean train mae: 36.9698)
+  *FOLD: 3  R^2: 0.6265 (MSE: 839.2395; MAE: 21.9787; mean train mae: 36.9698)
+-------
+  *FOLD: 2  R^2: 0.5927 (MSE: 737.3245; MAE: 19.7395; mean train mae: 32.9954)
+  *FOLD: 2  R^2: 0.5891 (MSE: 743.8952; MAE: 19.8140; mean train mae: 32.9954)
+-------
+  *FOLD: 1  R^2: 0.6585 (MSE: 669.3115; MAE: 19.4774; mean train mae: 33.4512)
+  *FOLD: 1  R^2: 0.6577 (MSE: 670.8786; MAE: 19.5240; mean train mae: 33.4512)
+-------
+  *FOLD: 0  R^2: 0.6803 (MSE: 471.9160; MAE: 16.2875; mean train mae: 31.4874)
+  *FOLD: 0  R^2: 0.6726 (MSE: 483.3062; MAE: 16.5114; mean train mae: 31.4874)
+-------
+_*Overall R^2:          0.6271    
+_*Overall FOLDS R^2:    0.6253 (+- 0.0128) (( 0.629353577067, 0.625322078319 ))   
+_*R (sqrt R^2):         0.7919    
+_*Pearson r:            0.7948 (p = 0.00000)    
+_*Folds Pearson r:      0.7990 (p = 0.00000)    
+_*Spearman rho:         0.8090 (p = 0.00000)    
+_*Mean Squared Error:   702.7682  (( 695.222870218, 702.480498816 ))  
+_*Mean Absolute Error:  19.8125  (( 19.6798288445, 19.8090544748 ))  
+_*Train_Mean MAE:       30.2206
+
+Finished at: 2019-02-20 19:20:57.748540

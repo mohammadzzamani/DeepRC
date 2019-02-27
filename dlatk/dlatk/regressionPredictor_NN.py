@@ -948,7 +948,7 @@ class RegressionPredictor:
                             #3a) iterate over nfold groups:
                             ##mb
                             R2_avg, mse_avg, mae_avg = None, None, None
-                            for testChunk in range(0, len(groupFolds)):
+                            for testChunk in range(len(groupFolds)-1, -1,-1 ):
                                 trainGroups = set()
                                 for chunk in (groupFolds[:testChunk]+groupFolds[(testChunk+1):]):
                                     for c in chunk:
@@ -1010,15 +1010,22 @@ class RegressionPredictor:
                                 global history_counter
                                 if history_counter is None and withLanguage:
                                    history = open(self.root_path + outputName +'/parameters_history.txt','a')
+                                   print('history is written at %s'% (self.root_path + outputName +'/parameters_history.txt'))
                                    history.write('\n\n>>>>>>>>outcome name: %s '%outcomeName)
                                    history.close()
                                 ypred = None
-                                if factor_adaptation:
-                                    (regressor, multiScalers, multiFSelectors, factorScalers) = self._multiXtrain(multiXtrain, ytrain, standardize, sparse = sparse, weightedSample=sampleWeights, factorAdaptation = factor_adaptation, featureSelectionParameters = featureSelectionParameters, factorAddition = factor_addition, factors = factorTrain)
+                                multiXtestCopy = copy.deepcopy(multiXtest)
+                                ytestCopy = copy.deepcopy(ytest)
+                                if factor_adaptation :
+                                    (regressor, multiScalers, multiFSelectors, factorScalers) = self._multiXtrain(multiXtrain, ytrain, standardize, sparse = sparse, weightedSample=sampleWeights, factorAdaptation = factor_adaptation, featureSelectionParameters = featureSelectionParameters, factorAddition = factor_addition, factors = factorTrain, outputName=outputName, Xtest=multiXtest, ytest=ytest)
                                     ypred = self._multiXpredict(regressor, multiXtest, multiScalers = multiScalers, multiFSelectors = multiFSelectors, sparse = sparse, factorScalers = factorScalers, factorAddition = factor_addition, factorAdaptation = factor_adaptation, factors = factorTest)
                                 else:
+                                  if withLanguage:
+                                    (regressor, multiScalers, multiFSelectors) = self._multiXtrain(multiXtrain, ytrain, standardize, sparse = sparse, weightedSample=sampleWeights, featureSelectionParameters = featureSelectionParameters, outputName=outputName,  Xtest=multiXtestCopy, ytest=ytestCopy)
+                                  else:
                                     (regressor, multiScalers, multiFSelectors) = self._multiXtrain(multiXtrain, ytrain, standardize, sparse = sparse, weightedSample=sampleWeights, featureSelectionParameters = featureSelectionParameters, outputName=outputName)
-                                    ypred = self._multiXpredict(regressor, multiXtest, multiScalers = multiScalers, multiFSelectors = multiFSelectors, sparse = sparse)
+                                  ypred = self._multiXpredict(regressor, multiXtest, multiScalers = multiScalers, multiFSelectors = multiFSelectors, sparse = sparse)
+
                                 predictions.update(dict(zip(testGroupsOrder,ypred[len(ypred)-1])))
                                 #pprint(ypred[:10])
                                 ##4 a) save accuracy stats:
@@ -1934,7 +1941,7 @@ class RegressionPredictor:
 
 
     def _multiXtrain(self, X, y, standardize = True, sparse = False, weightedSample = None, factorAdaptation=False, featureSelectionParameters=None, factorAddition=False, 
-                     outputName = '', report=False, factors=None):
+                     outputName = '', report=False, factors=None, Xtest=None, ytest=None):
         """does the actual regression training, first feature selection: can be used by both train and test
            create multiple scalers and feature selectors
            and just one regression model (of combining the Xes into 1)
@@ -2026,7 +2033,79 @@ class RegressionPredictor:
         y = y.reshape(-1)
         print ('y.shape: ', y.shape)
 
-        
+        #################################### 
+        if Xtest is not None and ytest is not None:
+            if not isinstance(Xtest, (list, tuple)):
+                Xtest = [Xtest]
+
+            multiXtest = Xtest
+            Xtest = None #to avoid errors
+
+            scaledFactors = None
+            standardizedFactors = None
+            if factorAdaptation:
+                multiXtest , scaledFactorsTest, standardizedFactorsTest, factorScalersTest = self.adaptMultiX(multiXtest, factorsTest, sparse = sparse, factorScalers = factorScalers)
+            elif factorAddition:
+                scaledFactorsTest, standardizedFactorsTest,  factorScalersTest = self.scale(factorsTest, sparse = sparse, scalers = factorScalers )
+
+            for i in range(len(multiXtest)):
+
+                #setup X and transformers:
+                Xtest = multiXtest[i]
+                if not sparse and not factorAdaptation:
+                    Xtest = Xtest.todense()
+                (scaler, fSelector) = (None, None)
+                if multiScalers:
+                    scaler = multiScalers[i]
+                if multiFSelectors:
+                    fSelector = multiFSelectors[i]
+
+                #run transformations:
+                if scaler:
+                    print("[PREDICT] applying standard scaler to X[%d]: %s" % (i, str(scaler))) #debug
+                    try:
+                        Xtest = scaler.transform(Xtest)
+                        if self.outliersToMean and not sparse:
+                            Xtest[abs(Xtest) > self.outliersToMean] = 0
+                            print("[PREDICT] Setting outliers (> %d) to mean for X[%d]" % (self.outliersToMean, i))
+                    except NotFittedError as e:
+                        warn(e)
+                        warn("Fitting scaler")
+                        Xtest = scaler.fit_transform(Xtest)
+                        if self.outliersToMean and not sparse:
+                            Xtest[abs(Xtest) > self.outliersToMean] = 0
+                            print("[PREDICT] Setting outliers (> %d) to mean for X[%d]" % (self.outliersToMean, i))
+                elif self.outliersToMean:
+                    print(" Warning: Outliers to mean is not being run because standardize is off")
+
+                if fSelector:
+                    print("[PREDICT] applying feature selection to X[%d]: %s" % (i, str(fSelector))) #debug
+                    newXtest = fSelector.transform(Xtest)
+                    if newXtest.shape[1]:
+                        Xtest = newXtest
+                    else:
+                        print("[PREDICT] No features selected, so using original full X")
+                multiXtest[i] = Xtest
+
+            #combine all multiX into one X:
+            '''if factorAddition:
+                Xtest = standardizedFactorsTest
+                startIndex = 0
+            else:
+                Xtest = multiXtest[0]
+
+                startIndex = 1
+            for nextXtest in multiX[startIndex:]:
+                Xtest = np.append(Xtest, nextXtest, 1)        
+            '''
+            print ('y.shape: ', ytest.shape)
+            ytest = yScaler.transform(ytest.reshape(-1, 1))
+            ytest = ytest.reshape(-1)  
+            print ('y.shape: ', ytest.shape)
+        ####################################  multiScalers, multiFSelectors, factorScalers 
+
+
+
         modelName = self.modelName.lower()
         totalFeats = 0
         for Xi in multiX[0]:
@@ -2059,60 +2138,65 @@ class RegressionPredictor:
                     regularization_factor = 0
                     parameters_str += 'Controls: hidden_nodes = %s,  regularization_factor= %2.f'%(','.join(map(str,hidden_nodes)), regularization_factor)
              else:
-                    hidden_nodes =[[64,64],[256,64],[2]] #[16,8]
+                    hidden_nodes =[[64,64],[64,64],[8]] #[16,8]
                     save_path = self.root_path+ outputName + '/models/LMOnly'
-                    regularization_factor = [0.005,0.005,0.,0.005,0.005] #0.005
+                    print ('save_path::::: ' , save_path, ' , self.root_path: ', self.root_path , ' ,outputName: ', outputName )
+                    regularization_factor = [0.005,0.001,0.,0.,0.] #0.005
                     parameters_str += 'LM: hidden_nodes = %s, regularization_factor= %s'%(','.join(map(str,hidden_nodes)),  ', '.join(map(str,regularization_factor)))
              #hidden_nodes = 16 if X.shape[1] < 20 else 32
+             attention_size = 512
              epochs = 600#700
-             learning_rate =[0.001 ,0.001, 0.0002]
+             learning_rate =[0.001 ,0.001, 0.001]
              decay = True
              decay_step =1
              decay_factor = 0.99 #0.8
-             stop_loss =0.0001 #0.0001
+             stop_loss =0.00001 #0.0001
              keep_prob = [0.9,1.] #0.9
-             activation_function = ['relu','sigmoid','linear'] # linear, sigmoid, tanh, relu
-             batch_size = 16 #16
+             activation_function = ['relu','sigmoid','linear','sigmoid'] # linear, sigmoid, tanh, relu
+             batch_size = 8 #16
              shuffle = True
              optimizer='Adam' # Adam, SGD, Adadelta 
-             stopping_iteration = [10,10,5,5] # if the accuracy didnt improve after this many iterations stop
-             stddev = [0.1 , 0.1, 0.01]
-             self.max_phase =4 # between 1 to 4
+             stopping_iteration = [10,15,5,5] # if the accuracy didnt improve after this many iterations stop
+             stddev = [0.1 ,0.01, 0.01]
+             self.max_phase =2 # between 1 to 4
              max_phase = self.max_phase
-             self.start_phase =1 # between 1 to 4
+             self.start_phase =2 # between 1 to 4
              start_phase =self.start_phase
              RC = False
              FA = False
              PCA = False
              combine_model = 'yhat' #yhat or hout             
-             regressor= ffNN(hidden_nodes=hidden_nodes, epochs=epochs, learning_rate=learning_rate,saveFrequency=2,save_path = save_path, decay=decay, decay_step=decay_step, decay_factor=decay_factor, stop_loss=stop_loss, keep_probability = keep_prob, regularization_factor=regularization_factor,minimum_cost=0,activation_function=activation_function,batch_size=batch_size,shuffle=shuffle,optimizer=optimizer,stopping_iteration= stopping_iteration, stddev=stddev,max_phase=max_phase,start_phase=start_phase,RC=RC,FA=FA,combine_model=combine_model)
+             mask_size = 16
+             regressor= ffNN(hidden_nodes=hidden_nodes, epochs=epochs, learning_rate=learning_rate,saveFrequency=1,save_path = save_path, decay=decay, decay_step=decay_step, decay_factor=decay_factor, stop_loss=stop_loss, keep_probability = keep_prob, regularization_factor=regularization_factor,minimum_cost=0.006,activation_function=activation_function,batch_size=batch_size,shuffle=shuffle,optimizer=optimizer,stopping_iteration= stopping_iteration, stddev=stddev,max_phase=max_phase,start_phase=start_phase,RC=RC,FA=FA,combine_model=combine_model,attention_size=attention_size,mask_size=mask_size)
              #regressor.initialize(x1_size = X.thape[1],x2_size=X.shape[1])
              global history_counter
              if history_counter is None :
                  history = open(self.root_path + outputName + '/parameters_history.txt','a')
                  history.write('\n\n Start at: '+str(datetime.datetime.now())+'\n')
-                 history.write('Model: %s , epochs: %d, learning_rates: %f, %f, %f, decay: %s , decay_step: %d , decay_factor: %f , stop_loss: %f , keep_prob: %s, activation_function: %s, batch_size: %d, shuffle: %s, optimizer: %s, stopping_iteration: %s, stddev: %s,max_phase: %d , start phase: %d, RC: %s, FA: %s, PCA: %s, combine: %s \n' %(save_path, epochs,  learning_rate[0], learning_rate[1], learning_rate[2], str(decay), decay_step, decay_factor, stop_loss, ', '.join(map(str,keep_prob)),activation_function,batch_size,str(shuffle),optimizer ,', '.join(map(str,stopping_iteration)),', '.join(map(str,stddev)),max_phase,start_phase,str(RC),str(FA), str(PCA), combine_model) )
+                 history.write('Model: %s , epochs: %d, learning_rates: %f, %f, %f, decay: %s , decay_step: %d , decay_factor: %f , stop_loss: %f , keep_prob: %s, activation_function: %s, batch_size: %d, shuffle: %s, optimizer: %s, stopping_iteration: %s, stddev: %s,max_phase: %d , start phase: %d, RC: %s, FA: %s, PCA: %s, combine: %s, attention_size: %d , mask_size: %d \n' %(save_path, epochs,  learning_rate[0], learning_rate[1], learning_rate[2], str(decay), decay_step, decay_factor, stop_loss, ', '.join(map(str,keep_prob)),activation_function,batch_size,str(shuffle),optimizer ,', '.join(map(str,stopping_iteration)),', '.join(map(str,stddev)),max_phase,start_phase,str(RC),str(FA), str(PCA), combine_model, attention_size, mask_size) )
                  history.write(parameters_str+'\n')
                  history.close()
                  history_counter = True
              print('length of the multiX is %d'%len(multiX))
              try: 
-                regressor.initialize(x1_size = multiX[len(multiX) -1].shape[1],x2_size=multiX[0].shape[1],x2n_size=multiX[len(multiX) -2].shape[1])#,xA_size=multiX[2].shape[1])
-             #   #regressor.set_params(**dict((k, v[0] if isinstance(v, list) else v) for k,v in self.cvParams[modelName][0].items()))
-             except IndexError:
-             #    
-                print(" >>No CV parameters available")
-             #   raise IndexError
+                 if not FA:
+                   regressor.initialize(x1_size = multiX[len(multiX) -1].shape[1],x2_size=multiX[0].shape[1],x2n_size=multiX[len(multiX) -2].shape[1],xA_size=multiX[len(multiX) -2].shape[1])
+                 else:
+                   regressor.initialize(x1_size = multiX[int(len(multiX)/2)-1].shape[1],x2_size=multiX[0].shape[1],x2n_size=multiX[len(multiX) -2].shape[1],xA_size=multiX[2].shape[1])
+                 #   #regressor.set_params(**dict((k, v[0] if isinstance(v, list) else v) for k,v in self.cvParams[modelName][0].items()))
+             except Exception as e:
+                 #    
+                 print('error occured %s'% e)
+                 print(" >>No CV parameters available")
+                 #   raise IndexError
              #print dict(self.cvParams[modelName][0])
 
              try:
-                try:
                     #multiX[0] = np.zeros((multiX[0].shape[0], multiX[0].shape[1]))
-                    regressor.train(multiX,y)
-                    #regressor.fit(X, y, sample_weight = weightedSample)
-                except TypeError:
-                    regressor.train(multiX,y)
-                    #regressor.fit(X, y)
+                    if Xtest is not None: 
+                       regressor.train(multiX,y, multiXtest, ytest)
+                    else:
+                       regressor.train(multiX,y)
              except LinAlgError:
                 print("  >>Lin Algebra error, X:")
                 pprint(X)
