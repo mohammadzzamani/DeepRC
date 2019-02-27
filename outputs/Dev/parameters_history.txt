@@ -1124,3 +1124,89 @@ LM: hidden_nodes = [64, 64],[256, 64],[8], regularization_factor= 0.005, 0.0, 0.
  Start at: 2019-02-26 17:47:11.574574
 Model: /home/mbastan/DeepRC/outputs/Dev/models/LMOnly , epochs: 600, learning_rates: 0.001000, 0.001000, 0.001000, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000010 , keep_prob: 0.9, 1.0, activation_function: ['relu', 'sigmoid', 'linear', 'sigmoid'], batch_size: 32, shuffle: True, optimizer: Adam, stopping_iteration: 10, 15, 5, 5, stddev: 0.1, 0.1, 0.01,max_phase: 2 , start phase: 2, RC: False, FA: False, PCA: False, combine: yhat, attention_size: 128 
 LM: hidden_nodes = [64, 64],[256, 64],[8], regularization_factor= 0.005, 0.0, 0.001, 0.0, 0.0
+
+
+>>>>>>>>outcome name: 01hea_aar 
+
+ Start at: 2019-02-27 08:24:52.286486
+Model: /home/mbastan/DeepRC/outputs/Dev/models/LMOnly , epochs: 600, learning_rates: 0.001000, 0.001000, 0.001000, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000010 , keep_prob: 0.9, 1.0, activation_function: ['relu', 'sigmoid', 'linear', 'sigmoid'], batch_size: 8, shuffle: True, optimizer: Adam, stopping_iteration: 10, 15, 5, 5, stddev: 0.1, 0.01, 0.01,max_phase: 2 , start phase: 2, RC: False, FA: False, PCA: False, combine: yhat, attention_size: 512 , mask_size: 16 
+LM: hidden_nodes = [64, 64],[64, 64],[8], regularization_factor= 0.005, 0.001, 0.0, 0.0, 0.0
+
+
+>>>>>>>>outcome name: 01hea_aar 
+
+ Start at: 2019-02-27 08:35:45.570227
+Model: /home/mbastan/DeepRC/outputs/Dev/models/LMOnly , epochs: 600, learning_rates: 0.001000, 0.001000, 0.001000, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000010 , keep_prob: 0.9, 1.0, activation_function: ['relu', 'sigmoid', 'linear', 'sigmoid'], batch_size: 8, shuffle: True, optimizer: Adam, stopping_iteration: 10, 15, 5, 5, stddev: 0.1, 0.01, 0.01,max_phase: 2 , start phase: 2, RC: False, FA: False, PCA: False, combine: yhat, attention_size: 32 , mask_size: 32 
+LM: hidden_nodes = [64, 64],[32],[8], regularization_factor= 0.005, 0.001, 0.0, 0.0, 0.0
+  *FOLD: 9  R^2: -0.0587 (MSE: 1883.0749; MAE: 34.3047; mean train mae: 33.6105)
+  *FOLD: 9  R^2: -0.0497 (MSE: 1867.1934; MAE: 34.3849; mean train mae: 33.6105)
+-------
+  *FOLD: 8  R^2: -0.0569 (MSE: 1705.4530; MAE: 32.7466; mean train mae: 32.1991)
+  *FOLD: 8  R^2: -0.0865 (MSE: 1753.2670; MAE: 33.2378; mean train mae: 32.1991)
+-------
+
+
+>>>>>>>>outcome name: 01hea_aar 
+
+ Start at: 2019-02-27 08:42:01.856255
+Model: /home/mbastan/DeepRC/outputs/Dev/models/LMOnly , epochs: 600, learning_rates: 0.001000, 0.001000, 0.001000, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000010 , keep_prob: 0.9, 1.0, activation_function: ['relu', 'sigmoid', 'linear', 'sigmoid'], batch_size: 8, shuffle: True, optimizer: Adam, stopping_iteration: 10, 15, 5, 5, stddev: 0.1, 0.01, 0.01,max_phase: 2 , start phase: 2, RC: False, FA: False, PCA: False, combine: yhat, attention_size: 32 , mask_size: 32 
+LM: hidden_nodes = [64, 64],[32],[8], regularization_factor= 0.005, 0.001, 0.0, 0.0, 0.0
+  *FOLD: 9  R^2: -0.0670 (MSE: 1897.9947; MAE: 33.8618; mean train mae: 33.6105)
+  *FOLD: 9  R^2: -0.1021 (MSE: 1960.3215; MAE: 34.1787; mean train mae: 33.6105)
+-------
+
+
+>>>>>>>>outcome name: 01hea_aar 
+
+ Start at: 2019-02-27 08:44:52.999942
+Model: /home/mbastan/DeepRC/outputs/Dev/models/LMOnly , epochs: 600, learning_rates: 0.001000, 0.001000, 0.001000, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000010 , keep_prob: 0.9, 1.0, activation_function: ['relu', 'sigmoid', 'linear', 'sigmoid'], batch_size: 8, shuffle: True, optimizer: Adam, stopping_iteration: 10, 15, 5, 5, stddev: 0.1, 0.01, 0.01,max_phase: 2 , start phase: 2, RC: False, FA: False, PCA: False, combine: yhat, attention_size: 32 , mask_size: 32 
+LM: hidden_nodes = [64, 64],[32, 8],[8], regularization_factor= 0.005, 0.001, 0.0, 0.0, 0.0
+  *FOLD: 9  R^2: -0.0263 (MSE: 1825.5934; MAE: 33.4748; mean train mae: 33.6105)
+  *FOLD: 9  R^2: -0.0418 (MSE: 1853.1310; MAE: 33.5680; mean train mae: 33.6105)
+-------
+
+
+>>>>>>>>outcome name: 01hea_aar 
+
+ Start at: 2019-02-27 08:47:32.878884
+Model: /home/mbastan/DeepRC/outputs/Dev/models/LMOnly , epochs: 600, learning_rates: 0.001000, 0.001000, 0.001000, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000010 , keep_prob: 0.9, 1.0, activation_function: ['relu', 'sigmoid', 'linear', 'sigmoid'], batch_size: 8, shuffle: True, optimizer: Adam, stopping_iteration: 10, 15, 5, 5, stddev: 0.1, 0.01, 0.01,max_phase: 2 , start phase: 2, RC: False, FA: False, PCA: False, combine: yhat, attention_size: 512 , mask_size: 1000 
+LM: hidden_nodes = [64, 64],[64, 16],[8], regularization_factor= 0.005, 0.001, 0.0, 0.0, 0.0
+  *FOLD: 9  R^2: -0.0787 (MSE: 1918.7134; MAE: 33.9198; mean train mae: 33.6105)
+  *FOLD: 9  R^2: -0.0682 (MSE: 1900.0320; MAE: 33.8097; mean train mae: 33.6105)
+-------
+
+
+>>>>>>>>outcome name: 01hea_aar 
+
+ Start at: 2019-02-27 09:09:41.279812
+Model: /home/mbastan/DeepRC/outputs/Dev/models/LMOnly , epochs: 600, learning_rates: 0.001000, 0.001000, 0.001000, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000010 , keep_prob: 0.9, 1.0, activation_function: ['relu', 'sigmoid', 'linear', 'sigmoid'], batch_size: 8, shuffle: True, optimizer: Adam, stopping_iteration: 10, 15, 5, 5, stddev: 0.1, 0.01, 0.01,max_phase: 2 , start phase: 2, RC: False, FA: False, PCA: False, combine: yhat, attention_size: 512 , mask_size: 1000 
+LM: hidden_nodes = [64, 64],[64, 16],[8], regularization_factor= 0.005, 0.001, 0.0, 0.0, 0.0
+  *FOLD: 9  R^2: -0.0726 (MSE: 1907.8703; MAE: 33.8560; mean train mae: 33.6105)
+  *FOLD: 9  R^2: -0.0311 (MSE: 1834.0781; MAE: 33.4933; mean train mae: 33.6105)
+-------
+  *FOLD: 8  R^2: -0.0138 (MSE: 1635.8745; MAE: 32.3070; mean train mae: 32.1991)
+  *FOLD: 8  R^2: -0.0000 (MSE: 1613.7293; MAE: 32.0155; mean train mae: 32.1991)
+-------
+  *FOLD: 7  R^2: -0.0217 (MSE: 2087.2178; MAE: 36.5871; mean train mae: 36.6985)
+  *FOLD: 7  R^2: -0.0152 (MSE: 2073.8119; MAE: 36.5709; mean train mae: 36.6985)
+-------
+
+
+>>>>>>>>outcome name: 01hea_aar 
+
+ Start at: 2019-02-27 10:00:22.852299
+Model: /home/mbastan/DeepRC/outputs/Dev/models/LMOnly , epochs: 600, learning_rates: 0.001000, 0.001000, 0.001000, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000010 , keep_prob: 0.9, 1.0, activation_function: ['relu', 'sigmoid', 'linear', 'sigmoid'], batch_size: 8, shuffle: True, optimizer: Adam, stopping_iteration: 10, 15, 5, 5, stddev: 0.1, 0.01, 0.01,max_phase: 2 , start phase: 2, RC: False, FA: False, PCA: False, combine: yhat, attention_size: 16 , mask_size: 4 
+LM: hidden_nodes = [64, 64],[64, 16],[8], regularization_factor= 0.005, 0.001, 0.0, 0.0, 0.0
+  *FOLD: 9  R^2: -0.0447 (MSE: 1858.3013; MAE: 33.5920; mean train mae: 33.6105)
+  *FOLD: 9  R^2: -0.1252 (MSE: 2001.4318; MAE: 34.4565; mean train mae: 33.6105)
+-------
+
+
+>>>>>>>>outcome name: 01hea_aar 
+
+ Start at: 2019-02-27 10:02:43.883935
+Model: /home/mbastan/DeepRC/outputs/Dev/models/LMOnly , epochs: 600, learning_rates: 0.001000, 0.001000, 0.001000, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000010 , keep_prob: 0.9, 1.0, activation_function: ['relu', 'sigmoid', 'linear', 'sigmoid'], batch_size: 8, shuffle: True, optimizer: Adam, stopping_iteration: 10, 15, 5, 5, stddev: 0.1, 0.01, 0.01,max_phase: 2 , start phase: 2, RC: False, FA: False, PCA: False, combine: yhat, attention_size: 16 , mask_size: 4 
+LM: hidden_nodes = [64, 64],[64, 16],[8], regularization_factor= 0.005, 0.001, 0.0, 0.0, 0.0
+  *FOLD: 9  R^2: 0.4019 (MSE: 1063.9006; MAE: 24.1553; mean train mae: 33.6105)
+  *FOLD: 9  R^2: 0.4011 (MSE: 1065.3091; MAE: 24.0676; mean train mae: 33.6105)
+-------

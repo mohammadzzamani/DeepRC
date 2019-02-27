@@ -58,7 +58,7 @@ class ffNN():
     def __init__(self, hidden_nodes=[[8,2],[32,8]], epochs=3, learning_rate=0.1, saveFrequency=1,
                  save_path='/models/ControlOnly', decay=False, decay_step=10, decay_factor=0.7,
                  stop_loss=0.0001, regularization_factor=[0.05,0.04,0.03,0.05], keep_probability=0.7, minimum_cost=0.2,
-                 activation_function='sigmoid', batch_size=1,shuffle=True,optimizer='Adam',stopping_iteration=[10,10,1,1], stddev=[0.5,0.1],max_phase=4,start_phase=1,FA=False,RC=False,combine_model='yhat',attention_size=32, mask_size=100):
+                 activation_function='sigmoid', batch_size=1,shuffle=True,optimizer='Adam',stopping_iteration=[10,10,1,1], stddev=[0.5,0.1],max_phase=4,start_phase=1,FA=False,RC=False,combine_model='yhat',attention_size=32, mask_size=100,use_dev=False):
         self.hidden_nodes = hidden_nodes
         self.epochs = epochs
         self.learning_rate = learning_rate
@@ -87,6 +87,7 @@ class ffNN():
         device_count = {'GPU': 0}
         )
         self.mask_size = mask_size
+        self.Dev = use_dev
         print('model started working :D')
 
     def forwardprop(self, X, w_in, b_in, keep_prob,activation_func):
@@ -145,7 +146,7 @@ class ffNN():
                                                        staircase=True)
             else:
                  learning_rate_adam = learning_rate
-            updates = tf.train.AdamOptimizer(learning_rate=learning_rate_adam).minimize(loss)#,var_list=[v for v in tf.trainable_variables() if ('phase'+str(phase)+prefix) in v.name])
+            updates = tf.train.AdamOptimizer(learning_rate=learning_rate_adam).minimize(loss,var_list=[v for v in tf.trainable_variables() if ('phase'+str(phase)+prefix) in v.name])
             return yhat, mse, loss, updates, h_out, learning_rate_adam,l_norm, w_out, b_out, w_in
 
 
@@ -159,7 +160,7 @@ class ffNN():
             mask_features_noshape = tf.boolean_mask(topic_features_3d_reshaped,mask_array_3d)
             topic_expanded= tf.reshape(mask_features_noshape,[-1,self.attention_size, mask_size])
 
-            w_in, b_in = init_weights(shape=[size_c,self.attention_size,mask_size], stddev=1.,name='attention_'+name,mean=0.)
+            w_in, b_in = init_weights(shape=[size_c,self.attention_size,mask_size], stddev=self.stddev[-1],name='attention_'+name,mean=0.1)
             #w_in = tf.Print(w_in,[w_in, b_in],message = 'w , b ', summarize= 20)
             exps = self.forwardprop( X=control_features, w_in=tf.reshape(w_in,[size_c,-1]), b_in=b_in, keep_prob=keep_prob,activation_func=self.activation_function[-1])
             exps_reshape = tf.reshape(exps, [-1,  self.attention_size,mask_size])
@@ -226,6 +227,8 @@ class ffNN():
             sample = random.sample([i for i in range(len(l))] , self.mask_size)
             list_sample = [ l[i] if i in sample else 0 for i in range(len(l))]
             random_mask = np.array([random.sample(list_sample, len(list_sample)) for i in range(self.attention_size)],dtype=bool) #(attention * 2000)
+            #print(random_mask)
+            #print(np.sum(random_mask,1), np.sum(random_mask,0))
             outAtt, l2_normAtt = self.attentionMechanism(control_features=self.X1, topic_features=self.X2,size_c=x1_size,size_t=x2_size , name='phase2',random_mask=random_mask,mask_size=self.mask_size,keep_prob=self.keep_prob)
 
             #print('shape of out Attention is %d',outAtt.get_shape())
@@ -399,8 +402,9 @@ class ffNN():
             learning_rates_adam = []
             all_epoch_cost = []
             all_epoch_MSE = []
-            #[train_x1,train_x2,train_x2n,train_adaptedx,train_y],[train_x1_dev,train_x2_dev,train_x2n_dev,train_adaptedx_dev,train_y_dev]= self.splitShuffle([X1,X2,X2n,XAdapted,y],devSize=0.1, shuffle=self.shuffle)
-            #train_y_dev = np.transpose(np.array([train_y_dev],dtype=np.float64))
+            if self.Dev:
+                [train_x1,train_x2,train_x2n,train_adaptedx,train_y],[train_x1_dev,train_x2_dev,train_x2n_dev,train_adaptedx_dev,train_y_dev]= self.splitShuffle([X1,X2,X2n,XAdapted,y],devSize=0.1, shuffle=self.shuffle)
+                train_y_dev = np.transpose(np.array([train_y_dev],dtype=np.float64))
 
 
 
@@ -417,8 +421,12 @@ class ffNN():
                    keep_prob = self.keep_probability[0]
                 else:
                    keep_prob = self.keep_probability[1]
-                [train_x1,train_x2,train_x2n,train_adaptedx,train_y], _  =self.splitShuffle([X1,X2,X2n,XAdapted,y],devSize=0., shuffle=self.shuffle)
-                #[train_x1,train_x2,train_x2n,train_adaptedx,train_y], _ = self.splitShuffle([train_x1,train_x2,train_x2n,train_adaptedx,train_y],devSize=0, shuffle=self.shuffle)
+
+
+                if self.Dev:
+                   [train_x1,train_x2,train_x2n,train_adaptedx,train_y], _ = self.splitShuffle([train_x1,train_x2,train_x2n,train_adaptedx,train_y],devSize=0, shuffle=self.shuffle)
+                else:
+                   [train_x1,train_x2,train_x2n,train_adaptedx,train_y], _  =self.splitShuffle([X1,X2,X2n,XAdapted,y],devSize=0., shuffle=self.shuffle)
                 '''
                 [train_x1,train_x2,train_x2n,train_adaptedx,train_y],[train_x1_dev,train_x2_dev,train_x2n_dev,train_adaptedx_dev,train_y_dev]= self.splitShuffle([X1,X2,X2n,XAdapted,y],devSize=0.2, shuffle=self.shuffle)
                 train_y_dev = np.transpose(np.array([train_y_dev],dtype=np.float64))
@@ -460,18 +468,19 @@ class ffNN():
                 # if self.decay is True and epoch % self.decay_step ==0:
                 #    self.learning_rate  *= self.decay_factor
                 stop =True
-                
-                ''' 
-                feed_dict_dev = {self.reg_factor1: self.regularization_factor[0],self.reg_factor2: self.regularization_factor[1],self.reg_factor3: self.regularization_factor[2],self.reg_factor4: self.regularization_factor[3],self.reg_factor5: self.regularization_factor[4], self.X1: train_x1_dev, self.X2: train_x2_dev, self.X2n: train_x2n_dev, self.XA:train_adaptedx_dev, self.y: train_y_dev, self.keep_prob: 1.}
-                epoch_cost,epoch_MSE = sess.run([eval('self.loss'+str(phase)),eval('self.mse'+str(phase))], feed_dict=feed_dict_dev)
-                #all_epoch_cost += [cost]
-                #all_epoch_MSE += [MSE] 
-                #stop =False
-                #epoch_cost = sum(all_epoch_cost[-20:])/ min(20,len(all_epoch_cost))
-                #epoch_MSE = sum(all_epoch_MSE[-20:])/ min(20,len(all_epoch_MSE))
-                #if len(all_epoch_cost) > 9:
-                #     stop = True
-                '''
+                if self.Dev:
+                  feed_dict_dev = {self.reg_factor1: self.regularization_factor[0],self.reg_factor2: self.regularization_factor[1],self.reg_factor3: self.regularization_factor[2],self.reg_factor4: self.regularization_factor[3],self.reg_factor5: self.regularization_factor[4], self.X1: train_x1_dev, self.X2: train_x2_dev, self.X2n: train_x2n_dev, self.XA:train_adaptedx_dev, self.y: train_y_dev, self.keep_prob: 1.}
+                  epoch_cost,epoch_MSE = sess.run([eval('self.loss'+str(phase)),eval('self.mse'+str(phase))], feed_dict=feed_dict_dev)
+                  #all_epoch_cost += [cost]
+                  #all_epoch_MSE += [MSE] 
+                  #stop =False
+                  #epoch_cost = sum(all_epoch_cost[-20:])/ min(20,len(all_epoch_cost))
+                  #epoch_MSE = sum(all_epoch_MSE[-20:])/ min(20,len(all_epoch_MSE))
+                  #if len(all_epoch_cost) > 9:
+                  #     stop = True
+                else:
+                  epoch_cost = float(allcosts) * self.batch_size / len(train_x1)
+                  epoch_MSE = float(MSE) * self.batch_size  / len(train_x1) 
 
 
                 X2test = Xtest[0]
@@ -482,12 +491,13 @@ class ffNN():
                 feed_dict_test = {self.reg_factor1: self.regularization_factor[0],self.reg_factor2: self.regularization_factor[1],self.reg_factor3: self.regularization_factor[2],self.reg_factor4: self.regularization_factor[3],self.reg_factor5: self.regularization_factor[4], self.X1: X1test, self.X2: X2test, self.X2n: X2ntest, self.XA:XAdaptedtest, self.y: ytest_feed, self.keep_prob: 1.}
                 costTest,MSETest = sess.run([eval('self.loss'+str(phase)),eval('self.mse'+str(phase))], feed_dict=feed_dict_test)
 
+                print("Phase= %d, Epoch = %d, train cost = %.6f, train mse:%.6f,test MSE = %.6f "#, weights: %s , weight_b: %.6f, l2norm3: %.6f"
+                      % (phase, epoch + 1, epoch_cost, epoch_MSE,MSETest))#, ', '.join(map(str, weights)), weight_b,l2_norm) )
+ 
 
 
-
-                epoch_cost = float(allcosts) * self.batch_size / len(train_x1) 
-                epoch_MSE = float(MSE) * self.batch_size  / len(train_x1) 
                 #if (epoch % self.saveFrequency == 0 and epoch != 0):
+
                 #if (phase == 3 and epoch - best_saved_epoch > self.saveFrequency and epoch != 0):
                 #    saver.save(sess, self.save_path + "/pretrained_lstm.ckpt", global_step=epoch)
                 if bestLoss - epoch_cost > self.stop_loss:
@@ -545,8 +555,8 @@ class ffNN():
                     # if epoch_cost < self.minimum_cost :
                 #       print("Exited on epoch  %d, with loss  %.6f" % (epoch + 1, epoch_cost))
                 #        break
-                print("Phase= %d, Epoch = %d, train cost = %.6f, train mse:%.6f,test MSE = %.6f "#, weights: %s , weight_b: %.6f, l2norm3: %.6f"
-                      % (phase, epoch + 1, epoch_cost, epoch_MSE,MSETest))#, ', '.join(map(str, weights)), weight_b,l2_norm) )
+                #print("Phase= %d, Epoch = %d, train cost = %.6f, train mse:%.6f,test MSE = %.6f "#, weights: %s , weight_b: %.6f, l2norm3: %.6f"
+                #      % (phase, epoch + 1, epoch_cost, epoch_MSE,MSETest))#, ', '.join(map(str, weights)), weight_b,l2_norm) )
             num_parameters = sum([np.prod(tvar.get_shape().as_list()) for tvar in tf.trainable_variables()])
             print('total number of parameters: %d'%num_parameters)
             sess.close()
