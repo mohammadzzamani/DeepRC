@@ -1,0 +1,200 @@
+
+
+>>>>>>>>outcome name: fair_poor_health_perc_bfrss15 
+
+ Start at: 2019-02-28 21:21:42.715912
+Model: /users/mzamani/DeepRC/outputs/5phases_hout/models/LMOnly , epochs: 600, learning_rates: 0.001000, 0.001000, 0.001000, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.9, 1.0, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 5, 3, 3, 3, 3, stddev: 0.1, 0.1, 0.1,max_phase: 5 , start phase: 1, RC: False, FA: True, PCA: False, combine: hout 
+LM: hidden_nodes = [64, 64],[256, 64],[256, 64],[16, 8], regularization_factor= 0.0, 0.005, 0.005, 0.0, 0.005
+
+
+>>>>>>>>outcome name: fair_poor_health_perc_bfrss15 
+
+ Start at: 2019-02-28 21:25:37.741825
+Model: /users/mzamani/DeepRC/outputs/5phases_hout/models/LMOnly , epochs: 600, learning_rates: 0.001000, 0.001000, 0.001000, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.9, 1.0, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 5, 3, 3, 3, 3, stddev: 0.1, 0.1, 0.1,max_phase: 5 , start phase: 1, RC: False, FA: True, PCA: False, combine: hout 
+LM: hidden_nodes = [64, 64],[256, 64],[256, 64],[16, 8], regularization_factor= 0.0, 0.005, 0.005, 0.0, 0.005
+
+
+>>>>>>>>outcome name: fair_poor_health_perc_bfrss15 
+
+ Start at: 2019-02-28 21:30:53.628825
+Model: /users/mzamani/DeepRC/outputs/5phases_hout/models/LMOnly , epochs: 600, learning_rates: 0.001000, 0.001000, 0.001000, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.9, 1.0, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 5, 3, 3, 3, 3, stddev: 0.1, 0.1, 0.1,max_phase: 5 , start phase: 1, RC: False, FA: True, PCA: False, combine: hout 
+LM: hidden_nodes = [64, 64],[256, 64],[256, 64],[16, 8], regularization_factor= 0.0, 0.005, 0.005, 0.0, 0.005
+
+
+>>>>>>>>outcome name: fair_poor_health_perc_bfrss15 
+
+ Start at: 2019-02-28 21:36:13.355482
+Model: /users/mzamani/DeepRC/outputs/5phases_hout/models/LMOnly , epochs: 600, learning_rates: 0.001000, 0.001000, 0.001000, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.9, 1.0, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 5, 3, 3, 3, 3, stddev: 0.1, 0.1, 0.1,max_phase: 5 , start phase: 1, RC: False, FA: True, PCA: False, combine: yhat 
+LM: hidden_nodes = [64, 64],[256, 64],[256, 64],[16, 8], regularization_factor= 0.0, 0.005, 0.005, 0.0, 0.005
+
+
+>>>>>>>>outcome name: fair_poor_health_perc_bfrss15 
+
+ Start at: 2019-02-28 21:37:58.226603
+Model: /users/mzamani/DeepRC/outputs/5phases_hout/models/LMOnly , epochs: 600, learning_rates: 0.001000, 0.001000, 0.001000, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.9, 1.0, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 5, 3, 3, 3, 3, stddev: 0.1, 0.1, 0.1,max_phase: 5 , start phase: 1, RC: False, FA: True, PCA: False, combine: hout 
+LM: hidden_nodes = [64, 64],[256, 64],[256, 64],[16, 8], regularization_factor= 0.0, 0.005, 0.005, 0.0, 0.005
+
+
+>>>>>>>>outcome name: fair_poor_health_perc_bfrss15 
+
+ Start at: 2019-02-28 21:40:04.282953
+Model: /users/mzamani/DeepRC/outputs/5phases_hout/models/LMOnly , epochs: 600, learning_rates: 0.001000, 0.001000, 0.001000, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.9, 1.0, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 5, 3, 3, 3, 3, stddev: 0.1, 0.1, 0.1,max_phase: 5 , start phase: 1, RC: False, FA: True, PCA: False, combine: hout 
+LM: hidden_nodes = [64, 64],[256, 64],[256, 64],[16, 8], regularization_factor= 0.0, 0.005, 0.005, 0.0, 0.005
+
+
+>>>>>>>>outcome name: fair_poor_health_perc_bfrss15 
+
+ Start at: 2019-02-28 21:42:45.419856
+Model: /users/mzamani/DeepRC/outputs/5phases_hout/models/LMOnly , epochs: 600, learning_rates: 0.001000, 0.001000, 0.001000, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.9, 1.0, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 5, 3, 3, 3, 3, stddev: 0.1, 0.1, 0.1,max_phase: 5 , start phase: 1, RC: False, FA: True, PCA: False, combine: hout 
+LM: hidden_nodes = [64, 64],[256, 64],[256, 64],[16, 8], regularization_factor= 0.0, 0.005, 0.005, 0.0, 0.005
+
+
+>>>>>>>>outcome name: fair_poor_health_perc_bfrss15 
+
+ Start at: 2019-02-28 21:45:29.376128
+Model: /users/mzamani/DeepRC/outputs/5phases_hout/models/LMOnly , epochs: 600, learning_rates: 0.001000, 0.001000, 0.001000, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.9, 1.0, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 5, 3, 3, 3, 3, stddev: 0.1, 0.1, 0.1,max_phase: 5 , start phase: 1, RC: False, FA: True, PCA: False, combine: hout 
+LM: hidden_nodes = [64, 64],[256, 64],[256, 64],[16, 8], regularization_factor= 0.0, 0.005, 0.005, 0.0, 0.005
+
+
+>>>>>>>>outcome name: fair_poor_health_perc_bfrss15 
+
+ Start at: 2019-02-28 21:46:49.132276
+Model: /users/mzamani/DeepRC/outputs/5phases_hout/models/LMOnly , epochs: 600, learning_rates: 0.001000, 0.001000, 0.001000, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.9, 1.0, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 5, 3, 3, 3, 3, stddev: 0.1, 0.1, 0.1,max_phase: 5 , start phase: 1, RC: False, FA: True, PCA: False, combine: hout 
+LM: hidden_nodes = [64, 64],[256, 64],[256, 64],[16, 8], regularization_factor= 0.0, 0.005, 0.005, 0.0, 0.005
+
+
+>>>>>>>>outcome name: fair_poor_health_perc_bfrss15 
+
+ Start at: 2019-02-28 21:50:27.001287
+Model: /users/mzamani/DeepRC/outputs/5phases_hout/models/LMOnly , epochs: 600, learning_rates: 0.001000, 0.001000, 0.001000, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.9, 1.0, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 5, 3, 3, 3, 3, stddev: 0.1, 0.1, 0.1, 0.1,max_phase: 5 , start phase: 1, RC: False, FA: True, PCA: False, combine: hout 
+LM: hidden_nodes = [64, 64],[256, 64],[256, 64],[16, 8], regularization_factor= 0.0, 0.005, 0.005, 0.0, 0.005
+  *FOLD: 9  R^2: 0.5954 (MSE: 14.6306; MAE: 2.7158; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.5486 (MSE: 16.3230; MAE: 3.0545; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.5696 (MSE: 15.5646; MAE: 2.8664; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.5959 (MSE: 14.6148; MAE: 2.7495; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.6254 (MSE: 13.5455; MAE: 2.6122; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.6244 (MSE: 13.5844; MAE: 2.6021; mean train mae: 4.6126)
+-------
+  *FOLD: 8  R^2: 0.6338 (MSE: 8.8601; MAE: 2.2696; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.5418 (MSE: 11.0850; MAE: 2.6507; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.5529 (MSE: 10.8172; MAE: 2.5765; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.7060 (MSE: 7.1135; MAE: 2.0657; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.6761 (MSE: 7.8368; MAE: 2.1236; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.6465 (MSE: 8.5515; MAE: 2.2311; mean train mae: 3.9087)
+-------
+  *FOLD: 7  R^2: 0.5883 (MSE: 12.8076; MAE: 2.7193; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.4511 (MSE: 17.0759; MAE: 2.9722; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.5167 (MSE: 15.0366; MAE: 2.9736; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.6369 (MSE: 11.2953; MAE: 2.4822; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.6240 (MSE: 11.6986; MAE: 2.5606; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.6211 (MSE: 11.7877; MAE: 2.5831; mean train mae: 4.3623)
+-------
+
+
+>>>>>>>>outcome name: fair_poor_health_perc_bfrss15 
+
+ Start at: 2019-02-28 22:08:49.444667
+Model: /users/mzamani/DeepRC/outputs/5phases_hout/models/LMOnly , epochs: 600, learning_rates: 0.001000, 0.001000, 0.001000, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.9, 1.0, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 5, 3, 3, 3, 3, stddev: 0.1, 0.1, 0.1, 0.1,max_phase: 5 , start phase: 1, RC: False, FA: True, PCA: False, combine: hout 
+LM: hidden_nodes = [64, 64],[256, 64],[256, 64],[16, 8], regularization_factor= 0.0, 0.005, 0.005, 0.0, 0.001
+  *FOLD: 9  R^2: 0.6071 (MSE: 14.2098; MAE: 2.6722; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.5364 (MSE: 16.7632; MAE: 2.9721; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.6323 (MSE: 13.2958; MAE: 2.6943; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.6088 (MSE: 14.1480; MAE: 2.8026; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.5732 (MSE: 15.4351; MAE: 2.8603; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.5876 (MSE: 14.9121; MAE: 2.8167; mean train mae: 4.6126)
+-------
+
+
+>>>>>>>>outcome name: fair_poor_health_perc_bfrss15 
+
+ Start at: 2019-02-28 22:19:03.853009
+Model: /users/mzamani/DeepRC/outputs/5phases_hout/models/LMOnly , epochs: 600, learning_rates: 0.001000, 0.001000, 0.001000, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.9, 1.0, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 5, 3, 3, 3, 3, stddev: 0.1, 0.1, 0.1, 0.1,max_phase: 5 , start phase: 1, RC: False, FA: True, PCA: False, combine: hout 
+LM: hidden_nodes = [64, 64],[256, 64],[256, 64],[16, 8], regularization_factor= 0.0, 0.005, 0.005, 0.0, 0.002
+
+
+>>>>>>>>outcome name: fair_poor_health_perc_bfrss15 
+
+ Start at: 2019-02-28 22:20:55.701172
+Model: /users/mzamani/DeepRC/outputs/5phases_hout/models/LMOnly , epochs: 600, learning_rates: 0.001000, 0.001000, 0.001000, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.9, 1.0, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 5, 3, 3, 3, 3, stddev: 0.1, 0.1, 0.1, 0.1,max_phase: 5 , start phase: 1, RC: False, FA: True, PCA: False, combine: hout 
+LM: hidden_nodes = [64, 64],[256, 64],[256, 64],[16, 8], regularization_factor= 0.0, 0.005, 0.005, 0.0, 0.002
+  *FOLD: 9  R^2: 0.6254 (MSE: 13.5456; MAE: 2.6099; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.4535 (MSE: 19.7639; MAE: 3.2327; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.5143 (MSE: 17.5659; MAE: 3.2220; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.6445 (MSE: 12.8555; MAE: 2.5632; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.6072 (MSE: 14.2056; MAE: 2.6586; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.6484 (MSE: 12.7135; MAE: 2.5630; mean train mae: 4.6126)
+-------
+  *FOLD: 8  R^2: 0.6667 (MSE: 8.0640; MAE: 2.1512; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.4717 (MSE: 12.7814; MAE: 2.8425; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.6898 (MSE: 7.5046; MAE: 2.0812; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.7216 (MSE: 6.7354; MAE: 1.9473; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.6895 (MSE: 7.5110; MAE: 2.0981; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.6893 (MSE: 7.5171; MAE: 2.0604; mean train mae: 3.9087)
+-------
+  *FOLD: 7  R^2: 0.6012 (MSE: 12.4050; MAE: 2.5972; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.5414 (MSE: 14.2682; MAE: 2.9188; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.5745 (MSE: 13.2355; MAE: 2.6499; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.6448 (MSE: 11.0503; MAE: 2.4964; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.6280 (MSE: 11.5721; MAE: 2.5046; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.6357 (MSE: 11.3341; MAE: 2.4960; mean train mae: 4.3623)
+-------
+  *FOLD: 6  R^2: 0.6063 (MSE: 11.3039; MAE: 2.5397; mean train mae: 4.3208)
+  *FOLD: 6  R^2: 0.5173 (MSE: 13.8593; MAE: 2.9372; mean train mae: 4.3208)
+  *FOLD: 6  R^2: 0.5440 (MSE: 13.0930; MAE: 2.7385; mean train mae: 4.3208)
+  *FOLD: 6  R^2: 0.6303 (MSE: 10.6146; MAE: 2.4653; mean train mae: 4.3208)
+  *FOLD: 6  R^2: 0.6117 (MSE: 11.1499; MAE: 2.5563; mean train mae: 4.3208)
+  *FOLD: 6  R^2: 0.5991 (MSE: 11.5128; MAE: 2.5718; mean train mae: 4.3208)
+-------
+  *FOLD: 5  R^2: 0.7234 (MSE: 8.6007; MAE: 2.1434; mean train mae: 4.4436)
+  *FOLD: 5  R^2: 0.5512 (MSE: 13.9530; MAE: 2.8465; mean train mae: 4.4436)
+  *FOLD: 5  R^2: 0.6477 (MSE: 10.9550; MAE: 2.5144; mean train mae: 4.4436)
+  *FOLD: 5  R^2: 0.7075 (MSE: 9.0947; MAE: 2.3626; mean train mae: 4.4436)
+  *FOLD: 5  R^2: 0.6946 (MSE: 9.4947; MAE: 2.2240; mean train mae: 4.4436)
+  *FOLD: 5  R^2: 0.7434 (MSE: 7.9770; MAE: 2.0506; mean train mae: 4.4436)
+-------
+  *FOLD: 4  R^2: 0.6885 (MSE: 8.9049; MAE: 2.3482; mean train mae: 4.3649)
+  *FOLD: 4  R^2: 0.6091 (MSE: 11.1753; MAE: 2.5347; mean train mae: 4.3649)
+  *FOLD: 4  R^2: 0.6485 (MSE: 10.0482; MAE: 2.4667; mean train mae: 4.3649)
+  *FOLD: 4  R^2: 0.6840 (MSE: 9.0342; MAE: 2.3359; mean train mae: 4.3649)
+  *FOLD: 4  R^2: 0.7358 (MSE: 7.5541; MAE: 2.1109; mean train mae: 4.3649)
+  *FOLD: 4  R^2: 0.7126 (MSE: 8.2156; MAE: 2.2397; mean train mae: 4.3649)
+-------
+  *FOLD: 3  R^2: 0.5186 (MSE: 18.9386; MAE: 2.9377; mean train mae: 4.7577)
+  *FOLD: 3  R^2: 0.5077 (MSE: 19.3656; MAE: 3.0411; mean train mae: 4.7577)
+  *FOLD: 3  R^2: 0.5049 (MSE: 19.4743; MAE: 3.2169; mean train mae: 4.7577)
+  *FOLD: 3  R^2: 0.5738 (MSE: 16.7664; MAE: 2.6765; mean train mae: 4.7577)
+  *FOLD: 3  R^2: 0.5315 (MSE: 18.4283; MAE: 2.7228; mean train mae: 4.7577)
+  *FOLD: 3  R^2: 0.5413 (MSE: 18.0422; MAE: 2.7008; mean train mae: 4.7577)
+-------
+  *FOLD: 2  R^2: 0.5878 (MSE: 12.0209; MAE: 2.5923; mean train mae: 4.4008)
+  *FOLD: 2  R^2: 0.3489 (MSE: 18.9894; MAE: 3.2908; mean train mae: 4.4008)
+  *FOLD: 2  R^2: 0.5275 (MSE: 13.7808; MAE: 2.7783; mean train mae: 4.4008)
+  *FOLD: 2  R^2: 0.5362 (MSE: 13.5274; MAE: 2.7373; mean train mae: 4.4008)
+  *FOLD: 2  R^2: 0.5989 (MSE: 11.6969; MAE: 2.5150; mean train mae: 4.4008)
+  *FOLD: 2  R^2: 0.6041 (MSE: 11.5472; MAE: 2.4799; mean train mae: 4.4008)
+-------
+  *FOLD: 1  R^2: 0.7460 (MSE: 8.0409; MAE: 2.2819; mean train mae: 4.4855)
+  *FOLD: 1  R^2: 0.6187 (MSE: 12.0728; MAE: 2.7506; mean train mae: 4.4855)
+  *FOLD: 1  R^2: 0.7276 (MSE: 8.6239; MAE: 2.3282; mean train mae: 4.4855)
+  *FOLD: 1  R^2: 0.7359 (MSE: 8.3605; MAE: 2.3164; mean train mae: 4.4855)
+  *FOLD: 1  R^2: 0.7734 (MSE: 7.1760; MAE: 2.0813; mean train mae: 4.4855)
+  *FOLD: 1  R^2: 0.7558 (MSE: 7.7310; MAE: 2.1527; mean train mae: 4.4855)
+-------
+  *FOLD: 0  R^2: 0.6687 (MSE: 10.0842; MAE: 2.2711; mean train mae: 4.4380)
+  *FOLD: 0  R^2: 0.4896 (MSE: 15.5350; MAE: 2.8434; mean train mae: 4.4380)
+  *FOLD: 0  R^2: 0.6529 (MSE: 10.5635; MAE: 2.2884; mean train mae: 4.4380)
+  *FOLD: 0  R^2: 0.6500 (MSE: 10.6509; MAE: 2.3171; mean train mae: 4.4380)
+  *FOLD: 0  R^2: 0.7025 (MSE: 9.0541; MAE: 2.1434; mean train mae: 4.4380)
+  *FOLD: 0  R^2: 0.6893 (MSE: 9.4569; MAE: 2.1578; mean train mae: 4.4380)
+-------
+_*Overall R^2:          0.6595    
+_*Overall FOLDS R^2:    0.6619 (+- 0.0206) (( 0.643265183207, 0.510902983301, 0.603176391669, 0.652864659014, 0.657314176909, 0.661902116485 ))   
+_*R (sqrt R^2):         0.8121    
+_*Pearson r:            0.8126 (p = 0.00000)    
+_*Folds Pearson r:      0.8199 (p = 0.00000)    
+_*Spearman rho:         0.8376 (p = 0.00000)    
+_*Mean Squared Error:   10.6295  (( 11.1908714425, 15.176375358, 12.4844743865, 10.868991021, 10.7842543613, 10.604726563 ))  
+_*Mean Absolute Error:  2.3492  (( 2.44726343879, 2.92383614948, 2.62845335772, 2.42178940482, 2.36148847989, 2.3472692665 ))  
+_*Train_Mean MAE:       3.8887
+
+Finished at: 2019-02-28 22:50:04.136809

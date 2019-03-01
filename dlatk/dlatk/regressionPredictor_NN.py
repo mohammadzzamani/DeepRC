@@ -2139,13 +2139,13 @@ class RegressionPredictor:
                     regularization_factor = 0
                     parameters_str += 'Controls: hidden_nodes = %s,  regularization_factor= %2.f'%(','.join(map(str,hidden_nodes)), regularization_factor)
              else:
-                    hidden_nodes =[[64,64],[256,64],[2]] #[16,8]
+                    hidden_nodes =[[64,64],[256,64],[256,64],[16,8]] #[16,8]
                     save_path = self.root_path+ outputName + '/models/LMOnly'
-                    regularization_factor = [0.005,0.005,0.,0.005,0.005] #0.005
+                    regularization_factor = [0.0,0.005,0.005, 0.0 ,0.002] #0.005
                     parameters_str += 'LM: hidden_nodes = %s, regularization_factor= %s'%(','.join(map(str,hidden_nodes)),  ', '.join(map(str,regularization_factor)))
              #hidden_nodes = 16 if X.shape[1] < 20 else 32
              epochs = 600#700
-             learning_rate =[0.001 ,0.001, 0.01,0.01, 0.0001]
+             learning_rate =[0.001 ,0.001, 0.001,0.01, 0.0005]
              decay = True
              decay_step =1
              decay_factor = 0.99 #0.8
@@ -2155,8 +2155,8 @@ class RegressionPredictor:
              batch_size = 16 #16
              shuffle = True
              optimizer='Adam' # Adam, SGD, Adadelta 
-             stopping_iteration = [10,1,1,3,3] # if the accuracy didnt improve after this many iterations stop
-             stddev = [0.1 , 0.1, 0.01]
+             stopping_iteration = [5,3,3,3,3] # if the accuracy didnt improve after this many iterations stop
+             stddev = [0.1 , 0.1, 0.1, 0.1]
              self.max_phase =5 # between 1 to 4
              max_phase = self.max_phase
              self.start_phase =1 # between 1 to 4
@@ -2164,7 +2164,7 @@ class RegressionPredictor:
              RC = False
              FA = True
              PCA = False
-             combine_model = 'yhat' #yhat or hout             
+             combine_model = 'hout' #yhat or hout             
              regressor= ffNN(hidden_nodes=hidden_nodes, epochs=epochs, learning_rate=learning_rate,saveFrequency=2,save_path = save_path, decay=decay, decay_step=decay_step, decay_factor=decay_factor, stop_loss=stop_loss, keep_probability = keep_prob, regularization_factor=regularization_factor,minimum_cost=0,activation_function=activation_function,batch_size=batch_size,shuffle=shuffle,optimizer=optimizer,stopping_iteration= stopping_iteration, stddev=stddev,max_phase=max_phase,start_phase=start_phase,RC=RC,FA=FA,combine_model=combine_model)
              #regressor.initialize(x1_size = X.thape[1],x2_size=X.shape[1])
              global history_counter
@@ -2177,14 +2177,15 @@ class RegressionPredictor:
                  history_counter = True
              print('length of the multiX is %d'%len(multiX))
              try:
-                 if not FA:
+                if not FA:
                    regressor.initialize(x1_size = multiX[len(multiX) -1].shape[1],x2_size=multiX[0].shape[1],x2n_size=multiX[len(multiX) -2].shape[1],xA_size=multiX[len(multiX) -2].shape[1])
-                 else:
+                else:
                    regressor.initialize(x1_size = multiX[int(len(multiX)/2)-1].shape[1],x2_size=multiX[0].shape[1],x2n_size=multiX[len(multiX) -2].shape[1],xA_size=multiX[2].shape[1]) 
                  #   #regressor.set_params(**dict((k, v[0] if isinstance(v, list) else v) for k,v in self.cvParams[modelName][0].items()))
-             except IndexError:
-             #    
+                 #except IndexError as e:
+             except Exception  as e:
                 print(" >>No CV parameters available")
+                print('e: ', e)
              #   raise IndexError
              #print dict(self.cvParams[modelName][0])
 
@@ -2318,7 +2319,7 @@ class RegressionPredictor:
                 print('phase %d'%i)
                 predictions.append(regressor.predict(multiX,phase=i,bestModel=False))
             predictions.append(regressor.predict(multiX, bestModel=False))
-            predictions.append(regressor.predict(multiX, reset_graph=True,phase=min(3,self.max_phase)))
+            predictions.append(regressor.predict(multiX, reset_graph=True,phase=min(4,self.max_phase)))
             return [ multiScalers[len(multiScalers)-1].inverse_transform(np.array(pr).reshape(-1,1)).reshape(-1) for pr in predictions ]
         else:
             return [regressor.predict(X)]
