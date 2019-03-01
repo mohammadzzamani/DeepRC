@@ -474,3 +474,68 @@ LM: hidden_nodes = [64, 64],[256, 64],[2], regularization_factor= 0.0, 0.005, 0.
   *FOLD: 9  R^2: 0.6253 (MSE: 13.5508; MAE: 2.5909; mean train mae: 4.6126)
   *FOLD: 9  R^2: 0.6244 (MSE: 13.5812; MAE: 2.5956; mean train mae: 4.6126)
 -------
+  *FOLD: 8  R^2: 0.6637 (MSE: 8.1346; MAE: 2.2035; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.5554 (MSE: 10.7552; MAE: 2.6144; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.6957 (MSE: 7.3627; MAE: 2.0827; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.6677 (MSE: 8.0391; MAE: 2.1705; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.6679 (MSE: 8.0341; MAE: 2.1713; mean train mae: 3.9087)
+-------
+  *FOLD: 7  R^2: 0.6117 (MSE: 12.0790; MAE: 2.6468; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.5235 (MSE: 14.8224; MAE: 2.9374; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.6427 (MSE: 11.1155; MAE: 2.5088; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.6176 (MSE: 11.8950; MAE: 2.5654; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.6145 (MSE: 11.9916; MAE: 2.5587; mean train mae: 4.3623)
+-------
+  *FOLD: 6  R^2: 0.5563 (MSE: 12.7395; MAE: 2.6948; mean train mae: 4.3208)
+  *FOLD: 6  R^2: 0.4722 (MSE: 15.1544; MAE: 3.0245; mean train mae: 4.3208)
+  *FOLD: 6  R^2: 0.6121 (MSE: 11.1394; MAE: 2.5177; mean train mae: 4.3208)
+  *FOLD: 6  R^2: 0.5908 (MSE: 11.7511; MAE: 2.5763; mean train mae: 4.3208)
+  *FOLD: 6  R^2: 0.5960 (MSE: 11.5999; MAE: 2.5643; mean train mae: 4.3208)
+-------
+  *FOLD: 5  R^2: 0.7388 (MSE: 8.1206; MAE: 2.1152; mean train mae: 4.4436)
+  *FOLD: 5  R^2: 0.5891 (MSE: 12.7770; MAE: 2.8519; mean train mae: 4.4436)
+  *FOLD: 5  R^2: 0.7529 (MSE: 7.6830; MAE: 2.0760; mean train mae: 4.4436)
+  *FOLD: 5  R^2: 0.7456 (MSE: 7.9086; MAE: 2.0921; mean train mae: 4.4436)
+  *FOLD: 5  R^2: 0.7438 (MSE: 7.9649; MAE: 2.0918; mean train mae: 4.4436)
+-------
+  *FOLD: 4  R^2: 0.6804 (MSE: 9.1381; MAE: 2.3980; mean train mae: 4.3649)
+  *FOLD: 4  R^2: 0.5256 (MSE: 13.5630; MAE: 2.7774; mean train mae: 4.3649)
+  *FOLD: 4  R^2: 0.7092 (MSE: 8.3147; MAE: 2.2435; mean train mae: 4.3649)
+  *FOLD: 4  R^2: 0.7051 (MSE: 8.4297; MAE: 2.2721; mean train mae: 4.3649)
+  *FOLD: 4  R^2: 0.7049 (MSE: 8.4363; MAE: 2.2838; mean train mae: 4.3649)
+-------
+  *FOLD: 3  R^2: 0.5227 (MSE: 18.7767; MAE: 2.8498; mean train mae: 4.7577)
+  *FOLD: 3  R^2: 0.5141 (MSE: 19.1147; MAE: 3.0120; mean train mae: 4.7577)
+  *FOLD: 3  R^2: 0.5578 (MSE: 17.3942; MAE: 2.7766; mean train mae: 4.7577)
+  *FOLD: 3  R^2: 0.5256 (MSE: 18.6619; MAE: 2.8311; mean train mae: 4.7577)
+  *FOLD: 3  R^2: 0.5279 (MSE: 18.5718; MAE: 2.8234; mean train mae: 4.7577)
+-------
+  *FOLD: 2  R^2: 0.5845 (MSE: 12.1167; MAE: 2.5984; mean train mae: 4.4008)
+  *FOLD: 2  R^2: 0.4826 (MSE: 15.0907; MAE: 2.8099; mean train mae: 4.4008)
+  *FOLD: 2  R^2: 0.5887 (MSE: 11.9966; MAE: 2.5614; mean train mae: 4.4008)
+  *FOLD: 2  R^2: 0.5741 (MSE: 12.4214; MAE: 2.5792; mean train mae: 4.4008)
+  *FOLD: 2  R^2: 0.5760 (MSE: 12.3645; MAE: 2.5784; mean train mae: 4.4008)
+-------
+  *FOLD: 1  R^2: 0.7637 (MSE: 7.4830; MAE: 2.1777; mean train mae: 4.4855)
+  *FOLD: 1  R^2: 0.4877 (MSE: 16.2208; MAE: 2.9393; mean train mae: 4.4855)
+  *FOLD: 1  R^2: 0.7516 (MSE: 7.8637; MAE: 2.2054; mean train mae: 4.4855)
+  *FOLD: 1  R^2: 0.7627 (MSE: 7.5138; MAE: 2.1744; mean train mae: 4.4855)
+  *FOLD: 1  R^2: 0.7593 (MSE: 7.6214; MAE: 2.1470; mean train mae: 4.4855)
+-------
+  *FOLD: 0  R^2: 0.6743 (MSE: 9.9130; MAE: 2.2231; mean train mae: 4.4380)
+  *FOLD: 0  R^2: 0.6174 (MSE: 11.6437; MAE: 2.6653; mean train mae: 4.4380)
+  *FOLD: 0  R^2: 0.6955 (MSE: 9.2686; MAE: 2.1874; mean train mae: 4.4380)
+  *FOLD: 0  R^2: 0.6772 (MSE: 9.8234; MAE: 2.2119; mean train mae: 4.4380)
+  *FOLD: 0  R^2: 0.6789 (MSE: 9.7726; MAE: 2.1997; mean train mae: 4.4380)
+-------
+_*Overall R^2:          0.6469    
+_*Overall FOLDS R^2:    0.6494 (+- 0.0224) (( 0.643119845022, 0.524962516774, 0.662292979984, 0.64917574469, 0.649375297944 ))   
+_*R (sqrt R^2):         0.8043    
+_*Pearson r:            0.8048 (p = 0.00000)    
+_*Folds Pearson r:      0.8082 (p = 0.00000)    
+_*Spearman rho:         0.8285 (p = 0.00000)    
+_*Mean Squared Error:   11.0226  (( 11.1698927555, 14.7873222797, 10.599276985, 10.9994806586, 10.9938339457 ))  
+_*Mean Absolute Error:  2.4033  (( 2.44676799943, 2.88972919981, 2.38366462087, 2.40639431287, 2.40140092641 ))  
+_*Train_Mean MAE:       3.8485
+
+Finished at: 2019-02-28 19:19:49.738324

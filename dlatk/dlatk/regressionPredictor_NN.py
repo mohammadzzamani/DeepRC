@@ -2141,11 +2141,11 @@ class RegressionPredictor:
              else:
                     hidden_nodes =[[64,64],[256,64],[2]] #[16,8]
                     save_path = self.root_path+ outputName + '/models/LMOnly'
-                    regularization_factor = [0.,0.005,0.,0.005,0.005] #0.005
+                    regularization_factor = [0.005,0.005,0.,0.005,0.005] #0.005
                     parameters_str += 'LM: hidden_nodes = %s, regularization_factor= %s'%(','.join(map(str,hidden_nodes)),  ', '.join(map(str,regularization_factor)))
              #hidden_nodes = 16 if X.shape[1] < 20 else 32
              epochs = 600#700
-             learning_rate =[0.001 ,0.001, 0.01, 0.0001]
+             learning_rate =[0.001 ,0.001, 0.01,0.01, 0.0001]
              decay = True
              decay_step =1
              decay_factor = 0.99 #0.8
@@ -2155,9 +2155,9 @@ class RegressionPredictor:
              batch_size = 16 #16
              shuffle = True
              optimizer='Adam' # Adam, SGD, Adadelta 
-             stopping_iteration = [10,1,5,5] # if the accuracy didnt improve after this many iterations stop
+             stopping_iteration = [10,1,1,3,3] # if the accuracy didnt improve after this many iterations stop
              stddev = [0.1 , 0.1, 0.01]
-             self.max_phase =4 # between 1 to 4
+             self.max_phase =5 # between 1 to 4
              max_phase = self.max_phase
              self.start_phase =1 # between 1 to 4
              start_phase =self.start_phase
