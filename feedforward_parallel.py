@@ -462,12 +462,15 @@ class ffNN():
                        bestLoss = epoch_cost
                        pass_best_epochs = 0
                        #if (epoch - best_saved_epoch > self.saveFrequency and epoch != 0):
-                       if (phase == max_phase):
-                         print ('phase: {}, best_loss:{}, epoch:{}, epoch_cost:{}'.format(phase, bestLoss, epoch, epoch_cost) )
-                         best_ckpt_saver.handle(epoch_cost, sess, global_step_tensor=tf.constant(epoch))
-                         saver.save(sess, self.save_path + "/pretrained_lstm.ckpt", global_step=epoch)
-                         #saver.save(sess, self.save_path +'_'+str(phase)+"/pretrained_lstm.ckpt",global_step=epoch)
-                         best_saved_epoch = epoch
+                       #if (phase == max_phase):
+                       print ('phase: {}, best_loss:{}, epoch:{}, epoch_cost:{}'.format(phase, bestLoss, epoch, epoch_cost) )
+
+                       if phase == max_phase:
+                           best_ckpt_saver.handle(epoch_cost, sess, global_step_tensor=tf.constant(epoch))
+                           saver.save(sess, self.save_path + "/pretrained_lstm.ckpt", global_step=epoch)
+                       else:
+                           saver.save(sess, self.save_path +'_'+str(phase)+"/pretrained_lstm.ckpt",global_step=epoch)
+                       best_saved_epoch = epoch
 
                 if self.RC:
                   #### Active for RC Model
@@ -488,14 +491,16 @@ class ffNN():
                         self.desired_epoch_cost = bestLoss if self.desired_epoch_cost is np.inf else min(self.desired_epoch_cost , bestLoss )
                         if phase < max_phase:
                            sess.run(self.initialize_global_step)
-                           
+                           load_path = self.save_path+'_'+str(phase)
+                           checkpoint = tf.train.latest_checkpoint(load_path)
+                           saver.restore(sess, checkpoint)
                            pass_best_epochs = 0
                            bestLoss = np.inf
                            best_saved_epoch = -10 
                            #if phase == 3:
                            #    learning_rate_phase3 = (self.last_learning_rate + self.learning_rate[2])/2
                            print ('<<<<<<<<< phase changed from {} to {} >>>>>>>>>>>'.format(phase, phase+1) )
-                           saver.save(sess, self.save_path +'_'+str(phase)+"/pretrained_lstm.ckpt",global_step=epoch)
+                           #saver.save(sess, self.save_path +'_'+str(phase)+"/pretrained_lstm.ckpt",global_step=epoch)
                            print('saved to: ' , self.save_path +'_'+str(phase)+"/pretrained_lstm.ckpt")
                            phase +=1        
                            continue

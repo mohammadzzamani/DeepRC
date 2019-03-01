@@ -182,8 +182,8 @@ def alignDictsAsy(y, *yhats, **kwargs):
     return tuple([listy]) + tuple(listyhats)
 
 class RegressionPredictor:
-    root_path = '/users/mzamani/'
-    #root_path = '/home/mbastan/'
+    #root_path = '/users/mzamani/'
+    root_path = '/home/mbastan/'
     """Handles prediction of continuous outcomes
     
     Attributes

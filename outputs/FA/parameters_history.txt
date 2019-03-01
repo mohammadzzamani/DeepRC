@@ -1,0 +1,28 @@
+
+
+>>>>>>>>outcome name: 01hea_aar 
+
+ Start at: 2019-03-01 15:21:01.610135
+Model: /home/mbastan/DeepRC/outputs/FA/models/LMOnly , epochs: 600, learning_rates: 0.001000, 0.001000, 0.001000, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.9, 1.0, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 5, 3, 3, 3, 3, stddev: 0.1, 0.1, 0.1, 0.1,max_phase: 5 , start phase: 1, RC: False, FA: True, PCA: False, combine: hout 
+LM: hidden_nodes = [64, 64],[256, 64],[256, 64],[16, 8], regularization_factor= 0.0, 0.005, 0.005, 0.0, 0.002
+
+
+>>>>>>>>outcome name: 01hea_aar 
+
+ Start at: 2019-03-01 15:22:52.586768
+Model: /home/mbastan/DeepRC/outputs/FA/models/LMOnly , epochs: 600, learning_rates: 0.001000, 0.001000, 0.001000, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.9, 1.0, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 5, 3, 3, 3, 3, stddev: 0.1, 0.1, 0.1, 0.1,max_phase: 5 , start phase: 1, RC: False, FA: True, PCA: False, combine: hout 
+LM: hidden_nodes = [64, 64],[256, 64],[256, 64],[16, 8], regularization_factor= 0.0, 0.005, 0.005, 0.0, 0.002
+
+
+>>>>>>>>outcome name: 01hea_aar 
+
+ Start at: 2019-03-01 15:26:10.578424
+Model: /home/mbastan/DeepRC/outputs/FA/models/LMOnly , epochs: 600, learning_rates: 0.001000, 0.001000, 0.001000, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.9, 1.0, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 5, 3, 3, 3, 3, stddev: 0.1, 0.1, 0.1, 0.1,max_phase: 5 , start phase: 1, RC: False, FA: True, PCA: False, combine: hout 
+LM: hidden_nodes = [64, 64],[256, 64],[256, 64],[16, 8], regularization_factor= 0.0, 0.005, 0.005, 0.0, 0.002
+  *FOLD: 9  R^2: 0.5310 (MSE: 834.3002; MAE: 22.7526; mean train mae: 33.6105)
+  *FOLD: 9  R^2: 0.4534 (MSE: 972.3440; MAE: 24.0328; mean train mae: 33.6105)
+  *FOLD: 9  R^2: 0.4855 (MSE: 915.1756; MAE: 24.2527; mean train mae: 33.6105)
+  *FOLD: 9  R^2: 0.5330 (MSE: 830.6436; MAE: 21.4353; mean train mae: 33.6105)
+  *FOLD: 9  R^2: 0.5459 (MSE: 807.7931; MAE: 21.9999; mean train mae: 33.6105)
+  *FOLD: 9  R^2: 0.5529 (MSE: 795.2621; MAE: 21.2687; mean train mae: 33.6105)
+-------

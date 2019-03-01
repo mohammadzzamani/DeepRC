@@ -4661,3 +4661,10 @@ LM: hidden_nodes = [64, 64],[256, 64],[2], regularization_factor= 0.005, 0.005, 
   *FOLD: 3  R^2: 0.6570 (MSE: 770.8578; MAE: 20.4378; mean train mae: 36.9698)
   *FOLD: 3  R^2: 0.6523 (MSE: 781.3369; MAE: 20.5632; mean train mae: 36.9698)
 -------
+
+
+>>>>>>>>outcome name: 01hea_aar 
+
+ Start at: 2019-03-01 02:19:58.000915
+Model: /home/mbastan/DeepRC/outputs/cpu/models/LMOnly , epochs: 600, learning_rates: 0.001000, 0.001000, 0.001000, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.9, 1.0, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 5, 3, 3, 3, 3, stddev: 0.1, 0.1, 0.1, 0.1,max_phase: 5 , start phase: 1, RC: False, FA: True, PCA: False, combine: hout 
+LM: hidden_nodes = [64, 64],[256, 64],[256, 64],[16, 8], regularization_factor= 0.0, 0.005, 0.005, 0.0, 0.002
