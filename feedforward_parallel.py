@@ -58,7 +58,7 @@ class ffNN():
     def __init__(self, hidden_nodes=[[8,2],[32,8]], epochs=3, learning_rate=0.1, saveFrequency=1,
                  save_path='/models/ControlOnly', decay=False, decay_step=10, decay_factor=0.7,
                  stop_loss=0.0001, regularization_factor=[0.05,0.04,0.03,0.05], keep_probability=0.7, minimum_cost=0.2,
-                 activation_function='sigmoid', batch_size=1,shuffle=True,optimizer='Adam',stopping_iteration=[10,10,1,1], stddev=[0.5,0.1],max_phase=4,start_phase=1,FA=False,RC=False,combine_model='yhat',attention_size=32, mask_size=100,use_dev=False):
+                 activation_function='sigmoid', batch_size=1,shuffle=True,optimizer='Adam',stopping_iteration=[10,10,1,1], stddev=[0.5,0.1],max_phase=4,start_phase=1,FA=False,RC=False,combine_model='yhat',attention_size=32, mask_size=100,dev_size=0.1):
         self.hidden_nodes = hidden_nodes
         self.epochs = epochs
         self.learning_rate = learning_rate
@@ -87,7 +87,7 @@ class ffNN():
         device_count = {'GPU': 0}
         )
         self.mask_size = mask_size
-        self.Dev = use_dev
+        self.dev_size = dev_size
         print('model started working :D')
 
     def forwardprop(self, X, w_in, b_in, keep_prob,activation_func):
@@ -152,13 +152,16 @@ class ffNN():
 
 
     def attentionMechanism(self,control_features, topic_features,size_c,size_t , name='',random_mask=None, mask_size=0, keep_prob=0.5):
-            batch_size = tf.shape(control_features)[0]
-            mask_array_3d = tf.ones([batch_size,self.attention_size, 1])* random_mask
             topic_features_3d = tf.ones([self.attention_size,1, 1])* tf.expand_dims(topic_features,0)
             topic_features_3d_reshaped = tf.reshape(topic_features_3d,[-1, self.attention_size,size_t])
-
-            mask_features_noshape = tf.boolean_mask(topic_features_3d_reshaped,mask_array_3d)
-            topic_expanded= tf.reshape(mask_features_noshape,[-1,self.attention_size, mask_size])
+            if self.mask_size > 0:
+                batch_size = tf.shape(control_features)[0]
+                mask_array_3d = tf.ones([batch_size,self.attention_size, 1])* random_mask
+                mask_features_noshape = tf.boolean_mask(topic_features_3d_reshaped,mask_array_3d)
+                topic_expanded= tf.reshape(mask_features_noshape,[-1,self.attention_size, mask_size])
+            else:  
+                mask_size=size_t
+                topic_expanded = topic_features_3d_reshaped
 
             w_in, b_in = init_weights(shape=[size_c,self.attention_size,mask_size], stddev=self.stddev[-1],name='attention_'+name,mean=0.1)
             #w_in = tf.Print(w_in,[w_in, b_in],message = 'w , b ', summarize= 20)
@@ -220,15 +223,14 @@ class ffNN():
 
 
             ############################# Attention Mechanism  ########################
-            #random_mask = np.random.choice(a=[False, True], size=(x2_size), p=[0.95, 0.05])
-            #mask_size=np.sum(random_mask)
+            random_mask = None
 
-            l = list(np.ones(x2_size) )
-            sample = random.sample([i for i in range(len(l))] , self.mask_size)
-            list_sample = [ l[i] if i in sample else 0 for i in range(len(l))]
-            random_mask = np.array([random.sample(list_sample, len(list_sample)) for i in range(self.attention_size)],dtype=bool) #(attention * 2000)
-            #print(random_mask)
-            #print(np.sum(random_mask,1), np.sum(random_mask,0))
+            if self.mask_size > 0:
+
+               l = list(np.ones(x2_size) )
+               sample = random.sample([i for i in range(len(l))] , self.mask_size)
+               list_sample = [ l[i] if i in sample else 0 for i in range(len(l))]
+               random_mask = np.array([random.sample(list_sample, len(list_sample)) for i in range(self.attention_size)],dtype=bool) #(attention * 2000)
             outAtt, l2_normAtt = self.attentionMechanism(control_features=self.X1, topic_features=self.X2,size_c=x1_size,size_t=x2_size , name='phase2',random_mask=random_mask,mask_size=self.mask_size,keep_prob=self.keep_prob)
 
             #print('shape of out Attention is %d',outAtt.get_shape())
@@ -245,22 +247,23 @@ class ffNN():
 
 
 
-            self.yhat2, self.mse2, self.loss2, self.updates2A , self.h_out2A, self.learning_rate2_adam,self.l2_norm2, _,_,_ =self.forward_pass(input_x=outAtt, phase=2,reg_factor=self.reg_factor2,keep_prob=self.keep_prob,x_size=self.attention_size,y_size=y_size, learning_rate=self.learning_rate2)#,rg_method='L1'), prefix='att' )
-            l2_norm2 = self.l2_norm2 + l2_normAtt
+            self.yhat2, self.mse2, self.loss2A, self.updates2A , self.h_out2A, self.learning_rate2_adam,self.l2_norm2A, _,_,_ =self.forward_pass(input_x=outAtt, phase=2,reg_factor=self.reg_factor2,keep_prob=self.keep_prob,x_size=self.attention_size,y_size=y_size, learning_rate=self.learning_rate2)#,rg_method='L1'), prefix='att' )
+            self.l2_norm2 = self.l2_norm2A + 0.1* l2_normAtt
+            #self.l2_norm2 = tf.Print(self.l2_norm2,[self.l2_norm2A,l2_normAtt],message='norm2 , normAtt' )
             self.loss2 = tf.add(self.mse2,self.reg_factor2* self.l2_norm2)
             if self.decay == 1 or self.decay is True:
                  learning_rate_adam = tf.train.exponential_decay(self.learning_rate2,self.global_step, self.decay_step, self.decay_factor,
                                                        staircase=True)
             else:
                  learning_rate_adam = self.learning_rate2
-            self.updates2A = tf.train.AdamOptimizer(learning_rate=learning_rate_adam).minimize(self.loss2,var_list=[v for v in tf.trainable_variables() if 'phase2' in v.name])
+            self.updates2= tf.train.AdamOptimizer(learning_rate=learning_rate_adam).minimize(self.loss2,var_list=[v for v in tf.trainable_variables() if 'phase2' in v.name])
             
             #self.yhat2, self.mse2, self.loss2, self.updates2t , self.h_out2, self.learning_rate2_adam,self.l2_norm2, _,_,_ =self.forward_pass(input_x=self.X2, phase=2,reg_factor=self.reg_factor2,keep_prob=self.keep_prob,x_size=x2_size,y_size=y_size, learning_rate=self.learning_rate2 )
 
             #self.yhat2n, self.mse2n, self.loss2n, self.updates2n , h_out2n, _,l2_norm2n,_,_ ,_=self.forward_pass(input_x=self.X2n,phase=2,reg_factor=self.reg_factor5,keep_prob=self.keep_prob,x_size=x2n_size,y_size=y_size, learning_rate=self.learning_rate2, prefix='ngram')
 
 
-            self.updates2 = self.updates2A
+            #self.updates2 = self.updates2A
             #self.updates2 = self.updates2t
             #self.updates2 = tf.group(self.updates2t,self.updates2n)
             #self.updates2 = tf.group(self.updates2t,self.updates2A)
@@ -402,8 +405,8 @@ class ffNN():
             learning_rates_adam = []
             all_epoch_cost = []
             all_epoch_MSE = []
-            if self.Dev:
-                [train_x1,train_x2,train_x2n,train_adaptedx,train_y],[train_x1_dev,train_x2_dev,train_x2n_dev,train_adaptedx_dev,train_y_dev]= self.splitShuffle([X1,X2,X2n,XAdapted,y],devSize=0.1, shuffle=self.shuffle)
+            if self.dev_size > 0:
+                [train_x1,train_x2,train_x2n,train_adaptedx,train_y],[train_x1_dev,train_x2_dev,train_x2n_dev,train_adaptedx_dev,train_y_dev]= self.splitShuffle([X1,X2,X2n,XAdapted,y],devSize=self.dev_size, shuffle=self.shuffle)
                 train_y_dev = np.transpose(np.array([train_y_dev],dtype=np.float64))
 
 
@@ -423,7 +426,7 @@ class ffNN():
                    keep_prob = self.keep_probability[1]
 
 
-                if self.Dev:
+                if self.dev_size > 0:
                    [train_x1,train_x2,train_x2n,train_adaptedx,train_y], _ = self.splitShuffle([train_x1,train_x2,train_x2n,train_adaptedx,train_y],devSize=0, shuffle=self.shuffle)
                 else:
                    [train_x1,train_x2,train_x2n,train_adaptedx,train_y], _  =self.splitShuffle([X1,X2,X2n,XAdapted,y],devSize=0., shuffle=self.shuffle)
@@ -468,7 +471,7 @@ class ffNN():
                 # if self.decay is True and epoch % self.decay_step ==0:
                 #    self.learning_rate  *= self.decay_factor
                 stop =True
-                if self.Dev:
+                if self.dev_size > 0:
                   feed_dict_dev = {self.reg_factor1: self.regularization_factor[0],self.reg_factor2: self.regularization_factor[1],self.reg_factor3: self.regularization_factor[2],self.reg_factor4: self.regularization_factor[3],self.reg_factor5: self.regularization_factor[4], self.X1: train_x1_dev, self.X2: train_x2_dev, self.X2n: train_x2n_dev, self.XA:train_adaptedx_dev, self.y: train_y_dev, self.keep_prob: 1.}
                   epoch_cost,epoch_MSE = sess.run([eval('self.loss'+str(phase)),eval('self.mse'+str(phase))], feed_dict=feed_dict_dev)
                   #all_epoch_cost += [cost]

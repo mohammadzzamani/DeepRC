@@ -2141,12 +2141,12 @@ class RegressionPredictor:
                     hidden_nodes =[[64,64],[128,16],[8]] #[16,8]
                     save_path = self.root_path+ outputName + '/models/LMOnly'
                     print ('save_path::::: ' , save_path, ' , self.root_path: ', self.root_path , ' ,outputName: ', outputName )
-                    regularization_factor = [0.005,0.,0.,0.,0.] #0.005
+                    regularization_factor = [0.005,0.00001,0.,0.,0.] #0.005
                     parameters_str += 'LM: hidden_nodes = %s, regularization_factor= %s'%(','.join(map(str,hidden_nodes)),  ', '.join(map(str,regularization_factor)))
              #hidden_nodes = 16 if X.shape[1] < 20 else 32
-             attention_size = 8
+             attention_size = 16
              epochs = 600#700
-             learning_rate =[0.001 ,0.001, 0.001]
+             learning_rate =[0.001 ,0.002, 0.001]
              decay = True
              decay_step =1
              decay_factor = 0.99 #0.8
@@ -2156,7 +2156,7 @@ class RegressionPredictor:
              batch_size = 8 #16
              shuffle = True
              optimizer='Adam' # Adam, SGD, Adadelta 
-             stopping_iteration = [10,15,5,5] # if the accuracy didnt improve after this many iterations stop
+             stopping_iteration = [10,50,5,5] # if the accuracy didnt improve after this many iterations stop
              stddev = [0.1 ,0.01, 0.01,0.01]
              self.max_phase =2 # between 1 to 4
              max_phase = self.max_phase
@@ -2166,15 +2166,15 @@ class RegressionPredictor:
              FA = False
              PCA = False
              combine_model = 'yhat' #yhat or hout             
-             mask_size = 1200
-             use_dev = False
-             regressor= ffNN(hidden_nodes=hidden_nodes, epochs=epochs, learning_rate=learning_rate,saveFrequency=1,save_path = save_path, decay=decay, decay_step=decay_step, decay_factor=decay_factor, stop_loss=stop_loss, keep_probability = keep_prob, regularization_factor=regularization_factor,minimum_cost=0.006,activation_function=activation_function,batch_size=batch_size,shuffle=shuffle,optimizer=optimizer,stopping_iteration= stopping_iteration, stddev=stddev,max_phase=max_phase,start_phase=start_phase,RC=RC,FA=FA,combine_model=combine_model,attention_size=attention_size,mask_size=mask_size,use_dev=use_dev)
+             mask_size =0
+             dev_size = 0.
+             regressor= ffNN(hidden_nodes=hidden_nodes, epochs=epochs, learning_rate=learning_rate,saveFrequency=1,save_path = save_path, decay=decay, decay_step=decay_step, decay_factor=decay_factor, stop_loss=stop_loss, keep_probability = keep_prob, regularization_factor=regularization_factor,minimum_cost=0.006,activation_function=activation_function,batch_size=batch_size,shuffle=shuffle,optimizer=optimizer,stopping_iteration= stopping_iteration, stddev=stddev,max_phase=max_phase,start_phase=start_phase,RC=RC,FA=FA,combine_model=combine_model,attention_size=attention_size,mask_size=mask_size,dev_size=dev_size)
              #regressor.initialize(x1_size = X.thape[1],x2_size=X.shape[1])
              global history_counter
              if history_counter is None :
                  history = open(self.root_path + outputName + '/parameters_history.txt','a')
                  history.write('\n\n Start at: '+str(datetime.datetime.now())+'\n')
-                 history.write('Model: %s , epochs: %d, learning_rates: %f, %f, %f, decay: %s , decay_step: %d , decay_factor: %f , stop_loss: %f , keep_prob: %s, activation_function: %s, batch_size: %d, shuffle: %s, optimizer: %s, stopping_iteration: %s, stddev: %s,max_phase: %d , start phase: %d, RC: %s, FA: %s, PCA: %s, combine: %s, attention_size: %d , mask_size: %d, use dev: %s \n' %(save_path, epochs,  learning_rate[0], learning_rate[1], learning_rate[2], str(decay), decay_step, decay_factor, stop_loss, ', '.join(map(str,keep_prob)),activation_function,batch_size,str(shuffle),optimizer ,', '.join(map(str,stopping_iteration)),', '.join(map(str,stddev)),max_phase,start_phase,str(RC),str(FA), str(PCA), combine_model, attention_size, mask_size, str(use_dev)) )
+                 history.write('Model: %s , epochs: %d, learning_rates: %f, %f, %f, decay: %s , decay_step: %d , decay_factor: %f , stop_loss: %f , keep_prob: %s, activation_function: %s, batch_size: %d, shuffle: %s, optimizer: %s, stopping_iteration: %s, stddev: %s,max_phase: %d , start phase: %d, RC: %s, FA: %s, PCA: %s, combine: %s, attention_size: %d , mask_size: %d, dev size: %s \n' %(save_path, epochs,  learning_rate[0], learning_rate[1], learning_rate[2], str(decay), decay_step, decay_factor, stop_loss, ', '.join(map(str,keep_prob)),activation_function,batch_size,str(shuffle),optimizer ,', '.join(map(str,stopping_iteration)),', '.join(map(str,stddev)),max_phase,start_phase,str(RC),str(FA), str(PCA), combine_model, attention_size, mask_size, str(dev_size)) )
                  history.write(parameters_str+'\n')
                  history.close()
                  history_counter = True
