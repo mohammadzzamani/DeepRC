@@ -1,0 +1,48 @@
+
+
+>>>>>>>>outcome name: fair_poor_health_perc_bfrss15 
+
+ Start at: 2019-03-01 03:18:44.012155
+Model: /users/mzamani/DeepRC/outputs/7phases_end2end/models/LMOnly , epochs: 600, learning_rates: 0.001000, 0.001000, 0.001000, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.9, 1.0, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 5, 3, 3, 3, 3, 3, 3, stddev: 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1,max_phase: 7 , start phase: 7, RC: False, FA: True, PCA: False, combine: yhat 
+LM: hidden_nodes = [64, 64],[256, 64],[256, 64],[16, 8], regularization_factor= 0.005, 0.01, 0.01, 0.0, 0.05, 0.0, 0.05
+  *FOLD: 9  R^2: 0.6221 (MSE: 13.6646; MAE: 2.5704; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.6402 (MSE: 13.0108; MAE: 2.5356; mean train mae: 4.6126)
+-------
+  *FOLD: 8  R^2: 0.6789 (MSE: 7.7669; MAE: 2.1259; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.6779 (MSE: 7.7917; MAE: 2.1289; mean train mae: 3.9087)
+-------
+  *FOLD: 7  R^2: 0.6135 (MSE: 12.0239; MAE: 2.5559; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.6124 (MSE: 12.0578; MAE: 2.5514; mean train mae: 4.3623)
+-------
+  *FOLD: 6  R^2: 0.5903 (MSE: 11.7643; MAE: 2.5982; mean train mae: 4.3208)
+  *FOLD: 6  R^2: 0.5650 (MSE: 12.4893; MAE: 2.7110; mean train mae: 4.3208)
+-------
+  *FOLD: 5  R^2: 0.7504 (MSE: 7.7605; MAE: 2.1156; mean train mae: 4.4436)
+  *FOLD: 5  R^2: 0.7412 (MSE: 8.0475; MAE: 2.1959; mean train mae: 4.4436)
+-------
+  *FOLD: 4  R^2: 0.7106 (MSE: 8.2733; MAE: 2.2171; mean train mae: 4.3649)
+  *FOLD: 4  R^2: 0.7120 (MSE: 8.2349; MAE: 2.2134; mean train mae: 4.3649)
+-------
+  *FOLD: 3  R^2: 0.5122 (MSE: 19.1890; MAE: 2.9338; mean train mae: 4.7577)
+  *FOLD: 3  R^2: 0.5370 (MSE: 18.2133; MAE: 2.7834; mean train mae: 4.7577)
+-------
+  *FOLD: 2  R^2: 0.5245 (MSE: 13.8690; MAE: 2.7036; mean train mae: 4.4008)
+  *FOLD: 2  R^2: 0.5313 (MSE: 13.6687; MAE: 2.6669; mean train mae: 4.4008)
+-------
+  *FOLD: 1  R^2: 0.7529 (MSE: 7.8248; MAE: 2.2262; mean train mae: 4.4855)
+  *FOLD: 1  R^2: 0.7551 (MSE: 7.7532; MAE: 2.2194; mean train mae: 4.4855)
+-------
+  *FOLD: 0  R^2: 0.6989 (MSE: 9.1634; MAE: 2.0828; mean train mae: 4.4380)
+  *FOLD: 0  R^2: 0.6990 (MSE: 9.1601; MAE: 2.1158; mean train mae: 4.4380)
+-------
+_*Overall R^2:          0.6454    
+_*Overall FOLDS R^2:    0.6471 (+- 0.0249) (( 0.64543187485, 0.647118873263 ))   
+_*R (sqrt R^2):         0.8034    
+_*Pearson r:            0.8039 (p = 0.00000)    
+_*Folds Pearson r:      0.8100 (p = 0.00000)    
+_*Spearman rho:         0.8266 (p = 0.00000)    
+_*Mean Squared Error:   11.0682  (( 11.1299767713, 11.0427346039 ))  
+_*Mean Absolute Error:  2.4138  (( 2.41295692644, 2.41216724655 ))  
+_*Train_Mean MAE:       3.7798
+
+Finished at: 2019-03-01 03:33:25.374112

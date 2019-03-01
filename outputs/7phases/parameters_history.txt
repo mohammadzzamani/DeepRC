@@ -1,0 +1,392 @@
+
+
+>>>>>>>>outcome name: fair_poor_health_perc_bfrss15 
+
+ Start at: 2019-03-01 01:59:38.147025
+Model: /users/mzamani/DeepRC/outputs/7phases/models/LMOnly , epochs: 600, learning_rates: 0.001000, 0.001000, 0.001000, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.9, 1.0, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 5, 3, 3, 3, 3, 3, 3, stddev: 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1,max_phase: 7 , start phase: 1, RC: False, FA: True, PCA: False, combine: yhat 
+LM: hidden_nodes = [64, 64],[256, 64],[256, 64],[16, 8], regularization_factor= 0.0, 0.005, 0.005, 0.0, 0.002, 0.0, 0.002
+
+
+>>>>>>>>outcome name: fair_poor_health_perc_bfrss15 
+
+ Start at: 2019-03-01 02:07:43.694323
+Model: /users/mzamani/DeepRC/outputs/7phases/models/LMOnly , epochs: 600, learning_rates: 0.001000, 0.001000, 0.001000, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.9, 1.0, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 5, 3, 3, 3, 3, 3, 3, stddev: 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1,max_phase: 7 , start phase: 1, RC: False, FA: True, PCA: False, combine: yhat 
+LM: hidden_nodes = [64, 64],[256, 64],[256, 64],[16, 8], regularization_factor= 0.0, 0.005, 0.005, 0.0, 0.002, 0.0, 0.002
+
+
+>>>>>>>>outcome name: fair_poor_health_perc_bfrss15 
+
+ Start at: 2019-03-01 02:13:44.758331
+Model: /users/mzamani/DeepRC/outputs/7phases/models/LMOnly , epochs: 600, learning_rates: 0.001000, 0.001000, 0.001000, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.9, 1.0, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 5, 3, 3, 3, 3, 3, 3, stddev: 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1,max_phase: 7 , start phase: 1, RC: False, FA: True, PCA: False, combine: yhat 
+LM: hidden_nodes = [64, 64],[256, 64],[256, 64],[16, 8], regularization_factor= 0.0, 0.005, 0.005, 0.0, 0.002, 0.0, 0.002
+
+
+>>>>>>>>outcome name: fair_poor_health_perc_bfrss15 
+
+ Start at: 2019-03-01 02:19:17.056404
+Model: /users/mzamani/DeepRC/outputs/7phases/models/LMOnly , epochs: 600, learning_rates: 0.001000, 0.001000, 0.001000, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.9, 1.0, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 5, 3, 3, 3, 3, 3, 3, stddev: 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1,max_phase: 7 , start phase: 1, RC: False, FA: True, PCA: False, combine: yhat 
+LM: hidden_nodes = [64, 64],[256, 64],[256, 64],[16, 8], regularization_factor= 0.0, 0.005, 0.005, 0.0, 0.002, 0.0, 0.002
+
+
+>>>>>>>>outcome name: fair_poor_health_perc_bfrss15 
+
+ Start at: 2019-03-01 02:27:38.815516
+Model: /users/mzamani/DeepRC/outputs/7phases/models/LMOnly , epochs: 600, learning_rates: 0.001000, 0.001000, 0.001000, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.9, 1.0, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 5, 3, 3, 3, 3, 3, 3, stddev: 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1,max_phase: 7 , start phase: 1, RC: False, FA: True, PCA: False, combine: yhat 
+LM: hidden_nodes = [64, 64],[256, 64],[256, 64],[16, 8], regularization_factor= 0.0, 0.005, 0.005, 0.0, 0.002, 0.0, 0.002
+  *FOLD: 9  R^2: 0.5678 (MSE: 15.6304; MAE: 2.8267; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.5118 (MSE: 17.6531; MAE: 3.0268; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.6107 (MSE: 14.0782; MAE: 2.8072; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.6411 (MSE: 12.9787; MAE: 2.6021; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.6379 (MSE: 13.0942; MAE: 2.5983; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.6427 (MSE: 12.9205; MAE: 2.5775; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.6551 (MSE: 12.4729; MAE: 2.5535; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.6193 (MSE: 13.7687; MAE: 2.6650; mean train mae: 4.6126)
+-------
+  *FOLD: 8  R^2: 0.6443 (MSE: 8.6048; MAE: 2.2423; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.5683 (MSE: 10.4439; MAE: 2.5281; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.6734 (MSE: 7.9006; MAE: 2.1074; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.6615 (MSE: 8.1882; MAE: 2.2440; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.7233 (MSE: 6.6949; MAE: 1.9471; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.6774 (MSE: 7.8040; MAE: 2.0871; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.6610 (MSE: 8.2007; MAE: 2.1173; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.6971 (MSE: 7.3278; MAE: 2.0094; mean train mae: 3.9087)
+-------
+  *FOLD: 7  R^2: 0.6096 (MSE: 12.1463; MAE: 2.6058; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.4000 (MSE: 18.6655; MAE: 3.1375; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.5485 (MSE: 14.0470; MAE: 2.8006; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.6324 (MSE: 11.4354; MAE: 2.5276; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.5939 (MSE: 12.6320; MAE: 2.7099; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.6100 (MSE: 12.1327; MAE: 2.5889; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.6122 (MSE: 12.0652; MAE: 2.5649; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.6229 (MSE: 11.7315; MAE: 2.5864; mean train mae: 4.3623)
+-------
+  *FOLD: 6  R^2: 0.5794 (MSE: 12.0765; MAE: 2.6028; mean train mae: 4.3208)
+  *FOLD: 6  R^2: 0.5102 (MSE: 14.0643; MAE: 2.9236; mean train mae: 4.3208)
+  *FOLD: 6  R^2: 0.5289 (MSE: 13.5279; MAE: 2.7834; mean train mae: 4.3208)
+  *FOLD: 6  R^2: 0.6065 (MSE: 11.2982; MAE: 2.5439; mean train mae: 4.3208)
+  *FOLD: 6  R^2: 0.6293 (MSE: 10.6435; MAE: 2.4419; mean train mae: 4.3208)
+  *FOLD: 6  R^2: 0.6287 (MSE: 10.6601; MAE: 2.4520; mean train mae: 4.3208)
+  *FOLD: 6  R^2: 0.6237 (MSE: 10.8057; MAE: 2.4910; mean train mae: 4.3208)
+  *FOLD: 6  R^2: 0.6168 (MSE: 11.0021; MAE: 2.4894; mean train mae: 4.3208)
+-------
+  *FOLD: 5  R^2: 0.7307 (MSE: 8.3734; MAE: 2.1419; mean train mae: 4.4436)
+  *FOLD: 5  R^2: 0.6015 (MSE: 12.3914; MAE: 2.7998; mean train mae: 4.4436)
+  *FOLD: 5  R^2: 0.6824 (MSE: 9.8751; MAE: 2.4002; mean train mae: 4.4436)
+  *FOLD: 5  R^2: 0.7396 (MSE: 8.0975; MAE: 2.1716; mean train mae: 4.4436)
+  *FOLD: 5  R^2: 0.7389 (MSE: 8.1194; MAE: 2.1315; mean train mae: 4.4436)
+  *FOLD: 5  R^2: 0.7364 (MSE: 8.1950; MAE: 2.1567; mean train mae: 4.4436)
+  *FOLD: 5  R^2: 0.7530 (MSE: 7.6805; MAE: 2.1161; mean train mae: 4.4436)
+  *FOLD: 5  R^2: 0.7536 (MSE: 7.6625; MAE: 2.0162; mean train mae: 4.4436)
+-------
+  *FOLD: 4  R^2: 0.6751 (MSE: 9.2874; MAE: 2.3951; mean train mae: 4.3649)
+  *FOLD: 4  R^2: 0.5450 (MSE: 13.0085; MAE: 2.7744; mean train mae: 4.3649)
+  *FOLD: 4  R^2: 0.6517 (MSE: 9.9588; MAE: 2.4343; mean train mae: 4.3649)
+  *FOLD: 4  R^2: 0.6850 (MSE: 9.0062; MAE: 2.3303; mean train mae: 4.3649)
+  *FOLD: 4  R^2: 0.7286 (MSE: 7.7596; MAE: 2.1362; mean train mae: 4.3649)
+  *FOLD: 4  R^2: 0.7314 (MSE: 7.6782; MAE: 2.1215; mean train mae: 4.3649)
+  *FOLD: 4  R^2: 0.7291 (MSE: 7.7437; MAE: 2.1437; mean train mae: 4.3649)
+  *FOLD: 4  R^2: 0.7239 (MSE: 7.8948; MAE: 2.1248; mean train mae: 4.3649)
+-------
+  *FOLD: 3  R^2: 0.5347 (MSE: 18.3029; MAE: 2.7935; mean train mae: 4.7577)
+  *FOLD: 3  R^2: 0.4995 (MSE: 19.6879; MAE: 3.0952; mean train mae: 4.7577)
+  *FOLD: 3  R^2: 0.5583 (MSE: 17.3764; MAE: 2.7147; mean train mae: 4.7577)
+  *FOLD: 3  R^2: 0.5747 (MSE: 16.7320; MAE: 2.5760; mean train mae: 4.7577)
+  *FOLD: 3  R^2: 0.5273 (MSE: 18.5931; MAE: 2.8579; mean train mae: 4.7577)
+  *FOLD: 3  R^2: 0.5326 (MSE: 18.3857; MAE: 2.8148; mean train mae: 4.7577)
+  *FOLD: 3  R^2: 0.4937 (MSE: 19.9163; MAE: 3.0532; mean train mae: 4.7577)
+  *FOLD: 3  R^2: 0.4955 (MSE: 19.8466; MAE: 3.0118; mean train mae: 4.7577)
+-------
+  *FOLD: 2  R^2: 0.5742 (MSE: 12.4185; MAE: 2.5573; mean train mae: 4.4008)
+  *FOLD: 2  R^2: 0.4053 (MSE: 17.3435; MAE: 3.0295; mean train mae: 4.4008)
+  *FOLD: 2  R^2: 0.5709 (MSE: 12.5132; MAE: 2.6723; mean train mae: 4.4008)
+  *FOLD: 2  R^2: 0.5921 (MSE: 11.8965; MAE: 2.4921; mean train mae: 4.4008)
+  *FOLD: 2  R^2: 0.6048 (MSE: 11.5254; MAE: 2.5136; mean train mae: 4.4008)
+  *FOLD: 2  R^2: 0.5942 (MSE: 11.8361; MAE: 2.5626; mean train mae: 4.4008)
+  *FOLD: 2  R^2: 0.5994 (MSE: 11.6843; MAE: 2.5133; mean train mae: 4.4008)
+  *FOLD: 2  R^2: 0.5692 (MSE: 12.5650; MAE: 2.5626; mean train mae: 4.4008)
+-------
+  *FOLD: 1  R^2: 0.7588 (MSE: 7.6367; MAE: 2.1996; mean train mae: 4.4855)
+  *FOLD: 1  R^2: 0.6320 (MSE: 11.6506; MAE: 2.6627; mean train mae: 4.4855)
+  *FOLD: 1  R^2: 0.7799 (MSE: 6.9687; MAE: 2.0911; mean train mae: 4.4855)
+  *FOLD: 1  R^2: 0.7544 (MSE: 7.7760; MAE: 2.2140; mean train mae: 4.4855)
+  *FOLD: 1  R^2: 0.7814 (MSE: 6.9206; MAE: 2.0773; mean train mae: 4.4855)
+  *FOLD: 1  R^2: 0.7716 (MSE: 7.2320; MAE: 2.0920; mean train mae: 4.4855)
+  *FOLD: 1  R^2: 0.7446 (MSE: 8.0870; MAE: 2.1505; mean train mae: 4.4855)
+  *FOLD: 1  R^2: 0.7828 (MSE: 6.8772; MAE: 1.9844; mean train mae: 4.4855)
+-------
+  *FOLD: 0  R^2: 0.6694 (MSE: 10.0626; MAE: 2.2381; mean train mae: 4.4380)
+  *FOLD: 0  R^2: 0.5753 (MSE: 12.9256; MAE: 2.8252; mean train mae: 4.4380)
+  *FOLD: 0  R^2: 0.6496 (MSE: 10.6639; MAE: 2.4336; mean train mae: 4.4380)
+  *FOLD: 0  R^2: 0.6801 (MSE: 9.7373; MAE: 2.2605; mean train mae: 4.4380)
+  *FOLD: 0  R^2: 0.6826 (MSE: 9.6603; MAE: 2.2228; mean train mae: 4.4380)
+  *FOLD: 0  R^2: 0.6822 (MSE: 9.6709; MAE: 2.2129; mean train mae: 4.4380)
+  *FOLD: 0  R^2: 0.6833 (MSE: 9.6393; MAE: 2.2024; mean train mae: 4.4380)
+  *FOLD: 0  R^2: 0.7028 (MSE: 9.0439; MAE: 2.0995; mean train mae: 4.4380)
+-------
+_*Overall R^2:          0.6538    
+_*Overall FOLDS R^2:    0.6584 (+- 0.0267) (( 0.634399378139, 0.524894602484, 0.625424347911, 0.656732291301, 0.664805651768, 0.660733276703, 0.655499981314, 0.658378002484 ))   
+_*R (sqrt R^2):         0.8086    
+_*Pearson r:            0.8101 (p = 0.00000)    
+_*Folds Pearson r:      0.8201 (p = 0.00000)    
+_*Spearman rho:         0.8371 (p = 0.00000)    
+_*Mean Squared Error:   10.8061  (( 11.4539395154, 14.7834241627, 11.6909766993, 10.7146098366, 10.5642965815, 10.6515263509, 10.8295591199, 10.772002892 ))  
+_*Mean Absolute Error:  2.3580  (( 2.46028983129, 2.88028509763, 2.52448941424, 2.39620637995, 2.36362940363, 2.3666136779, 2.3906017483, 2.35495081205 ))  
+_*Train_Mean MAE:       3.9969
+
+Finished at: 2019-03-01 03:00:07.350132
+
+
+>>>>>>>>outcome name: fair_poor_health_perc_bfrss15 
+
+ Start at: 2019-03-01 03:14:53.415779
+Model: /users/mzamani/DeepRC/outputs/7phases/models/LMOnly , epochs: 600, learning_rates: 0.001000, 0.001000, 0.001000, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.9, 1.0, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 5, 3, 3, 3, 3, 3, 3, stddev: 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1,max_phase: 7 , start phase: 1, RC: False, FA: True, PCA: False, combine: yhat 
+LM: hidden_nodes = [64, 64],[256, 64],[256, 64],[16, 8], regularization_factor= 0.005, 0.01, 0.01, 0.0, 0.05, 0.0, 0.05
+  *FOLD: 9  R^2: 0.5266 (MSE: 17.1193; MAE: 2.9326; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.4478 (MSE: 19.9684; MAE: 3.2617; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.3878 (MSE: 22.1387; MAE: 3.5826; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.6150 (MSE: 13.9215; MAE: 2.6995; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.6201 (MSE: 13.7378; MAE: 2.6806; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.6186 (MSE: 13.7911; MAE: 2.7055; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.5905 (MSE: 14.8090; MAE: 2.8524; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.6283 (MSE: 13.4414; MAE: 2.6475; mean train mae: 4.6126)
+-------
+
+
+>>>>>>>>outcome name: fair_poor_health_perc_bfrss15 
+
+ Start at: 2019-03-01 03:31:17.027306
+Model: /users/mzamani/DeepRC/outputs/7phases/models/LMOnly , epochs: 600, learning_rates: 0.001000, 0.001000, 0.001000, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.9, 1.0, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 5, 3, 3, 3, 3, 3, 3, stddev: 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1,max_phase: 7 , start phase: 1, RC: False, FA: True, PCA: False, combine: yhat 
+LM: hidden_nodes = [64, 64],[256, 64],[256, 64],[16, 8], regularization_factor= 0.005, 0.01, 0.01, 0.0, 0.05, 0.0, 0.05
+  *FOLD: 9  R^2: 0.5171 (MSE: 17.4619; MAE: 2.9401; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.3901 (MSE: 22.0545; MAE: 3.2411; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.6300 (MSE: 13.3807; MAE: 2.6919; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.6002 (MSE: 14.4591; MAE: 2.7560; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.6223 (MSE: 13.6586; MAE: 2.6879; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.6358 (MSE: 13.1689; MAE: 2.6549; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.6144 (MSE: 13.9444; MAE: 2.7239; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.6279 (MSE: 13.4559; MAE: 2.6718; mean train mae: 4.6126)
+-------
+  *FOLD: 8  R^2: 0.5246 (MSE: 11.5015; MAE: 2.6321; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.5671 (MSE: 10.4734; MAE: 2.5037; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.4989 (MSE: 12.1215; MAE: 2.8426; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.6859 (MSE: 7.5982; MAE: 2.0991; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.6505 (MSE: 8.4560; MAE: 2.2114; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.6562 (MSE: 8.3169; MAE: 2.2025; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.6495 (MSE: 8.4782; MAE: 2.2075; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.6542 (MSE: 8.3648; MAE: 2.2187; mean train mae: 3.9087)
+-------
+  *FOLD: 7  R^2: 0.5053 (MSE: 15.3893; MAE: 2.9195; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.4163 (MSE: 18.1584; MAE: 3.2897; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.5644 (MSE: 13.5503; MAE: 2.7418; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.5723 (MSE: 13.3064; MAE: 2.7397; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.5814 (MSE: 13.0220; MAE: 2.7090; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.5950 (MSE: 12.5980; MAE: 2.6474; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.6025 (MSE: 12.3661; MAE: 2.5871; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.6003 (MSE: 12.4353; MAE: 2.6151; mean train mae: 4.3623)
+-------
+  *FOLD: 6  R^2: 0.5269 (MSE: 13.5854; MAE: 2.8038; mean train mae: 4.3208)
+  *FOLD: 6  R^2: 0.4388 (MSE: 16.1139; MAE: 3.1343; mean train mae: 4.3208)
+  *FOLD: 6  R^2: 0.3975 (MSE: 17.2993; MAE: 3.0988; mean train mae: 4.3208)
+  *FOLD: 6  R^2: 0.6127 (MSE: 11.1204; MAE: 2.5378; mean train mae: 4.3208)
+  *FOLD: 6  R^2: 0.5664 (MSE: 12.4512; MAE: 2.6953; mean train mae: 4.3208)
+  *FOLD: 6  R^2: 0.5687 (MSE: 12.3831; MAE: 2.6748; mean train mae: 4.3208)
+  *FOLD: 6  R^2: 0.5785 (MSE: 12.1024; MAE: 2.6433; mean train mae: 4.3208)
+  *FOLD: 6  R^2: 0.5568 (MSE: 12.7248; MAE: 2.7219; mean train mae: 4.3208)
+-------
+
+
+>>>>>>>>outcome name: fair_poor_health_perc_bfrss15 
+
+ Start at: 2019-03-01 03:47:46.736701
+Model: /users/mzamani/DeepRC/outputs/7phases/models/LMOnly , epochs: 600, learning_rates: 0.001000, 0.001000, 0.001000, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.9, 1.0, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 5, 3, 3, 3, 3, 3, 3, stddev: 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1,max_phase: 7 , start phase: 1, RC: False, FA: True, PCA: False, combine: yhat 
+LM: hidden_nodes = [64, 64],[256, 64],[256, 64],[16, 8], regularization_factor= 0.005, 0.01, 0.01, 0.0, 0.05, 0.0, 0.05
+  *FOLD: 9  R^2: 0.5461 (MSE: 16.4159; MAE: 2.9138; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.4956 (MSE: 18.2410; MAE: 3.0917; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.6166 (MSE: 13.8652; MAE: 2.8234; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.6265 (MSE: 13.5055; MAE: 2.6475; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.6154 (MSE: 13.9088; MAE: 2.7531; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.6174 (MSE: 13.8357; MAE: 2.6975; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.6365 (MSE: 13.1460; MAE: 2.6275; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.6382 (MSE: 13.0846; MAE: 2.6189; mean train mae: 4.6126)
+-------
+  *FOLD: 8  R^2: 0.6029 (MSE: 9.6077; MAE: 2.3391; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.3781 (MSE: 15.0445; MAE: 3.1786; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.5404 (MSE: 11.1175; MAE: 2.4607; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.5951 (MSE: 9.7962; MAE: 2.3888; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.6274 (MSE: 9.0150; MAE: 2.3687; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.6528 (MSE: 8.4001; MAE: 2.1744; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.6326 (MSE: 8.8886; MAE: 2.3629; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.6603 (MSE: 8.2184; MAE: 2.2001; mean train mae: 3.9087)
+-------
+  *FOLD: 7  R^2: 0.5469 (MSE: 14.0942; MAE: 2.8854; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.4282 (MSE: 17.7898; MAE: 2.9811; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.5221 (MSE: 14.8681; MAE: 2.9524; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.5736 (MSE: 13.2665; MAE: 2.6583; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.5846 (MSE: 12.9219; MAE: 2.6827; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.5516 (MSE: 13.9487; MAE: 2.7972; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.5492 (MSE: 14.0229; MAE: 2.8671; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.5949 (MSE: 12.6038; MAE: 2.6510; mean train mae: 4.3623)
+-------
+  *FOLD: 6  R^2: 0.5257 (MSE: 13.6190; MAE: 2.8489; mean train mae: 4.3208)
+  *FOLD: 6  R^2: 0.5258 (MSE: 13.6170; MAE: 2.7667; mean train mae: 4.3208)
+  *FOLD: 6  R^2: 0.4872 (MSE: 14.7237; MAE: 2.9203; mean train mae: 4.3208)
+  *FOLD: 6  R^2: 0.5603 (MSE: 12.6268; MAE: 2.7388; mean train mae: 4.3208)
+  *FOLD: 6  R^2: 0.5446 (MSE: 13.0772; MAE: 2.7771; mean train mae: 4.3208)
+  *FOLD: 6  R^2: 0.5728 (MSE: 12.2659; MAE: 2.6542; mean train mae: 4.3208)
+  *FOLD: 6  R^2: 0.5693 (MSE: 12.3679; MAE: 2.6393; mean train mae: 4.3208)
+  *FOLD: 6  R^2: 0.5747 (MSE: 12.2131; MAE: 2.6307; mean train mae: 4.3208)
+-------
+
+
+>>>>>>>>outcome name: fair_poor_health_perc_bfrss15 
+
+ Start at: 2019-03-01 03:57:23.285612
+Model: /users/mzamani/DeepRC/outputs/7phases/models/LMOnly , epochs: 600, learning_rates: 0.001000, 0.001000, 0.001000, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.9, 1.0, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 5, 3, 3, 3, 3, 3, 3, stddev: 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1,max_phase: 7 , start phase: 1, RC: False, FA: True, PCA: False, combine: yhat 
+LM: hidden_nodes = [64, 64],[256, 64],[256, 64],[16, 8], regularization_factor= 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
+  *FOLD: 9  R^2: 0.6320 (MSE: 13.3075; MAE: 2.5928; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.5107 (MSE: 17.6948; MAE: 3.0264; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.2993 (MSE: 25.3388; MAE: 3.7063; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.5638 (MSE: 15.7756; MAE: 2.8177; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.5700 (MSE: 15.5501; MAE: 2.7191; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.5735 (MSE: 15.4221; MAE: 2.7046; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.5605 (MSE: 15.8921; MAE: 2.7947; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.5852 (MSE: 15.0002; MAE: 2.7266; mean train mae: 4.6126)
+-------
+  *FOLD: 8  R^2: 0.6538 (MSE: 8.3760; MAE: 2.1788; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.4728 (MSE: 12.7537; MAE: 2.7605; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.2787 (MSE: 17.4484; MAE: 3.3073; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.6219 (MSE: 9.1476; MAE: 2.3172; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.6020 (MSE: 9.6290; MAE: 2.3536; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.6158 (MSE: 9.2935; MAE: 2.3065; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.6230 (MSE: 9.1207; MAE: 2.2980; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.6487 (MSE: 8.4988; MAE: 2.1627; mean train mae: 3.9087)
+-------
+
+
+>>>>>>>>outcome name: fair_poor_health_perc_bfrss15 
+
+ Start at: 2019-03-01 04:03:11.416070
+Model: /users/mzamani/DeepRC/outputs/7phases/models/LMOnly , epochs: 600, learning_rates: 0.001000, 0.001000, 0.001000, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.9, 1.0, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 5, 3, 3, 3, 3, 3, 3, stddev: 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1,max_phase: 7 , start phase: 1, RC: False, FA: True, PCA: False, combine: yhat 
+LM: hidden_nodes = [64, 64],[256, 64],[256, 64],[16, 8], regularization_factor= 0.0, 0.0, 0.0, 0.01, 0.01, 0.01, 0.01
+  *FOLD: 9  R^2: 0.6123 (MSE: 14.0204; MAE: 2.6459; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.4840 (MSE: 18.6613; MAE: 2.9996; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.3671 (MSE: 22.8861; MAE: 3.5191; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.5825 (MSE: 15.0994; MAE: 2.7304; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.6382 (MSE: 13.0839; MAE: 2.5191; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.6090 (MSE: 14.1404; MAE: 2.6491; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.6213 (MSE: 13.6936; MAE: 2.5864; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.6407 (MSE: 12.9932; MAE: 2.5238; mean train mae: 4.6126)
+-------
+  *FOLD: 8  R^2: 0.6510 (MSE: 8.4420; MAE: 2.2158; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.4533 (MSE: 13.2261; MAE: 2.8225; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.4863 (MSE: 12.4262; MAE: 2.7600; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.5713 (MSE: 10.3703; MAE: 2.4779; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.6598 (MSE: 8.2301; MAE: 2.1965; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.6618 (MSE: 8.1813; MAE: 2.1732; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.6348 (MSE: 8.8340; MAE: 2.2757; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.6525 (MSE: 8.4062; MAE: 2.2387; mean train mae: 3.9087)
+-------
+  *FOLD: 7  R^2: 0.6044 (MSE: 12.3073; MAE: 2.6168; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.4818 (MSE: 16.1221; MAE: 3.2113; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.4274 (MSE: 17.8142; MAE: 3.3085; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.5876 (MSE: 12.8288; MAE: 2.7802; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.5865 (MSE: 12.8650; MAE: 2.6353; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.5847 (MSE: 12.9200; MAE: 2.7624; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.6229 (MSE: 11.7314; MAE: 2.5124; mean train mae: 4.3623)
+  *FOLD: 7  R^2: 0.6277 (MSE: 11.5824; MAE: 2.4858; mean train mae: 4.3623)
+-------
+  *FOLD: 6  R^2: 0.5915 (MSE: 11.7287; MAE: 2.6122; mean train mae: 4.3208)
+  *FOLD: 6  R^2: 0.4695 (MSE: 15.2327; MAE: 2.9656; mean train mae: 4.3208)
+  *FOLD: 6  R^2: 0.4148 (MSE: 16.8043; MAE: 3.1657; mean train mae: 4.3208)
+  *FOLD: 6  R^2: 0.5519 (MSE: 12.8682; MAE: 2.7184; mean train mae: 4.3208)
+  *FOLD: 6  R^2: 0.5978 (MSE: 11.5487; MAE: 2.5752; mean train mae: 4.3208)
+  *FOLD: 6  R^2: 0.5538 (MSE: 12.8121; MAE: 2.7142; mean train mae: 4.3208)
+  *FOLD: 6  R^2: 0.5754 (MSE: 12.1915; MAE: 2.6562; mean train mae: 4.3208)
+  *FOLD: 6  R^2: 0.5998 (MSE: 11.4924; MAE: 2.5781; mean train mae: 4.3208)
+-------
+  *FOLD: 5  R^2: 0.7168 (MSE: 8.8045; MAE: 2.2795; mean train mae: 4.4436)
+  *FOLD: 5  R^2: 0.6199 (MSE: 11.8170; MAE: 2.7249; mean train mae: 4.4436)
+  *FOLD: 5  R^2: 0.4921 (MSE: 15.7916; MAE: 3.0547; mean train mae: 4.4436)
+  *FOLD: 5  R^2: 0.6987 (MSE: 9.3675; MAE: 2.3823; mean train mae: 4.4436)
+  *FOLD: 5  R^2: 0.7385 (MSE: 8.1318; MAE: 2.1836; mean train mae: 4.4436)
+  *FOLD: 5  R^2: 0.7226 (MSE: 8.6259; MAE: 2.2047; mean train mae: 4.4436)
+  *FOLD: 5  R^2: 0.7220 (MSE: 8.6446; MAE: 2.3196; mean train mae: 4.4436)
+  *FOLD: 5  R^2: 0.7308 (MSE: 8.3701; MAE: 2.1536; mean train mae: 4.4436)
+-------
+  *FOLD: 4  R^2: 0.7023 (MSE: 8.5103; MAE: 2.2599; mean train mae: 4.3649)
+  *FOLD: 4  R^2: 0.6316 (MSE: 10.5336; MAE: 2.5249; mean train mae: 4.3649)
+  *FOLD: 4  R^2: 0.3936 (MSE: 17.3358; MAE: 3.1958; mean train mae: 4.3649)
+  *FOLD: 4  R^2: 0.6854 (MSE: 8.9935; MAE: 2.3269; mean train mae: 4.3649)
+  *FOLD: 4  R^2: 0.7124 (MSE: 8.2217; MAE: 2.2168; mean train mae: 4.3649)
+  *FOLD: 4  R^2: 0.7057 (MSE: 8.4124; MAE: 2.2682; mean train mae: 4.3649)
+  *FOLD: 4  R^2: 0.6918 (MSE: 8.8104; MAE: 2.2943; mean train mae: 4.3649)
+  *FOLD: 4  R^2: 0.7201 (MSE: 8.0021; MAE: 2.2054; mean train mae: 4.3649)
+-------
+  *FOLD: 3  R^2: 0.5457 (MSE: 17.8692; MAE: 2.8111; mean train mae: 4.7577)
+  *FOLD: 3  R^2: 0.4928 (MSE: 19.9507; MAE: 3.1411; mean train mae: 4.7577)
+  *FOLD: 3  R^2: 0.3416 (MSE: 25.8984; MAE: 3.7087; mean train mae: 4.7577)
+  *FOLD: 3  R^2: 0.5666 (MSE: 17.0506; MAE: 2.7915; mean train mae: 4.7577)
+  *FOLD: 3  R^2: 0.5360 (MSE: 18.2512; MAE: 2.8471; mean train mae: 4.7577)
+  *FOLD: 3  R^2: 0.5351 (MSE: 18.2859; MAE: 2.8248; mean train mae: 4.7577)
+  *FOLD: 3  R^2: 0.5097 (MSE: 19.2864; MAE: 3.0157; mean train mae: 4.7577)
+  *FOLD: 3  R^2: 0.5361 (MSE: 18.2486; MAE: 2.8034; mean train mae: 4.7577)
+-------
+  *FOLD: 2  R^2: 0.5637 (MSE: 12.7251; MAE: 2.7008; mean train mae: 4.4008)
+  *FOLD: 2  R^2: 0.4997 (MSE: 14.5901; MAE: 2.7415; mean train mae: 4.4008)
+  *FOLD: 2  R^2: 0.4328 (MSE: 16.5414; MAE: 3.0245; mean train mae: 4.4008)
+  *FOLD: 2  R^2: 0.5256 (MSE: 13.8367; MAE: 2.6853; mean train mae: 4.4008)
+  *FOLD: 2  R^2: 0.5781 (MSE: 12.3040; MAE: 2.6397; mean train mae: 4.4008)
+  *FOLD: 2  R^2: 0.5642 (MSE: 12.7097; MAE: 2.6856; mean train mae: 4.4008)
+  *FOLD: 2  R^2: 0.5564 (MSE: 12.9364; MAE: 2.6367; mean train mae: 4.4008)
+  *FOLD: 2  R^2: 0.5804 (MSE: 12.2367; MAE: 2.5997; mean train mae: 4.4008)
+-------
+  *FOLD: 1  R^2: 0.7064 (MSE: 9.2967; MAE: 2.4643; mean train mae: 4.4855)
+  *FOLD: 1  R^2: 0.5632 (MSE: 13.8293; MAE: 2.8220; mean train mae: 4.4855)
+  *FOLD: 1  R^2: 0.5808 (MSE: 13.2716; MAE: 2.8635; mean train mae: 4.4855)
+  *FOLD: 1  R^2: 0.6574 (MSE: 10.8460; MAE: 2.5473; mean train mae: 4.4855)
+  *FOLD: 1  R^2: 0.7476 (MSE: 7.9923; MAE: 2.1603; mean train mae: 4.4855)
+  *FOLD: 1  R^2: 0.7199 (MSE: 8.8693; MAE: 2.3224; mean train mae: 4.4855)
+  *FOLD: 1  R^2: 0.7253 (MSE: 8.6972; MAE: 2.3251; mean train mae: 4.4855)
+  *FOLD: 1  R^2: 0.7388 (MSE: 8.2697; MAE: 2.1846; mean train mae: 4.4855)
+-------
+  *FOLD: 0  R^2: 0.6756 (MSE: 9.8722; MAE: 2.2366; mean train mae: 4.4380)
+  *FOLD: 0  R^2: 0.5016 (MSE: 15.1679; MAE: 2.8743; mean train mae: 4.4380)
+  *FOLD: 0  R^2: 0.1722 (MSE: 25.1938; MAE: 3.7364; mean train mae: 4.4380)
+  *FOLD: 0  R^2: 0.5774 (MSE: 12.8603; MAE: 2.6410; mean train mae: 4.4380)
+  *FOLD: 0  R^2: 0.6571 (MSE: 10.4357; MAE: 2.2416; mean train mae: 4.4380)
+  *FOLD: 0  R^2: 0.6211 (MSE: 11.5323; MAE: 2.3855; mean train mae: 4.4380)
+  *FOLD: 0  R^2: 0.6693 (MSE: 10.0653; MAE: 2.1746; mean train mae: 4.4380)
+  *FOLD: 0  R^2: 0.6566 (MSE: 10.4506; MAE: 2.2484; mean train mae: 4.4380)
+-------
+_*Overall R^2:          0.6466    
+_*Overall FOLDS R^2:    0.6484 (+- 0.0201) (( 0.636983734005, 0.519741045843, 0.410884433248, 0.60044140503, 0.645196834998, 0.627792041484, 0.632902490643, 0.648353193266 ))   
+_*R (sqrt R^2):         0.8041    
+_*Pearson r:            0.8049 (p = 0.00000)    
+_*Folds Pearson r:      0.8086 (p = 0.00000)    
+_*Spearman rho:         0.8261 (p = 0.00000)    
+_*Mean Squared Error:   11.0303  (( 11.3576297718, 14.9130707407, 18.3963476824, 12.4121296819, 11.1064543189, 11.648937356, 11.4890830551, 11.005198269 ))  
+_*Mean Absolute Error:  2.4039  (( 2.48428687871, 2.88278047219, 3.23367328333, 2.6081302303, 2.42151901804, 2.49900265874, 2.47966358917, 2.40214758763 ))  
+_*Train_Mean MAE:       3.8730
+
+Finished at: 2019-03-01 04:23:16.056959
+
+
+>>>>>>>>outcome name: fair_poor_health_perc_bfrss15 
+
+ Start at: 2019-03-01 09:38:01.608330
+Model: /users/mzamani/DeepRC/outputs/7phases/models/LMOnly , epochs: 600, learning_rates: 0.001000, 0.001000, 0.001000, decay: True , decay_step: 1 , decay_factor: 0.990000 , stop_loss: 0.000100 , keep_prob: 0.9, 1.0, activation_function: ['relu', 'sigmoid', 'linear'], batch_size: 16, shuffle: True, optimizer: Adam, stopping_iteration: 5, 3, 3, 3, 3, stddev: 0.1, 0.1, 0.1, 0.1,max_phase: 5 , start phase: 1, RC: False, FA: True, PCA: False, combine: hout 
+LM: hidden_nodes = [64, 64],[256, 64],[256, 64],[16, 8], regularization_factor= 0.0, 0.005, 0.005, 0.0, 0.002
+  *FOLD: 9  R^2: 0.6234 (MSE: 13.6181; MAE: 2.6348; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.4798 (MSE: 18.8110; MAE: 3.1699; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.5559 (MSE: 16.0587; MAE: 2.9438; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.6311 (MSE: 13.3389; MAE: 2.6242; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.6351 (MSE: 13.1966; MAE: 2.5710; mean train mae: 4.6126)
+  *FOLD: 9  R^2: 0.6395 (MSE: 13.0353; MAE: 2.5908; mean train mae: 4.6126)
+-------
+  *FOLD: 8  R^2: 0.6601 (MSE: 8.2217; MAE: 2.2085; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.5545 (MSE: 10.7787; MAE: 2.6119; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.6910 (MSE: 7.4749; MAE: 2.0707; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.6748 (MSE: 7.8667; MAE: 2.1739; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.7145 (MSE: 6.9063; MAE: 1.9639; mean train mae: 3.9087)
+  *FOLD: 8  R^2: 0.7098 (MSE: 7.0213; MAE: 1.9724; mean train mae: 3.9087)
+-------
