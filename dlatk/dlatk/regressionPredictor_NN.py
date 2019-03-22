@@ -183,6 +183,7 @@ def alignDictsAsy(y, *yhats, **kwargs):
 
 class RegressionPredictor:
     root_path = '/home/mbastan/'
+    root_path = '/users/mzamani/'
     """Handles prediction of continuous outcomes
     
     Attributes
@@ -2071,7 +2072,7 @@ class RegressionPredictor:
              decay_factor = 0.99 #0.8
              stop_loss =0.0001 #0.0001
              keep_prob = [0.9,1.] #0.9
-             activation_function = ['relu','sigmoid','linear'] # linear, sigmoid, tanh, relu
+             activation_function = ['relu','sigmoid','softmax'] # linear, sigmoid, tanh, relu
              batch_size = 16 #16
              shuffle = True
              optimizer='Adam' # Adam, SGD, Adadelta 
@@ -2096,12 +2097,12 @@ class RegressionPredictor:
                  history.close()
                  history_counter = True
              print('length of the multiX is %d'%len(multiX))
-             try: 
-                regressor.initialize(x1_size = multiX[len(multiX) -1].shape[1],x2_size=multiX[0].shape[1],x2n_size=multiX[len(multiX) -2].shape[1])#,xA_size=multiX[2].shape[1])
+             #try: 
+             regressor.initialize(x1_size = multiX[len(multiX) -1].shape[1],x2_size=multiX[0].shape[1],x2n_size=multiX[len(multiX) -2].shape[1])#,xA_size=multiX[len(multiX)-1].shape[1])
              #   #regressor.set_params(**dict((k, v[0] if isinstance(v, list) else v) for k,v in self.cvParams[modelName][0].items()))
-             except IndexError:
+             #except IndexError:
              #    
-                print(" >>No CV parameters available")
+             print(" >>No CV parameters available")
              #   raise IndexError
              #print dict(self.cvParams[modelName][0])
 

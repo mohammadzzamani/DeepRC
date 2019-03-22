@@ -99,6 +99,8 @@ class ffNN():
             h = tf.nn.sigmoid(z_norm)
         elif activation_func == 'tanh':
             h = tf.nn.tanh(z_norm)
+        elif activation_func == 'softmax':
+            h = tf.nn.softmax(z_norm)
         else:
             h = z_norm
         # h = tf.nn.sigmoid(tf.matmul(X, w_in))  # The \sigma function
@@ -122,7 +124,9 @@ class ffNN():
             w_out, b_out = init_weights((self.hidden_nodes[phase-1][-1], y_size), stddev=self.stddev[phase-1],name='out_phase'+str(phase)+prefix,mean=mean)
             l2_norm = tf.add_n([tf.nn.l2_loss(w_out),tf.nn.l2_loss(b_out), l2_norm])
             yhat = tf.add(tf.matmul(h_out, w_out), b_out)
+            
             # Backward propagation
+            #mse = tf.nn.sparse_softmax_cross_entropy_with_logits(labels=self.y, logits=yhat)
             mse = tf.losses.mean_squared_error(labels=self.y, predictions=yhat)
             #l2_norm1 = tf.Print(l2_norm1,[l2_norm1],message='l2_norm1')
 
@@ -169,6 +173,7 @@ class ffNN():
         # w_hid,b_hid = init_weights((self.hidden_nodes,self.hidden_nodes))
         # w_hid2,b_hid2 = init_weights((self.hidden_nodes,self.hidden_nodes))
         # w_out,b_out = init_weights((self.hidden_nodes, y_size))
+        print('not_started')
         with tf.variable_scope("initialization", reuse=tf.AUTO_REUSE):
             # self.reg_factor = tf.get_variable( name='reg_factor',shape=(), dtype = tf.float32)
             #self.reg_factor = self.regularization_factor
@@ -213,7 +218,8 @@ class ffNN():
                l2_normA = tf.add(tf.nn.l2_loss(b_outA), l2_normA)
    
                self.yhatA = tf.add(tf.matmul(h_outA, w_outA), b_outA)
-               self.mseA = tf.losses.mean_squared_error(labels=self.y, predictions=self.yhatA)
+               #print ( 'self.y: ', self.y.get_shape() , ' , self.yhatA: ', self.yhatA.get_shape() ) 
+               self.mseA = tf.nn.sparse_softmax_cross_entropy_with_logits(labels=self.y, logits=self.yhatA)
                self.lossA = tf.add(self.mseA, self.reg_factor22 * l2_normA)
    
                if self.decay == 1 or  self.decay is True:
@@ -232,11 +238,12 @@ class ffNN():
             ########################## Phase3 ############################
             #w_in3 = tf.Variable((np.ones([2,1]) * np.array([[0.5], [0.5]])).astype(np.float32 ),name='w_in_phase3')
             #b_in3 = tf.Variable(tf.zeros(1, dtype=tf.float32),name='b_in_phase3')
-
+            print ( 'self.y: ', self.y.get_shape())
             if self.combine_model == 'yhat':
                 self.w_out3 = tf.Variable((np.ones([2,1]) * np.array([[0.5], [0.5]])).astype(np.float32 ),name='w_out_phase3')
                 self.b_out3 = tf.Variable(tf.zeros(1, dtype=tf.float32),name='b_out_phase3')
                 self.yhat3 = self.forwardprop(tf.concat([self.yhat1, self.yhat2],axis=1), self.w_out3, self.b_out3, self.keep_prob,self.activation_function[2]) 
+                print ( 'self.y: ', self.y.get_shape() , ' , self.yhat3: ', self.yhat3.get_shape() )
                 #self.yhat3, self.mse3, self.loss3, self.updates3 , h_out3, self.learning_rate3_adam,l2_norm3,self.w_out3,self.b_out3 =self.forward_pass(input_x=tf.concat([self.yhat1, self.yhat2],axis=1),phase=3,reg_factor=self.reg_factor3,keep_prob=self.keep_prob,x_size=last_layer_nodes,y_size=y_size, learning_rate=self.learning_rate3,mean=0.5)#,mean1=0.05,mean2=0.5)#, w_in=w_in3, b_in=b_in3 )
                 #self.yhat3, self.mse3, self.loss3, self.updates3 , h_out3, self.learning_rate3_adam,l2_norm3,self.w_out3,self.b_out3 =self.forward_pass(input_x=tf.concat([self.yhat1, self.yhat2,self.yhat2n],axis=1),phase=3,reg_factor=self.reg_factor3,keep_prob=self.keep_prob,x_size=last_layer_nodes,y_size=y_size, learning_rate=self.learning_rate3)#,mean1=0.05,mean2=0.5)#, w_in=w_in3, b_in=b_in3 )
             else:
@@ -245,7 +252,9 @@ class ffNN():
                 self.yhat3, self.mse3, self.loss3, self.updates3 , h_out3, self.learning_rate3_adam,l2_norm3, self.w_out3, self.b_out3=self.forward_pass(input_x=tf.concat([self.h_out1, self.h_out2],axis=1),phase=3,reg_factor=self.reg_factor3,keep_prob=self.keep_prob,x_size=last_layer_nodes,y_size=y_size, learning_rate=self.learning_rate3, mean=0.01 )
 
             # Backward propagation
-            self.mse3 = tf.losses.mean_squared_error(labels=self.y, predictions=self.yhat3)
+            print ( 'self.y: ', self.y.get_shape() , ' , self.yhat3: ', self.yhat3.get_shape() )
+            self.mse3 = tf.nn.sparse_softmax_cross_entropy_with_logits(labels=self.y, logits=self.yhat3, name='softmax')
+            
             self.loss3 = self.mse3 #tf.add(self.mse3,self.reg_factor* l2_norm3)
             
             if self.decay == 1 or  self.decay is True:
